@@ -1,4 +1,5 @@
-//challenge 1
+// Challenge 1
+
 const a = 1; const b = 2; const c = 3;
 
 (function firstFunction () {
@@ -18,7 +19,7 @@ const a = 1; const b = 2; const c = 3;
   })()
 })()
 
-//challenge 2
+//Challenge 2
 
 var bird = 'Pidgeons';
 ( function () {
