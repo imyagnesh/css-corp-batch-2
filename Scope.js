@@ -27,6 +27,3 @@ var bird = 'Pidgeons';
         console.log('Bert loves his ' + bird );
     }
 }() );
-
-
-
