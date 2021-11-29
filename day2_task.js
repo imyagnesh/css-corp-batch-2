@@ -10,7 +10,6 @@ const users = [
   ];
   
   // challange1: Adding profession according to gender
-  
 const updateUser1 =users.map(x =>
     {
         if (x.gender === 'male') {
