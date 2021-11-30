@@ -14,4 +14,22 @@ const a = 1; const b = 2; const c = 3;
       })()
     })()
   })()
-})()
+})();
+
+
+
+## challenge 2:
+
+## Please help me and fix this code to get 'Bert loves his Pidgeons'.
+
+
+var bird = 'Pidgeons';
+( function () {
+    var bird = 'Pidgeons';
+    if ( typeof bird === 'undefined' ){
+        var bird = 'Rubber Duck';
+        console.log('Ernie loves his ' + bird );
+    } else {
+        console.log('Bert loves his ' + bird );
+    }
+}() );
