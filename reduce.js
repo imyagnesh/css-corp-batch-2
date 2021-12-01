@@ -59,6 +59,7 @@ const groupByAge = users.reduce((previousValue, currentValue) => {
 
 console.log(groupByAge);
 
+
 // "20-29": 
 
 
