@@ -21,10 +21,10 @@ const a = 1; const b = 2; const c = 3;
 
 //Challenge 2
 
-var bird = 'Pidgeons';
+let bird = 'Pidgeons';
 ( function () {
     if ( typeof bird === 'undefined' ){
-        bird = 'Rubber Duck';
+        const bird = 'Rubber Duck';
         console.log('Ernie loves his ' + bird );
     } else {
         console.log('Bert loves his ' + bird );
