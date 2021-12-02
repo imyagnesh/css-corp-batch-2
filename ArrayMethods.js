@@ -26,13 +26,6 @@ const users = [
 // else -1
 const index = users.findIndex(item => item.name === "Rohit")
 
-
-const index1 = users.reduce{(p,c) =>{
-if(c.name == 'Rohit') {
-return();
-}
-},[]};
-
 console.log(index);
 
 // O(logN) -> best case scenario -> found record
