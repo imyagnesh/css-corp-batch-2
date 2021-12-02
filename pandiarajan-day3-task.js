@@ -30,7 +30,7 @@ console.log(key);
 // sort -> O(N)
 // O(2N)
 
-// reduce + sort  -> O(N) 
+// reduce + sort  -> O(N)
 
 const groupByAge = users.reduce((previousValue, currentValue) => {
     const ageGroup = Math.floor(currentValue.age / 10);
