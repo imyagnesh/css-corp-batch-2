@@ -4,6 +4,9 @@
   "description": "react and javascript training",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +25,16 @@
   },
   "homepage": "https://github.com/imyagnesh/css-corp-batch-2#readme",
   "devDependencies": {
-    "webpack": "^5.64.4"
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1"
   }
 }
