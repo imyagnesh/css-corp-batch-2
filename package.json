@@ -1,0 +1,28 @@
+{
+  "name": "css-corp-batch-2",
+  "version": "0.0.1",
+  "description": "Learning react javascript es6",
+  "main": "index.js",
+  "repository": "https://github.com/Raghavendra1983/css-corp-batch-3.git",
+  "author": "Raghavendra <rao.raghuba@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint ./src --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/preset-env": "^7.16.4",
+    "@webpack-cli/generators": "^1.1.0",
+    "babel-loader": "^8.2.3",
+    "eslint": "^8.4.0",
+    "eslint-config-airbnb": "^19.0.2",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "webpack": "^5.64.4"
+  }
+}
