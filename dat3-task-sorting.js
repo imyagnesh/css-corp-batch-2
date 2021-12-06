@@ -25,6 +25,7 @@ const groupByAgeSort = users.reduce((previousValue, currentValue) => {
     const ageGroup = Math.floor(currentValue.age / 10);
     const key = `${ageGroup}0-${ageGroup}9`;
     (previousValue[key] = previousValue[key] || []).push(currentValue);
+    previousValue[key] .sort( (a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1);  
     return previousValue;
 }, {});
 
