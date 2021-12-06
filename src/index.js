@@ -1,4 +1,4 @@
-import Xyz, { a as aa, d } from './app';
+import Xyz, { a as aa, b, d } from './app';
 
 // import { a as aa } from './app'
 
