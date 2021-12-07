@@ -1,0 +1,27 @@
+{
+  "name": "css-corp-batch-2",
+  "version": "0.0.1",
+  "description": "react and javascript training",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fazilhakkim/css-corp-batch-2.git"
+  },
+  "keywords": [
+    "react",
+    "javascript",
+    "es6"
+  ],
+  "author": "Fazil hakkim (MohammedFazil.Hakkim@csscorp.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Fazilhakkim/css-corp-batch-2/issues"
+  },
+  "homepage": "https://github.com/Fazilhakkim/css-corp-batch-2#readme",
+  "devDependencies": {
+    "webpack": "^5.65.0"
+  }
+}
