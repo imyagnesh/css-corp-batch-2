@@ -1,21 +1,32 @@
-import Xyz, { a as aa, b, d } from './app';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-// import { a as aa } from './app'
+// component
+// 1. Function Component
+// 2. Class Component
 
-console.log(Xyz(1, 2));
+// Rules For Components
+// 1. Name of the component should be start with upper case.
+// 2. Per component return only 1 element/component
+// 3. Instead of class have to use className
+// 4. for inline style use object instead of string and property Name should be in camel case
 
-console.log(d);
+const Input = ({ title, caption }) => (
+  <div>
+    <h1 className="heading">{title}</h1>
+    <h2
+      style={{
+        backgroundColor: false ? 'red' : 'blue',
+        color: '#fff',
+      }}
+    >
+      {caption}
+    </h2>
+    <input type="checkbox" />
+  </div>
+);
 
-// import * as test from './app';
-
-// New Javascript import syntax
-// import * as test from  './app'
-
-// OLD JAVASCRIPT Syntax
-// const app = require('./app');
-
-console.log(aa);
-
-console.log('hello');
-
-console.log('how are you?');
+ReactDOM.render(
+  <Input title="Good Morning" caption="have a good day." />,
+  document.getElementById('root'),
+);
