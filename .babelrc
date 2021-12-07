@@ -1,11 +1,6 @@
 {
-    "presets": ["@babel/preset-env"]
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ]
 }
-// or you can use like this
-// use: {
-//    loader: 'babel-loader',
-//    options: {
-//      presets: ['@babel/preset-env'],
-//      plugins: ['@babel/plugin-proposal-object-rest-spread']
-//    }
-//  } - inside your webpack.config.js
