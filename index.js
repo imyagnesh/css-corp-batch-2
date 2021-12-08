@@ -1,4 +1,4 @@
-import defaultVariable, { app as a } from './app';
+import defaultVariable, { app as a } from './src/app';
 
 // import * as app from './app';
 
