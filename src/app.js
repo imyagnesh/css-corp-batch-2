@@ -1,4 +1,4 @@
-export const a = 'hello a from app.js';
+export const a = "hello a from app.js";
 
 export const b = 'hello b from app.js';
 
