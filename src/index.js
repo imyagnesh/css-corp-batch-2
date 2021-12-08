@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Input from './Input';
 
 // component
 // 1. Function Component
@@ -11,22 +12,24 @@ import ReactDOM from 'react-dom';
 // 3. Instead of class have to use className
 // 4. for inline style use object instead of string and property Name should be in camel case
 
-const Input = ({ title, caption }) => (
-  <div>
-    <h1 className="heading">{title}</h1>
-    <h2
-      style={{
-        backgroundColor: false ? 'red' : 'blue',
-        color: '#fff',
-      }}
-    >
-      {caption}
-    </h2>
-    <input type="checkbox" />
-  </div>
-);
+// const Input = ({ title, caption }) => (
+//   <div>
+//     <h1 className="heading">{title}</h1>
+//     <h2
+//       style={{
+//         backgroundColor: false ? 'red' : 'blue',
+//         color: '#fff',
+//       }}
+//     >
+//       {caption}
+//     </h2>
+//     <input type="checkbox" />
+//   </div>
+// );
+
+// Class Component
 
 ReactDOM.render(
-  <Input title="Good Morning" caption="have a good day." />,
+  <Input title="Good Morning" />,
   document.getElementById('root'),
 );
