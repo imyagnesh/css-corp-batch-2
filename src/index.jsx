@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Input from './input';
 
 
 
-const App = ({ title, caption }) => {
-    return (
-        <div>
-            <h1>{title}</h1>
-            <h2 style={{ background: 'red', color: 'white' }}>
+// const App = ({ title, caption }) => {
+//     return (
+//         <div>
+//             <h1>{title}</h1>
+//             <h2 style={{ background: 'red', color: 'white' }}>
 
-                {caption}
-            </h2>
-            <input type="text" />
-        </div>
-    );
-}
+//                 {caption}
+//             </h2>
+//             <input type="text" />
+//         </div>
+//     );
+// }
 
-ReactDOM.render(<App title="Good morning" caption="Thank you" />, document.getElementById('root'));
+
+ReactDOM.render(<Input title="Good morning" />, document.getElementById('root'));
