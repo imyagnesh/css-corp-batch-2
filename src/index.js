@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Input from './Input';
+import UserGreet from './Input';
 
 // component
 // 1. Function Component
@@ -30,6 +30,6 @@ import Input from './Input';
 // Class Component
 
 ReactDOM.render(
-  <Input title="Good Morning" />,
+  <UserGreet username="Yagnesh Modh" />,
   document.getElementById('root'),
 );
