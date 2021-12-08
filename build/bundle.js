@@ -16,7 +16,7 @@
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"a\": () => (/* binding */ a),\n/* harmony export */   \"b\": () => (/* binding */ b),\n/* harmony export */   \"c\": () => (/* binding */ c),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar a = \"hello from a\";\nvar b = \"hello from b\";\nvar c = \"hello from c\";\n\nvar sum = function sum(a, b) {\n  return a + b;\n}; //per file only one export default will be done\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sum);\n\n//# sourceURL=webpack://css-corp-batch-2/./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"a\": () => (/* binding */ a),\n/* harmony export */   \"b\": () => (/* binding */ b),\n/* harmony export */   \"c\": () => (/* binding */ c),\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nvar a = 'hello from a';\nvar b = 'hello from b';\nvar c = 'hello from c';\n\nvar sum = function sum(p, q) {\n  return p + q;\n}; // per file only one export default will be done\n\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (sum);\n\n//# sourceURL=webpack://css-corp-batch-2/./src/app.js?");
 
 /***/ }),
 
