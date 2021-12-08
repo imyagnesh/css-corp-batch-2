@@ -11,16 +11,25 @@ class Input extends Component {
     };
   }
 
-  incrementCounter = () => {
-    // const { counter } = this.state;
-    // this.setState({
-    //   counter: counter + 1,
-    // });
-
+  setCounter = (event, value) => {
+    const btnType = event.target.name;
     this.setState(({ counter }) => ({
-      counter: counter + 1,
+      //   counter: btnType === 'increment' ? counter + 1 : counter - 1,
+      counter: counter + value,
     }));
   };
+
+  //   incrementCounter = () => {
+  //     this.setState(({ counter }) => ({
+  //       counter: counter + 1,
+  //     }));
+  //   };
+
+  //   decrementCounter = () => {
+  //     this.setState(({ counter }) => ({
+  //       counter: counter - 1,
+  //     }));
+  //   };
 
   render() {
     const { title, caption } = this.props;
@@ -32,8 +41,19 @@ class Input extends Component {
         <h2 style={{ backgroundColor: 'red', color: '#fff' }}>{title}</h2>
         <h2>{caption}</h2>
         <p>{counter}</p>
-        <button type="button" onClick={this.incrementCounter}>
+        <button
+          type="button"
+          name="increment"
+          onClick={(event) => this.setCounter(event, 1)}
+        >
           Increment Counter
+        </button>
+        <button
+          type="button"
+          name="decrement"
+          onClick={(event) => this.setCounter(event, -1)}
+        >
+          Decrement Counter
         </button>
       </div>
     );
