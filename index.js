@@ -5,6 +5,7 @@ import defaultVariable, { app as a } from './app';
 // const app =  require('./app');
 
 const index = 'This is a index.js file';
+
 console.log(index);
 
 const index2 = 'This is a index2 variable';
