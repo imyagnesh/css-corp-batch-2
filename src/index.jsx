@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import Input from './input';
+import UserGreet from './input';
+
 
 
 
@@ -18,4 +19,4 @@ import Input from './input';
 // }
 
 
-ReactDOM.render(<Input title="Good morning" />, document.getElementById('root'));
+ReactDOM.render(<UserGreet username="Hemant Yogananda" />, document.getElementById('root'));
