@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserGreet from './Input';
+import App from './app';
+// import UserGreet from './Input';
 
 // component
 // 1. Function Component
@@ -29,7 +30,4 @@ import UserGreet from './Input';
 
 // Class Component
 
-ReactDOM.render(
-  <UserGreet username="Yagnesh Modh" />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<App name="yagnesh 1" />, document.getElementById('root'));
