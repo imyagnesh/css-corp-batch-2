@@ -15,10 +15,10 @@ export default class DataTypeValidation extends Component {
 }
 
 DataTypeValidation.propTypes = {
-  name: PropTypes.string.isRequired,
-  age: PropTypes.number,
+  name: PropTypes.string,
+  age: PropTypes.number.isRequired,
 };
 
 DataTypeValidation.defaultProps = {
-  age: 25,
+  name: 'Seeni (default value)',
 };

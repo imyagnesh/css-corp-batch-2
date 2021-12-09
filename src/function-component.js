@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { memo } from 'react';
 
-export default function FunctionComponent() {
+const FunctionComponent = () => {
   return (
     <div>
-      <h1>This is the functional component</h1>
+      <h1>Functional Component</h1>
+      <hr />
     </div>
   );
-}
+};
+
+export default memo(FunctionComponent, (prevProps, prevState) => {
+  return true;
+});

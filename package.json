@@ -40,6 +40,7 @@
   "homepage": "https://github.com/SeenivasanBalakrishnan/css-corp-batch-2#readme",
   "dependencies": {
     "react": "^17.0.2",
+    "react-addons-shallow-compare": "^15.6.3",
     "react-dom": "^17.0.2"
   }
 }

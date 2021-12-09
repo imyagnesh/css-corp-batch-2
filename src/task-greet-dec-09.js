@@ -15,10 +15,12 @@ export class Greet extends Component {
   render() {
     return (
       <div>
+        <h1>Greet Component</h1>
         <h2>{this.state.greet}</h2>
         <button type="button" onClick={this.greetMe}>
           Greet Me
         </button>
+        <hr />
       </div>
     );
   }
