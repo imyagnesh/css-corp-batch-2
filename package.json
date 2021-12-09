@@ -7,6 +7,7 @@
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
     "babel-loader": "^8.2.3",
     "eslint": "^8.4.0",
     "eslint-config-airbnb": "^19.0.2",
@@ -38,6 +39,7 @@
   },
   "homepage": "https://github.com/SeenivasanBalakrishnan/css-corp-batch-2#readme",
   "dependencies": {
-    "yarn": "^1.22.17"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
