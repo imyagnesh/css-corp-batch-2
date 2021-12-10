@@ -22,8 +22,10 @@ import Child2 from './Child2';
 // 5. componentDidUpdate
 
 // Unmounting
+// componentWillUnmount
 
 // Error
+//
 class App extends Component {
   // base on props set state value(optional)
   // Analytics
@@ -50,15 +52,15 @@ class App extends Component {
   //   };
 
   //  calls everytime when value or state value change
-  static getDerivedStateFromProps(props, prevState) {
-    console.log('getDerivedStateFromProps');
-    if (!prevState.greet) {
-      return {
-        greet: `Hello, ${props.name}`,
-      };
-    }
-    return null;
-  }
+  // static getDerivedStateFromProps(props, prevState) {
+  //   console.log('getDerivedStateFromProps');
+  //   if (!prevState.greet) {
+  //     return {
+  //       greet: `Hello, ${props.name}`,
+  //     };
+  //   }
+  //   return null;
+  // }
 
   // Manipulate Dom element
   // call only once
@@ -84,23 +86,43 @@ class App extends Component {
     console.log(snapshot);
   }
 
-  setCounter = (value) => {
-    this.setState(({ counter }) => ({
-      counter: counter + value,
-    }));
+  static getDerivedStateFromError(error) {
+    return {
+      error,
+    };
+  }
+
+  componentDidCatch(error, info) {
+    console.log(error);
+    console.log(info);
+    // log error on server
+  }
+
+  setCounter = async (value) => {
+    try {
+      this.setState(({ counter }) => ({
+        counter: counter + value,
+      }));
+    } catch (error) {}
   };
 
   changeUserName = () => {
-    this.setState(({ user }) => {
-      //   user.name = 'Virat';
-      return {
-        user: { ...user, name: 'Virat' },
-      };
-    });
+    try {
+      this.setState(({ user }) =>
+        //   user.name = 'Virat';
+        ({
+          user: { ...user, name: 'Virat' },
+        }),
+      );
+    } catch (error) {}
   };
 
   render() {
-    const { counter, greet, user } = this.state;
+    const { counter, greet, user, error } = this.state;
+
+    if (error) {
+      return <h1>{error.message}</h1>;
+    }
     return (
       <div>
         <h1 id="heading">{greet}</h1>
@@ -116,10 +138,25 @@ class App extends Component {
         </button>
         <h2>{user.name}</h2>
         <Child1 counter={counter} />
-        <Child2 userInfo={user} />
+        {counter < 10 && <Child2 userInfo={user} />}
+        <button
+          type="button"
+          onClick={() => {
+            this.setState({
+              stateColor: 'blue',
+            });
+          }}
+        >
+          Change Color
+        </button>
       </div>
     );
   }
 }
+
+App.getDerivedStateFromProps = (props, state) => ({
+  greet: `Hello, ${props.name} ${state.stateColor || props.color}`,
+  stateColor: props.color,
+});
 
 export default App;

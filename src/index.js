@@ -31,9 +31,7 @@ import App from './app';
 
 // Class Component
 
-//ReactDOM.render(
-//<UserGreet username="Yagnesh Modh" />,
-//<GreeetUser></GreeetUser>,
-//document.getElementById('root'),
-//);
-ReactDOM.render(<App name="yagnesh 1" />, document.getElementById('root'));
+ReactDOM.render(
+    <App name="yagnesh" color="red" />,
+    document.getElementById('root'),
+);
