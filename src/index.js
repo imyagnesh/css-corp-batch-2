@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import UserGreet from './input';
 
 // types of component
 
@@ -12,7 +13,7 @@ import ReactDOM from 'react-dom';
 // 3.we should use className instead of class as class is a reserved keyword in JS
 // 4.For inline style we should give as objects
 // 5.css property name should be a camel case
-const App = ({ title, caption }) => (
+/* const App = ({ title, caption }) => (
   <div className="heading-parent">
     <h1>
       {title}
@@ -27,5 +28,5 @@ const App = ({ title, caption }) => (
     </h2>
     <h3>learning props</h3>
   </div>
-);
-ReactDOM.render(<App title="Good morning" caption="have a good day" />, document.getElementById('root'));
+); */
+ReactDOM.render(<UserGreet username="Fazil Hakkim" />, document.getElementById('root'));
