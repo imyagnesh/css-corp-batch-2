@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Child1 from './Child1';
+import Child2 from './Child2';
 
 // render method will call when ever state or props value change
 
@@ -13,6 +15,11 @@ import React, { Component } from 'react';
 // 4. componentDidMount
 
 // Updating
+// 1. getDerivedStateFromProps
+// 2. shouldComponentUpdate(MIMP)
+// 3. render
+// 4. getSnapshotBeforeUpdate
+// 5. componentDidUpdate
 
 // Unmounting
 
@@ -28,10 +35,14 @@ class App extends Component {
     this.state = {
       counter: 0,
       greet: `Hello, ${props.name}`,
+      user: {
+        name: 'yagnesh',
+        age: 30,
+      },
     };
     // this.setCounter(5);
     // Pass user info to server through HTTP Call
-    this.changeGreet = this.changeGreet.bind(this);
+    // this.changeGreet = this.changeGreet.bind(this);
   }
 
   //   state = {
@@ -64,24 +75,32 @@ class App extends Component {
     // setstate data
   }
 
+  getSnapshotBeforeUpdate(prevProps, prevState) {
+    return 'hello from getSnapshotBeforeUpdate';
+  }
+
+  // Manipulate dom base on prev Props and prev State
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log(snapshot);
+  }
+
   setCounter = (value) => {
     this.setState(({ counter }) => ({
       counter: counter + value,
     }));
   };
 
-  changeGreet = () => {
-    this.setState((state, props) => {
-      if (state.greet) {
-        return {
-          greet: `Hola ${props.name}`,
-        };
-      }
+  changeUserName = () => {
+    this.setState(({ user }) => {
+      //   user.name = 'Virat';
+      return {
+        user: { ...user, name: 'Virat' },
+      };
     });
   };
 
   render() {
-    const { counter, greet } = this.state;
+    const { counter, greet, user } = this.state;
     return (
       <div>
         <h1 id="heading">{greet}</h1>
@@ -92,9 +111,12 @@ class App extends Component {
         <button type="button" onClick={() => this.setCounter(-1)}>
           Decrement Counter
         </button>
-        <button type="button" onClick={this.changeGreet}>
-          Change Greet Message
+        <button type="button" onClick={this.changeUserName}>
+          Change User name
         </button>
+        <h2>{user.name}</h2>
+        <Child1 counter={counter} />
+        <Child2 userInfo={user} />
       </div>
     );
   }
