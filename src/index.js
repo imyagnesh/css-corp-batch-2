@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import UserGreet from './input';
+import App from './app';
 
 // types of component
 
@@ -29,4 +29,4 @@ import UserGreet from './input';
     <h3>learning props</h3>
   </div>
 ); */
-ReactDOM.render(<UserGreet username="Fazil Hakkim" />, document.getElementById('root'));
+ReactDOM.render(<App name="fazil" />, document.getElementById('root'));
