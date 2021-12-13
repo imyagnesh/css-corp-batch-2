@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './app';
+// import Todo from './pages/todo';
+// import './root.scss';
 
 // types of component
 

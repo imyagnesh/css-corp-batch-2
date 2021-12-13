@@ -8,7 +8,6 @@ class App extends Component {
     super(props);
     this.state = {
       counter: 0,
-      greet: `Hello, ${props.name}`,
       user: {
         name: 'Mohammed fazil',
         age: 30,
@@ -24,7 +23,7 @@ class App extends Component {
   //   greet: '',
   // };
 
-  static getDerivedStateFromProps(props, state) {
+  /* static getDerivedStateFromProps(props, state) {
     console.log(document.getElementById('heading'));
     if (!state.greet) {
       return {
@@ -32,7 +31,7 @@ class App extends Component {
       };
     }
     return null;
-  }
+  } */
 
   changeGreet = () => {
     this.setState((prevState, props) => ({
@@ -74,9 +73,20 @@ class App extends Component {
     console.log(`snapshot value:${snapshot}`);
   }
 
+  static getDerivedStateFromError(error) {
+    return {
+      error,
+    };
+  }
+
   render() {
     console.log('render');
-    const { counter, greet, user } = this.state;
+    const {
+      counter, greet, user, error,
+    } = this.state;
+    if (error) {
+      return <h1>{error.message}</h1>;
+    }
     return (
       <div>
         <h1>{greet}</h1>
@@ -90,10 +100,19 @@ class App extends Component {
         */}
         <button type="button" onClick={this.changeUsername}>Change username</button>
         <Child1 counter={counter} />
-        <Child2 user={user} />
+        {counter < 10 && <Child2 user={user} />}
       </div>
     );
   }
 }
+App.getDerivedStateFromProps = (props, state) => {
+  console.log(document.getElementById('heading'));
+  if (!state.greet) {
+    return {
+      greet: `hello ${props.name}`,
+    };
+  }
+  return null;
+};
 
 export default App;
