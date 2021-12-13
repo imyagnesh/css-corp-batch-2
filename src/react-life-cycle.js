@@ -10,8 +10,9 @@ export default class LifeCycleHook extends Component {
   }
 
   static getDerivedStateFromProps(props, { logs }) {
-    const lastLog = logs[logs.length - 2];
-    if (lastLog?.isgetDerivedCalled) return logs;
+    const lastLog = logs[logs.length - 1];
+    const secondLastLog = logs[logs.length - 2];
+    if (secondLastLog?.isgetDerivedCalled || lastLog?.isdidUpdated) return logs;
     return {
       logs: [
         ...logs,
@@ -35,22 +36,58 @@ export default class LifeCycleHook extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
     const shallowCompareResponse = shallowCompare(this, nextProps, nextState);
-    document.getElementById(
-      'should-component-update'
-    ).innerHTML = `${nextState.logs.length}. shouldComponentUpdate() is loaded (shallowCompare retuns ${shallowCompareResponse})`;
+    document.getElementById('should-component-update').innerHTML = `${
+      nextState.logs.length + 1
+    }. shouldComponentUpdate() is loaded (shallowCompare retuns ${shallowCompareResponse})`;
     return shallowCompareResponse;
+  }
+
+  getSnapshotBeforeUpdate(prevProps, { logs }) {
+    const lastLog = logs[logs.length - 2];
+    if (lastLog?.isGetSnapCalled) return logs;
+
+    return {
+      msg: 'getSnapshotBeforeUpdate() is loaded',
+      isGetSnapCalled: true,
+    };
+  }
+
+  componentDidUpdate(prevProps, prevState, snapResponse) {
+    const { logs } = this.state;
+    const lastLog = logs[logs.length - 4];
+    if (lastLog?.isGetSnapCalled) return logs;
+
+    this.setState(() => ({
+      logs: [
+        ...logs,
+        snapResponse,
+        {
+          msg: 'componentDidUpdate() is loaded',
+          isStateChanged: true,
+          isdidUpdated: true,
+          isGetSnapCalled: true,
+        },
+      ],
+    }));
   }
 
   render() {
     const { logs } = this.state;
     const lastLog = logs[logs.length - 1];
-    if (lastLog.isStateChanged || lastLog.isgetDerivedCalled) {
+
+    if (
+      lastLog.isStateChanged ||
+      lastLog.isgetDerivedCalled ||
+      lastLog.isGetSnapCalled
+    ) {
       this.setState(({ logs }) => ({
         logs: [
           ...logs,
           {
             msg: 'render() is loaded',
             isStateChanged: false,
+            isgetDerivedCalled: false,
+            isGetSnapCalled: false,
           },
         ],
       }));

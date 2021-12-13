@@ -6,9 +6,11 @@ import Maths from './maths';
 import DataTypeValidation from './data-type-validation';
 import { Greet } from './task-greet-dec-09';
 import LifeCycleHook from './react-life-cycle';
+import InstaFeed from './insta-new-feed';
 
 ReactDOM.render(
   <div>
+    <InstaFeed />
     <LifeCycleHook />
     <Maths />
     <FunctionComponent />
