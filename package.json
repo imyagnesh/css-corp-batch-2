@@ -26,12 +26,14 @@
   },
   "homepage": "https://github.com/kmahendi/css-corp-batch-2#readme",
   "dependencies": {
+    "react-dom": "^17.0.2",
     "webpack": "^5.64.4"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
     "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
     "babel-loader": "^8.2.3",
     "eslint": "^8.4.0",
     "eslint-config-airbnb": "^19.0.2",
