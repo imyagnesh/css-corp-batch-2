@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './app';
 import Todo from './pages/Todo';
-import './root.scss';
+import './root.css';
 // import UserGreet from './Input';
 
 // component
