@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
+// import App from './app';
+import Todo from './pages/Todo';
+import './root.scss';
 // import UserGreet from './Input';
 
 // component
@@ -30,7 +32,4 @@ import App from './app';
 
 // Class Component
 
-ReactDOM.render(
-  <App name="yagnesh" color="red" />,
-  document.getElementById('root'),
-);
+ReactDOM.render(<Todo />, document.getElementById('root'));
