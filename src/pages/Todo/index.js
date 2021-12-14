@@ -71,7 +71,35 @@ export default class Todo extends Component {
           </button>
         </form>
         <div className="flex-1 overflow-auto">
-          {todoList.reduce((p, c) => {
+          {
+            todoList.map((todoItem) => (
+              ((filterType === 'all' || (filterType === 'pending' && !todoItem.isDone) || (filterType === 'completed' && todoItem.isDone)) && 
+              <div className="flex items-center m-2" key={todoItem.id}>
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  checked={todoItem.isDone}
+                  onChange={() => this.toggleComplete(todoItem)}
+                />
+                <p
+                  className={cn('flex-1 px-2', {
+                    'line-through': todoItem.isDone,
+                  })}
+                >
+                  {todoItem.text}
+                </p>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => this.deleteTodo(todoItem)}
+                >
+                  Delete
+                </button>
+              </div>
+              )
+            ))
+            /*
+          todoList.reduce((p, c) => {
             const UI = (
               <div className="flex items-center m-2" key={c.id}>
                 <input
@@ -113,26 +141,27 @@ export default class Todo extends Component {
                 return [...p, UI];
             }
             return p;
-          }, [])}
+          }, [])*/
+          }
         </div>
         <div className="flex">
           <button
             type="button"
-            className="flex-1"
+            className="flex-1 buttons"
             onClick={() => this.filterTodo('all')}
           >
             All
           </button>
           <button
             type="button"
-            className="flex-1"
+            className="flex-1 buttons"
             onClick={() => this.filterTodo('pending')}
           >
             Pending
           </button>
           <button
             type="button"
-            className="flex-1"
+            className="flex-1 buttons"
             onClick={() => this.filterTodo('completed')}
           >
             Completed
