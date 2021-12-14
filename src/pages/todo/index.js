@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import './todoStyle.scss';
+import './todoStyle.css';
 
 class Todo extends Component {
   render() {
     return (
-      <div className="container">
-        <h1>Hello Todo</h1>
+      <div className="container bg-black">
+        <h1 className='text'>Hello Todo</h1>
       </div>
     );
   }

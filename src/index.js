@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
-// import Todo from './pages/todo';
-// import './root.scss';
+// import App from './app';
+import Todo from './pages/todo';
+import './root.css';
 
 // types of component
 
@@ -31,4 +31,4 @@ import App from './app';
     <h3>learning props</h3>
   </div>
 ); */
-ReactDOM.render(<App name="fazil" />, document.getElementById('root'));
+ReactDOM.render(<Todo />, document.getElementById('root'));
