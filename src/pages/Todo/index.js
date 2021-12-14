@@ -8,6 +8,7 @@ export default class Todo extends Component {
     super(props);
     this.state = {
       todoList: [],
+      filterType: 'all'
     };
 
     this.inputText = createRef();
@@ -53,9 +54,15 @@ export default class Todo extends Component {
     }));
   };
 
+  setFilterType = (type) => {
+    this.setState(({todoList, filterType}) => {
+      return {todoList, filterType: type}
+    })
+  }
+
   render() {
     console.log('render');
-    const { todoList } = this.state;
+    const { todoList, filterType } = this.state;
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
@@ -66,8 +73,17 @@ export default class Todo extends Component {
           </button>
         </form>
         <div className="flex-1 overflow-auto">
-          {todoList.map((item) => (
-            <div className="flex items-center m-2" key={item.id}>
+          {todoList.map((item) => {
+            if (filterType !== 'all') {
+              if (filterType === 'pending' && item.isDone){
+                return '';
+              }
+              if(filterType === 'completed' && !item.isDone ) {
+                return '';
+              }
+            }
+            return (
+              <div className="flex items-center m-2" key={item.id}>
               <input
                 type="checkbox"
                 className="checkbox"
@@ -84,17 +100,18 @@ export default class Todo extends Component {
               <button type="button" className="btn-primary" onClick={() => this.deleteTodo(item)}>
                 Delete
               </button>
-            </div>
-          ))}
+            </div>);
+          })}
+          
         </div>
         <div className="flex">
-          <button type="button" className="flex-1">
+          <button type="button" className="flex-1" onClick={() => {this.setFilterType('all')}}>
             All
           </button>
-          <button type="button" className="flex-1">
+          <button type="button" className="flex-1" onClick={() => {this.setFilterType('pending')}}>
             Pending
           </button>
-          <button type="button" className="flex-1">
+          <button type="button" className="flex-1" onClick={() => {this.setFilterType('completed')}}>
             Completed
           </button>
         </div>
