@@ -2,12 +2,13 @@ import React, { Component, createRef } from 'react';
 import cn from 'classnames';
 import './todoStyle.css';
 
-const test = () => {};
+const test = () => { };
 export default class Todo extends Component {
   constructor(props) {
     super(props);
     this.state = {
       todoList: [],
+      filterType: "all"
     };
 
     this.inputText = createRef();
@@ -45,9 +46,27 @@ export default class Todo extends Component {
     }));
   };
 
+  deleteTodo = (item) => {
+    this.setState(({ todoList }) => ({
+      todoList: todoList.filter((x) => {
+        return x.id !== item.id;
+      })
+    })
+    )
+  }
+
+  filterTodo = (filterType) => {
+    this.setState(({ todoList }) => ({
+      todoList: todoList,
+      filterType
+    })
+    )
+  }
+
   render() {
     console.log('render');
-    const { todoList } = this.state;
+    const { todoList, filterType } = this.state;
+    console.log(filterType);
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
@@ -58,7 +77,19 @@ export default class Todo extends Component {
           </button>
         </form>
         <div className="flex-1 overflow-auto">
-          {todoList.map((item) => (
+          {todoList.filter((item) => {
+            switch (filterType) {
+              case "pending":
+                return item.isDone === false
+                break;
+              case "completed":
+                return item.isDone === true
+
+              default:
+                return item
+                break;
+            }
+          }).map((item) => (
             <div className="flex items-center m-2" key={item.id}>
               <input
                 type="checkbox"
@@ -73,20 +104,20 @@ export default class Todo extends Component {
               >
                 {item.text}
               </p>
-              <button type="button" className="btn-primary">
+              <button type="button" className="btn-primary" onClick={() => this.deleteTodo(item)}>
                 Delete
               </button>
             </div>
           ))}
         </div>
         <div className="flex">
-          <button type="button" className="flex-1">
+          <button type="button" className="flex-1" onClick={() => this.filterTodo("all")}>
             All
           </button>
-          <button type="button" className="flex-1">
+          <button type="button" className="flex-1" onClick={() => this.filterTodo("pending")}>
             Pending
           </button>
-          <button type="button" className="flex-1">
+          <button type="button" className="flex-1" onClick={() => this.filterTodo("completed")}>
             Completed
           </button>
         </div>
