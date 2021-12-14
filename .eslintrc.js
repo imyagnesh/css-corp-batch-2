@@ -17,5 +17,8 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/function-component-definition': 0,
+    'linebreak-style': 0,
+    'indent': ['error', 2],
+    "react/sort-comp": [`<enabled>, { order: <order>, groups: <groups> }`]
   },
 };
