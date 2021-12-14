@@ -3,6 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
+  parser: "@babel/eslint-parser",
   extends: [
     'plugin:react/recommended',
     'airbnb',
@@ -18,5 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/function-component-definition': 0,
   },
 };
