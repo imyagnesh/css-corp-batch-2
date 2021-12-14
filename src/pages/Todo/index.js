@@ -48,9 +48,11 @@ export default class Todo extends Component {
 
   deleteTodo = (item) => {
     this.setState(({ todoList }) => ({
-      todoList: todoList.filter((x) => x.id !== item.id),
-    }));
-  };
+      todoList: todoList.filter((x) => {
+          return x.id !== item.id
+      }),
+    }));  
+  }
 
   filterTodo = (filterType) => {
     this.setState({
