@@ -8,6 +8,7 @@ export default class Todo extends Component {
     super(props);
     this.state = {
       todoList: [],
+      filterType: 'all',
     };
 
     this.inputText = createRef();
@@ -45,9 +46,21 @@ export default class Todo extends Component {
     }));
   };
 
+  deleteTodo = (item) => {
+    this.setState(({ todoList }) => ({
+      todoList: todoList.filter((x) => x.id !== item.id),
+    }));
+  };
+
+  filterTodo = (filterType) => {
+    this.setState({
+      filterType,
+    });
+  };
+
   render() {
     console.log('render');
-    const { todoList } = this.state;
+    const { todoList, filterType } = this.state;
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
@@ -58,35 +71,70 @@ export default class Todo extends Component {
           </button>
         </form>
         <div className="flex-1 overflow-auto">
-          {todoList.map((item) => (
-            <div className="flex items-center m-2" key={item.id}>
-              <input
-                type="checkbox"
-                className="checkbox"
-                checked={item.isDone}
-                onChange={() => this.toggleComplete(item)}
-              />
-              <p
-                className={cn('flex-1 px-2', {
-                  'line-through': item.isDone,
-                })}
-              >
-                {item.text}
-              </p>
-              <button type="button" className="btn-primary">
-                Delete
-              </button>
-            </div>
-          ))}
+          {todoList.reduce((p, c) => {
+            const UI = (
+              <div className="flex items-center m-2" key={c.id}>
+                <input
+                  type="checkbox"
+                  className="checkbox"
+                  checked={c.isDone}
+                  onChange={() => this.toggleComplete(c)}
+                />
+                <p
+                  className={cn('flex-1 px-2', {
+                    'line-through': c.isDone,
+                  })}
+                >
+                  {c.text}
+                </p>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => this.deleteTodo(c)}
+                >
+                  Delete
+                </button>
+              </div>
+            );
+            switch (filterType) {
+              case 'pending':
+                if (!c.isDone) {
+                  return [...p, UI];
+                }
+                break;
+
+              case 'completed':
+                if (c.isDone) {
+                  return [...p, UI];
+                }
+                break;
+
+              default:
+                return [...p, UI];
+            }
+            return p;
+          }, [])}
         </div>
         <div className="flex">
-          <button type="button" className="flex-1">
+          <button
+            type="button"
+            className="flex-1"
+            onClick={() => this.filterTodo('all')}
+          >
             All
           </button>
-          <button type="button" className="flex-1">
+          <button
+            type="button"
+            className="flex-1"
+            onClick={() => this.filterTodo('pending')}
+          >
             Pending
           </button>
-          <button type="button" className="flex-1">
+          <button
+            type="button"
+            className="flex-1"
+            onClick={() => this.filterTodo('completed')}
+          >
             Completed
           </button>
         </div>
