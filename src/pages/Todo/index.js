@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import cn from 'classnames';
 import './todoStyle.css';
 
-const test = () => {};
+const test = () => { };
 export default class Todo extends Component {
   constructor(props) {
     super(props);
@@ -32,6 +32,14 @@ export default class Todo extends Component {
         this.inputText.current.value = '';
       },
     );
+  };
+  deleteTodo = (item) => {
+    this.setState(({ todoList }) => {
+      const index = this.state.todoList.indexOf(item);
+      return {
+        todoList: [...todoList.slice(0, index), ...todoList.slice(index + 1)]
+      }
+    });
   };
 
   toggleComplete = (item) => {
@@ -73,7 +81,7 @@ export default class Todo extends Component {
               >
                 {item.text}
               </p>
-              <button type="button" className="btn-primary">
+              <button type="button" className="btn-primary" onClick={() => this.deleteTodo(item)}>
                 Delete
               </button>
             </div>
