@@ -1,66 +1,83 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
+import cn from 'classnames';
 import './todoStyle.css';
 
+const test = () => {};
 export default class Todo extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+    this.state = {
+      todoList: [],
+    };
+
+    this.inputText = createRef();
+  }
+
+  addTodo = (event) => {
+    event.preventDefault();
+    this.setState(
+      ({ todoList }) => {
+        // const todoText = document.getElementById('todoText').value;
+        // O(1)
+        const todoText = this.inputText.current.value;
+        return {
+          todoList: [
+            ...todoList,
+            { id: new Date().valueOf(), text: todoText, isDone: false },
+          ],
+        };
+      },
+      () => {
+        // document.getElementById('todoText').value = '';
+        this.inputText.current.value = '';
+      },
+    );
+  };
+
+  toggleComplete = (item) => {
+    this.setState(({ todoList }) => ({
+      todoList: todoList.map((x) => {
+        if (x.id === item.id) {
+          return { ...x, isDone: !x.isDone };
+        }
+        return x;
+      }),
+    }));
+  };
 
   render() {
+    console.log('render');
+    const { todoList } = this.state;
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
-        <form className="flex justify-center my-2">
-          <input type="text" />
-          <button type="submit">Add Todo</button>
+        <form className="flex justify-center my-2" onSubmit={this.addTodo}>
+          <input type="text" className="input" ref={this.inputText} />
+          <button type="submit" className="btn-primary">
+            Add Todo
+          </button>
         </form>
         <div className="flex-1 overflow-auto">
-          <div className="flex items-center m-2">
-            <input type="checkbox" />
-            <p className="flex-1 px-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              obcaecati.
-            </p>
-            <button>Delete</button>
-          </div>
-          <div className="flex items-center m-2">
-            <input type="checkbox" />
-            <p className="flex-1 px-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              obcaecati.
-            </p>
-            <button>Delete</button>
-          </div>
-          <div className="flex items-center m-2">
-            <input type="checkbox" />
-            <p className="flex-1 px-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              obcaecati.
-            </p>
-            <button>Delete</button>
-          </div>
-          <div className="flex items-center m-2">
-            <input type="checkbox" />
-            <p className="flex-1 px-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              obcaecati.
-            </p>
-            <button>Delete</button>
-          </div>
-          <div className="flex items-center m-2">
-            <input type="checkbox" />
-            <p className="flex-1 px-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              obcaecati.
-            </p>
-            <button>Delete</button>
-          </div>
-          <div className="flex items-center m-2">
-            <input type="checkbox" />
-            <p className="flex-1 px-2">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam,
-              obcaecati.
-            </p>
-            <button>Delete</button>
-          </div>
+          {todoList.map((item) => (
+            <div className="flex items-center m-2" key={item.id}>
+              <input
+                type="checkbox"
+                className="checkbox"
+                checked={item.isDone}
+                onChange={() => this.toggleComplete(item)}
+              />
+              <p
+                className={cn('flex-1 px-2', {
+                  'line-through': item.isDone,
+                })}
+              >
+                {item.text}
+              </p>
+              <button type="button" className="btn-primary">
+                Delete
+              </button>
+            </div>
+          ))}
         </div>
         <div className="flex">
           <button type="button" className="flex-1">
