@@ -19,11 +19,12 @@ export default class Weather extends Component {
     getWeather = (event) => {
         event.preventDefault();
         this.setState(({ reports }) => {
-            const city = this.textBox.current;
-            var fetchedReport = reports.find(report => report.city.toLowerCase() === city.value.toLowerCase());
-            fetchedReport = (!fetchedReport) ? city.value : fetchedReport;
-            city.value = '';
-            return { ...reports, fetchedReport }
+            const city = this.textBox.current.value;
+            var fetchedReport = reports.find(report => report.city.toLowerCase() === city.toLowerCase());
+            fetchedReport = (!fetchedReport) ? city : fetchedReport;
+            return { fetchedReport }
+        }, () => {
+            this.textBox.current.value = '';
         });
     }
 
