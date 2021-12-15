@@ -27,7 +27,7 @@ class UserGreet extends Component {
     const { username } = this.props;
     console.log('render');
     return (
-      <div>
+      <div className="bg-black">
         <h1 id="heading">{greet}</h1>
         <h2>{username}</h2>
         <button type="button" onClick={this.greetUser}>
