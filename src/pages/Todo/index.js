@@ -147,6 +147,7 @@ export default class Todo extends Component {
             Completed
           </button>
         </div>
+
       </div>
     );
   }
