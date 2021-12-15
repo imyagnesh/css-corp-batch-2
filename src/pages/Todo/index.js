@@ -1,9 +1,11 @@
-import React, { Component, createRef } from 'react';
-import cn from 'classnames';
+import React, { PureComponent, createRef, lazy, Suspense } from 'react';
 import './todoStyle.css';
 
-const test = () => {};
-export default class Todo extends Component {
+const TodoForm = lazy(() => import('./todoForm'));
+const TodoList = lazy(() => import('./todoList'));
+const TodoFilter = lazy(() => import('./todoFilter'));
+
+export default class Todo extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,17 +16,25 @@ export default class Todo extends Component {
     this.inputText = createRef();
   }
 
-  addTodo = (event) => {
+  addTodo = async (event) => {
     event.preventDefault();
+    // const format = await ;
+    const format = await import('date-fns/format');
     this.setState(
       ({ todoList }) => {
         // const todoText = document.getElementById('todoText').value;
         // O(1)
         const todoText = this.inputText.current.value;
+
         return {
           todoList: [
             ...todoList,
-            { id: new Date().valueOf(), text: todoText, isDone: false },
+            {
+              id: new Date().valueOf(),
+              text: todoText,
+              isDone: false,
+              timeStamp: format.default(new Date(), 'MM-dd-yy hh:mm'),
+            },
           ],
         };
       },
@@ -64,80 +74,24 @@ export default class Todo extends Component {
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
-        <form className="flex justify-center my-2" onSubmit={this.addTodo}>
-          <input type="text" className="input" ref={this.inputText} />
-          <button type="submit" className="btn-primary">
-            Add Todo
-          </button>
-        </form>
-        <div className="flex-1 overflow-auto">
-          {todoList.reduce((p, c) => {
-            const UI = (
-              <div className="flex items-center m-2" key={c.id}>
-                <input
-                  type="checkbox"
-                  className="checkbox"
-                  checked={c.isDone}
-                  onChange={() => this.toggleComplete(c)}
-                />
-                <p
-                  className={cn('flex-1 px-2', {
-                    'line-through': c.isDone,
-                  })}
-                >
-                  {c.text}
-                </p>
-                <button
-                  type="button"
-                  className="btn-primary"
-                  onClick={() => this.deleteTodo(c)}
-                >
-                  Delete
-                </button>
-              </div>
-            );
-            switch (filterType) {
-              case 'pending':
-                if (!c.isDone) {
-                  return [...p, UI];
-                }
-                break;
-
-              case 'completed':
-                if (c.isDone) {
-                  return [...p, UI];
-                }
-                break;
-
-              default:
-                return [...p, UI];
-            }
-            return p;
-          }, [])}
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <TodoForm addTodo={this.addTodo} ref={this.inputText} />
+        </Suspense>
+        <div className="flex-1">
+          {todoList.length > 0 && (
+            <Suspense fallback={<h1>Loading...</h1>}>
+              <TodoList
+                todoList={todoList}
+                filterType={filterType}
+                toggleComplete={this.toggleComplete}
+                deleteTodo={this.deleteTodo}
+              />
+            </Suspense>
+          )}
         </div>
-        <div className="flex">
-          <button
-            type="button"
-            className="flex-1"
-            onClick={() => this.filterTodo('all')}
-          >
-            All
-          </button>
-          <button
-            type="button"
-            className="flex-1"
-            onClick={() => this.filterTodo('pending')}
-          >
-            Pending
-          </button>
-          <button
-            type="button"
-            className="flex-1"
-            onClick={() => this.filterTodo('completed')}
-          >
-            Completed
-          </button>
-        </div>
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <TodoFilter filterTodo={this.filterTodo} />
+        </Suspense>
       </div>
     );
   }
