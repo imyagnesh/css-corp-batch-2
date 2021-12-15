@@ -25,14 +25,10 @@
     "url": "https://github.com/kmahendi/css-corp-batch-2/issues"
   },
   "homepage": "https://github.com/kmahendi/css-corp-batch-2#readme",
-  "dependencies": {
-    "classnames": "^2.3.1",
-    "react-dom": "^17.0.2",
-    "webpack": "^5.64.4"
-  },
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.3",
+    "@babel/plugin-transform-runtime": "^7.16.5",
     "@babel/preset-env": "^7.16.4",
     "@babel/preset-react": "^7.16.0",
     "@tailwindcss/jit": "^0.1.18",
@@ -54,5 +50,15 @@
     "tailwindcss": "^3.0.2",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0"
+  },
+  "dependencies": {
+    "@tailwindcss/forms": "^0.4.0",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.27.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-addons-shallow-compare": "^15.6.3",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.64.4"
   }
 }

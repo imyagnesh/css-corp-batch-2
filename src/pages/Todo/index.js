@@ -1,11 +1,11 @@
-import React, { Component, createRef, lazy, Suspense } from 'react';
+import React, { PureComponent, createRef, lazy, Suspense } from 'react';
 import './todoStyle.css';
 
 const TodoForm = lazy(() => import('./todoForm'));
 const TodoList = lazy(() => import('./todoList'));
 const TodoFilter = lazy(() => import('./todoFilter'));
 
-export default class Todo extends Component {
+export default class Todo extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,17 +25,25 @@ export default class Todo extends Component {
     });
   };
 
-  addTodo = (event) => {
+  addTodo = async (event) => {
     event.preventDefault();
+    // const format = await ;
+    const format = await import('date-fns/format');
     this.setState(
       ({ todoList }) => {
         // const todoText = document.getElementById('todoText').value;
         // O(1)
         const todoText = this.inputText.current.value;
+
         return {
           todoList: [
             ...todoList,
-            { id: new Date().valueOf(), text: todoText, isDone: false },
+            {
+              id: new Date().valueOf(),
+              text: todoText,
+              isDone: false,
+              timeStamp: format.default(new Date(), 'MM-dd-yy hh:mm'),
+            },
           ],
         };
       },
