@@ -18,14 +18,15 @@ export default class Weather extends Component {
 
   weatherForecast = (event) => {
     event.preventDefault();
-    const currentCity = this.inputRef.current.value;
-
     this.setState(
       ({ cites }) => {
-      const result = cites.find((item) => item.city === currentCity);
+      const currentCity = this.inputRef.current.value;
+      const result = cites.find((item) => item.city.toLowerCase() === currentCity.toLowerCase());
       return {
         cityMatches: result ? result : `No matches found`,
       }
+    }, () => {
+      this.inputRef.current.value = ''
     })
   }
 
@@ -37,12 +38,16 @@ export default class Weather extends Component {
 
     if (cityMatches.city) {
       tempForecast = (
-        <div>
+        <div className='text-center'>
           {cityMatches.city} city's temperature is {cityMatches.temp}
         </div>
       );
     } else {
-      tempForecast = cityMatches;
+      tempForecast = (
+        <div className='text-center'>
+          {cityMatches}
+        </div>
+      );
     }
 
     return (
