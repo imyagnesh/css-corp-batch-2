@@ -103,22 +103,23 @@ class App extends Component {
       this.setState(({ counter }) => ({
         counter: counter + value,
       }));
-    } catch (error) {}
+    } catch (error) { }
   };
 
   changeUserName = () => {
     try {
       this.setState(({ user }) =>
-        //   user.name = 'Virat';
+      //   user.name = 'Virat';
         ({
           user: { ...user, name: 'Virat' },
-        }),
-      );
-    } catch (error) {}
+        }));
+    } catch (error) { }
   };
 
   render() {
-    const { counter, greet, user, error } = this.state;
+    const {
+      counter, greet, user, error,
+    } = this.state;
 
     if (error) {
       return <h1>{error.message}</h1>;

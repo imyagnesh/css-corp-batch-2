@@ -16,6 +16,15 @@ export default class Todo extends PureComponent {
     this.inputText = createRef();
   }
 
+  deleteTodo = (item) => {
+    this.setState(({ todoList }) => {
+      const index = todoList.findIndex((x) => x.id === item.id);
+      return {
+        todoList: [...todoList.slice(0, index), ...todoList.slice(index + 1)],
+      };
+    });
+  };
+
   addTodo = async (event) => {
     event.preventDefault();
     // const format = await ;
