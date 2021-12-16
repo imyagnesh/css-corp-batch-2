@@ -6,33 +6,14 @@ const TodoList = ({ todoList, toggleComplete, deleteTodo, filterType }) => {
   console.log('TodoList render');
   return (
     <div className="flex-1 overflow-auto">
-      {todoList.reduce((p, c) => {
-        const UI = (
-          <TodoItem
-            key={c.id}
-            item={c}
-            toggleComplete={toggleComplete}
-            deleteTodo={deleteTodo}
-          />
-        );
-        switch (filterType) {
-          case 'pending':
-            if (!c.isDone) {
-              return [...p, UI];
-            }
-            break;
-
-          case 'completed':
-            if (c.isDone) {
-              return [...p, UI];
-            }
-            break;
-
-          default:
-            return [...p, UI];
-        }
-        return p;
-      }, [])}
+      {todoList.map((item) => (
+        <TodoItem
+          key={item.id}
+          item={item}
+          toggleComplete={toggleComplete}
+          deleteTodo={deleteTodo}
+        />
+      ))}
     </div>
   );
 };
@@ -49,5 +30,7 @@ TodoList.propTypes = {
   deleteTodo: PropTypes.func.isRequired,
   filterType: PropTypes.oneOf(['all', 'pending', 'completed']).isRequired,
 };
+
+TodoList.displayName = 'TodoList';
 
 export default memo(TodoList);

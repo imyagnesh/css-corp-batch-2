@@ -13,6 +13,8 @@ const TodoForm = forwardRef(({ addTodo }, ref) => {
   );
 });
 
+TodoForm.displayName = 'TodoForm';
+
 TodoForm.propTypes = {
   addTodo: PropTypes.func.isRequired,
 };
