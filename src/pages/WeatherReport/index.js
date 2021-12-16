@@ -7,21 +7,32 @@ export default class WeatherReport extends Component {
         this.state = {
             cityTemperature: {},
             defaultText: "Please enter a city name to get its weather condition",
-            cityDetails: [
-                {id:1, city:'chennai', temperature:'37d'},
-                {id:2, city:'coimbatore', temperature:'15d'},
-                {id:3, city:'erode', temperature:'24d'},
-                {id:4, city:'salem', temperature:'45d'},
-                {id:5, city:'pollachi', temperature:'31d'}
-            ]
+            cityDetails: []
         };
         this.inputRef = createRef();
     }
 
+    async componentDidMount() {
+        this.loadCityDetails();
+    }
+
+    loadCityDetails = async() => {
+        try {
+            const res = await fetch('http://localhost:3000/city-details');
+            const json = await res.json();
+            this.setState({
+                cityDetails: json
+            });
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     getWheatherDetails = (event) => {
         event.preventDefault();
-        const getCityName = this.inputRef.current.value.toLowerCase();
-        const getCityDetails = this.state.cityDetails.find((x) => (x.city === getCityName));
+        const getCityName = this.inputRef.current.value;
+        const getCityDetails = this.state.cityDetails.find((x) => (x.city.toLowerCase() === getCityName.toLowerCase()));
         this.setState({
             cityTemperature: getCityDetails,
             defaultText: !getCityDetails ? "No Record Found" : ""
@@ -45,7 +56,7 @@ export default class WeatherReport extends Component {
                         ? <p className='text-center'>{cityTemperature.city} has a temperature of {cityTemperature.temperature}</p>
                         : <p className='text-center'>{defaultText}</p>
                     }
-                </div>       
+                </div>
             </div>
         )
     }
