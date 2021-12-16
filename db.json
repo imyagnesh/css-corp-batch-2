@@ -1,16 +1,6 @@
 {
   "todo-list": [
     {
-      "text": "Get milk 2",
-      "isDone": true,
-      "id": 1
-    },
-    {
-      "text": "Learn React",
-      "isDone": true,
-      "id": 2
-    },
-    {
       "text": "Learn React Native",
       "isDone": false,
       "id": 3
