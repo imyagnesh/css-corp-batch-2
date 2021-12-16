@@ -19,6 +19,7 @@ const TodoItem = ({ item, toggleComplete, deleteTodo }) => {
       >
         {item.text}
       </p>
+      <p>{item.timeStamp}</p>
       <button
         type="button"
         className="btn-primary"
@@ -35,6 +36,7 @@ TodoItem.propTypes = {
     id: PropTypes.number,
     text: PropTypes.string,
     isDone: PropTypes.bool,
+    timeStamp: PropTypes.string,
   }).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
