@@ -8,7 +8,7 @@
     },
     {
       "text": "learn node js",
-      "isDone": true,
+      "isDone": false,
       "timeStamp": "12-16-21 12:48",
       "id": 5
     },
@@ -31,11 +31,21 @@
       "id": 8
     }
   ],
-  "weather-info": [
+  "cityDetails": [
     {
       "id": 1,
-      "city": "Ahmedabad",
-      "temp": 33
+      "city": "Chennai",
+      "temp": 31
+    },
+    {
+      "id": 2,
+      "city": "Bangalore",
+      "temp": 25
+    },
+    {
+      "id": 3,
+      "city": "Delhi",
+      "temp": 20
     }
   ]
 }
