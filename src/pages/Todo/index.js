@@ -17,15 +17,20 @@ export default class Todo extends PureComponent {
   }
 
   async componentDidMount() {
-    this.loadTodo();
+    this.loadTodo('all');
   }
 
-  loadTodo = async () => {
+  loadTodo = async (filterType) => {
     try {
-      const res = await fetch('http://localhost:3000/todo-list');
+      let url = 'http://localhost:3000/todo-list';
+      if (filterType !== 'all') {
+        url = `${url}?isDone=${filterType === 'completed'}`;
+      }
+      const res = await fetch(url);
       const json = await res.json();
       this.setState({
         todoList: json,
+        filterType,
       });
     } catch (error) {
       console.error(error);
@@ -91,16 +96,18 @@ export default class Todo extends PureComponent {
     } catch (error) {}
   };
 
-  deleteTodo = (item) => {
-    this.setState(({ todoList }) => ({
-      todoList: todoList.filter((x) => x.id !== item.id),
-    }));
-  };
+  deleteTodo = async (item) => {
+    try {
+      await fetch(`http://localhost:3000/todo-list/${item.id}`, {
+        method: 'DELETE',
+      });
 
-  filterTodo = (filterType) => {
-    this.setState({
-      filterType,
-    });
+      this.setState(({ todoList }) => ({
+        todoList: todoList.filter((x) => x.id !== item.id),
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
@@ -125,7 +132,7 @@ export default class Todo extends PureComponent {
           )}
         </div>
         <Suspense fallback={<h1>Loading...</h1>}>
-          <TodoFilter filterTodo={this.filterTodo} />
+          <TodoFilter filterTodo={this.loadTodo} filterType={filterType} />
         </Suspense>
       </div>
     );
