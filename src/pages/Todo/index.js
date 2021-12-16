@@ -69,7 +69,7 @@ export default class Todo extends PureComponent {
           this.inputText.current.value = '';
         },
       );
-    } catch (error) {}
+    } catch (error) { }
   };
 
   toggleComplete = async (item) => {
@@ -96,13 +96,20 @@ export default class Todo extends PureComponent {
           return x;
         }),
       }));
-    } catch (error) {}
+    } catch (error) { }
   };
 
-  deleteTodo = (item) => {
-    this.setState(({ todoList }) => ({
-      todoList: todoList.filter((x) => x.id !== item.id),
-    }));
+  deleteTodo = async (item) => {
+    try {
+      const res = await fetch(`http://localhost:3000/todo-list/${item.id}`, {
+        method: 'DELETE',
+      });
+      if (res.status === 200) {
+        this.setState(({ todoList }) => ({
+          todoList: todoList.filter((x) => x.id !== item.id),
+        }));
+      }
+    } catch (error) { }
   };
 
   filterTodo = (filterType) => {
