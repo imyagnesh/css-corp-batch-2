@@ -17,7 +17,7 @@ export default class Weather extends Component {
   cityWeatherreport = (event) => {
     event.preventDefault();
     const city = this.inputText.current.value;
-    const weatherCity = this.state.Citydetails.find(x => x.city.toUpperCase() === city.toUpperCase());
+    const weatherCity = this.state.Citydetails.find(x => x.city);
     this.setState(({ Citydetails, weatherreport }) => ({
       Citydetails,
       weatherreport: weatherCity ? ` ${city} Temperature is ${weatherCity.temp} °C` : 'City is not available in list',
