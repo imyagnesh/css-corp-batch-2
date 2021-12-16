@@ -16,44 +16,79 @@ export default class Todo extends PureComponent {
     this.inputText = createRef();
   }
 
-  addTodo = async (event) => {
-    event.preventDefault();
-    // const format = await ;
-    const format = await import('date-fns/format');
-    this.setState(
-      ({ todoList }) => {
-        // const todoText = document.getElementById('todoText').value;
-        // O(1)
-        const todoText = this.inputText.current.value;
+  async componentDidMount() {
+    this.loadTodo();
+  }
 
-        return {
-          todoList: [
-            ...todoList,
-            {
-              id: new Date().valueOf(),
-              text: todoText,
-              isDone: false,
-              timeStamp: format.default(new Date(), 'MM-dd-yy hh:mm'),
-            },
-          ],
-        };
-      },
-      () => {
-        // document.getElementById('todoText').value = '';
-        this.inputText.current.value = '';
-      },
-    );
+  loadTodo = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/todo-list');
+      const json = await res.json();
+      this.setState({
+        todoList: json,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  toggleComplete = (item) => {
-    this.setState(({ todoList }) => ({
-      todoList: todoList.map((x) => {
-        if (x.id === item.id) {
-          return { ...x, isDone: !x.isDone };
-        }
-        return x;
-      }),
-    }));
+  addTodo = async (event) => {
+    try {
+      event.preventDefault();
+      const format = await import('date-fns/format');
+      const todoText = this.inputText.current.value;
+      const res = await fetch('http://localhost:3000/todo-list', {
+        method: 'POST',
+        body: JSON.stringify({
+          text: todoText,
+          isDone: false,
+          timeStamp: format.default(new Date(), 'MM-dd-yy hh:mm'),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      const json = await res.json();
+
+      this.setState(
+        ({ todoList }) => ({
+          todoList: [...todoList, json],
+        }),
+        () => {
+          // document.getElementById('todoText').value = '';
+          this.inputText.current.value = '';
+        },
+      );
+    } catch (error) {}
+  };
+
+  toggleComplete = async (item) => {
+    try {
+      const res = await fetch(`http://localhost:3000/todo-list/${item.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          ...item,
+          isDone: !item.isDone,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      const json = await res.json();
+
+      this.setState(({ todoList }) => ({
+        todoList: todoList.map((x) => {
+          if (x.id === item.id) {
+            return json;
+          }
+          return x;
+        }),
+      }));
+    } catch (error) {}
   };
 
   deleteTodo = (item) => {
