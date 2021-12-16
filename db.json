@@ -36,6 +36,41 @@
       "id": 1,
       "city": "Ahmedabad",
       "temp": 33
+    },
+    {
+      "id": 2,
+      "city": "Delhi",
+      "temp": 28
+    },
+    {
+      "id": 3,
+      "city": "Mumbai",
+      "temp": 18
+    },
+    {
+      "id": 4,
+      "city": "Kolkata",
+      "temp": 22
+    },
+    {
+      "id": 5,
+      "city": "Bangalore",
+      "temp": 12
+    },
+    {
+      "id": 6,
+      "city": "Chennai",
+      "temp": 13
+    },
+    {
+      "id": 7,
+      "city": "Hyderabad",
+      "temp": 17
+    },
+    {
+      "id": 8,
+      "city": "Pune",
+      "temp": 18
     }
   ]
 }
