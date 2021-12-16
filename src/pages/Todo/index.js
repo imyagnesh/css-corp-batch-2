@@ -16,53 +16,79 @@ export default class Todo extends PureComponent {
     this.inputText = createRef();
   }
 
-  deleteTodo = (item) => {
-    this.setState(({ todoList }) => {
-      const index = todoList.findIndex((x) => x.id === item.id);
-      return {
-        todoList: [...todoList.slice(0, index), ...todoList.slice(index + 1)],
-      };
-    });
+  async componentDidMount() {
+    this.loadTodo();
+  }
+
+  loadTodo = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/todo-list');
+      const json = await res.json();
+      this.setState({
+        todoList: json,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   addTodo = async (event) => {
-    event.preventDefault();
-    // const format = await ;
-    const format = await import('date-fns/format');
-    this.setState(
-      ({ todoList }) => {
-        // const todoText = document.getElementById('todoText').value;
-        // O(1)
-        const todoText = this.inputText.current.value;
+    try {
+      event.preventDefault();
+      const format = await import('date-fns/format');
+      const todoText = this.inputText.current.value;
+      const res = await fetch('http://localhost:3000/todo-list', {
+        method: 'POST',
+        body: JSON.stringify({
+          text: todoText,
+          isDone: false,
+          timeStamp: format.default(new Date(), 'MM-dd-yy hh:mm'),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
 
-        return {
-          todoList: [
-            ...todoList,
-            {
-              id: new Date().valueOf(),
-              text: todoText,
-              isDone: false,
-              timeStamp: format.default(new Date(), 'MM-dd-yy hh:mm'),
-            },
-          ],
-        };
-      },
-      () => {
-        // document.getElementById('todoText').value = '';
-        this.inputText.current.value = '';
-      },
-    );
+      const json = await res.json();
+
+      this.setState(
+        ({ todoList }) => ({
+          todoList: [...todoList, json],
+        }),
+        () => {
+          // document.getElementById('todoText').value = '';
+          this.inputText.current.value = '';
+        },
+      );
+    } catch (error) { }
   };
 
-  toggleComplete = (item) => {
-    this.setState(({ todoList }) => ({
-      todoList: todoList.map((x) => {
-        if (x.id === item.id) {
-          return { ...x, isDone: !x.isDone };
-        }
-        return x;
-      }),
-    }));
+  toggleComplete = async (item) => {
+    try {
+      const res = await fetch(`http://localhost:3000/todo-list/${item.id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          ...item,
+          isDone: !item.isDone,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+
+      const json = await res.json();
+
+      this.setState(({ todoList }) => ({
+        todoList: todoList.map((x) => {
+          if (x.id === item.id) {
+            return json;
+          }
+          return x;
+        }),
+      }));
+    } catch (error) { }
   };
 
   deleteTodo = (item) => {

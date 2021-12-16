@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './app';
-//import Todo from './pages/Todo';
-import WeatherReport from './Pages/Todo/weather';
+import Todo from './pages/Todo';
+//import WeatherReport from './Pages/Todo/weather';
 import './root.css';
 // import UserGreet from './Input';
 
@@ -33,5 +33,5 @@ import './root.css';
 
 // Class Component
 
-//ReactDOM.render(<Todo />, document.getElementById('root'));
-ReactDOM.render(<WeatherReport />, document.getElementById('root'));
+ReactDOM.render(<Todo />, document.getElementById('root'));
+//ReactDOM.render(<WeatherReport />, document.getElementById('root'));
