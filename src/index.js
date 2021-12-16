@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './app';
 import Todo from './pages/Todo';
-import Weather from './pages/Todo/weather';
+import Weather from './pages/Weather/weather';
 import './root.css';
 // import UserGreet from './Input';
 
@@ -33,4 +33,4 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Weather title='Weather Forcast' btnText='Check Weather' />, document.getElementById('root'));
+ReactDOM.render(<Weather />, document.getElementById('root'));
