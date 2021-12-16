@@ -42,4 +42,6 @@ TodoItem.propTypes = {
   deleteTodo: PropTypes.func.isRequired,
 };
 
+TodoItem.displayName = 'TodoItem';
+
 export default memo(TodoItem);
