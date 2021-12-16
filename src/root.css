@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+    .btn-primary {
+      @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700;
+    }
+  
+    .input {
+      @apply px-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm ;
+    }
+  
+    /* .checkbox {
+      @apply focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded;
+    } */
+  }
