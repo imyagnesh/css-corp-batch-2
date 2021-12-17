@@ -12,7 +12,7 @@ const TodoList = ({ todoList, toggleComplete, deleteTodo, httpStatus }) => {
           item={item}
           toggleComplete={toggleComplete}
           deleteTodo={deleteTodo}
-          httpStatus={httpStatus}
+          httpStatus={httpStatus.filter((x) => x.id === item.id)}
         />
       ))}
     </div>
@@ -29,15 +29,13 @@ TodoList.propTypes = {
   ).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  httpStatus: PropTypes.shape({
-    type: PropTypes.string,
-    payload: PropTypes.objectOf(Error),
-    status: PropTypes.oneOf(['REQUEST', 'FAIL']),
-  }),
-};
-
-TodoList.defaultProps = {
-  httpStatus: undefined,
+  httpStatus: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      payload: PropTypes.objectOf(Error),
+      status: PropTypes.oneOf(['REQUEST', 'FAIL']),
+    }),
+  ).isRequired,
 };
 
 TodoList.displayName = 'TodoList';

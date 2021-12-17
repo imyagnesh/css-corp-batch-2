@@ -9,7 +9,9 @@ const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
       <input
         type="checkbox"
         checked={item.isDone}
-        disabled={httpStatus?.status === 'REQUEST'}
+        disabled={httpStatus.some(
+          (x) => x.type === 'UPDATE_TODO' && x.status === 'REQUEST',
+        )}
         onChange={() => toggleComplete(item)}
       />
       <p
@@ -22,7 +24,14 @@ const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
       <p>{item.timeStamp}</p>
       <button
         type="button"
-        className="btn-primary"
+        className={cn('btn-primary', {
+          'btn-disabled': httpStatus.some(
+            (x) => x.type === 'DELETE_TODO' && x.status === 'REQUEST',
+          ),
+        })}
+        disabled={httpStatus.some(
+          (x) => x.type === 'DELETE_TODO' && x.status === 'REQUEST',
+        )}
         onClick={() => deleteTodo(item)}
       >
         Delete
@@ -40,15 +49,13 @@ TodoItem.propTypes = {
   }).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  httpStatus: PropTypes.shape({
-    type: PropTypes.string,
-    payload: PropTypes.objectOf(Error),
-    status: PropTypes.oneOf(['REQUEST', 'FAIL']),
-  }),
-};
-
-TodoItem.defaultProps = {
-  httpStatus: undefined,
+  httpStatus: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      payload: PropTypes.objectOf(Error),
+      status: PropTypes.oneOf(['REQUEST', 'FAIL']),
+    }),
+  ).isRequired,
 };
 
 TodoItem.displayName = 'TodoItem';
