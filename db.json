@@ -8,19 +8,19 @@
     },
     {
       "text": "learn node js",
-      "isDone": true,
+      "isDone": false,
       "timeStamp": "12-16-21 12:48",
       "id": 5
     },
     {
       "text": "learn react",
-      "isDone": true,
+      "isDone": false,
       "timeStamp": "12-16-21 01:34",
       "id": 6
     },
     {
       "text": "learn react native",
-      "isDone": true,
+      "isDone": false,
       "timeStamp": "12-16-21 01:34",
       "id": 7
     },
@@ -29,9 +29,39 @@
       "isDone": true,
       "timeStamp": "12-16-21 01:39",
       "id": 8
+    },
+    {
+      "text": "learn web assembaly",
+      "isDone": false,
+      "timeStamp": "12-17-21 12:50",
+      "id": 9
+    },
+    {
+      "text": "cvzxcvzcxv",
+      "isDone": true,
+      "timeStamp": "12-17-21 12:51",
+      "id": 10
+    },
+    {
+      "text": "adding record",
+      "isDone": true,
+      "timeStamp": "12-17-21 12:55",
+      "id": 11
+    },
+    {
+      "text": "adding record",
+      "isDone": false,
+      "timeStamp": "12-17-21 12:55",
+      "id": 12
+    },
+    {
+      "text": "adding record",
+      "isDone": false,
+      "timeStamp": "12-17-21 12:55",
+      "id": 13
     }
   ],
-  "weather-info": [
+  "weather-infor": [
     {
       "id": 1,
       "city": "Ahmedabad",
