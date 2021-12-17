@@ -66,7 +66,7 @@ export default class Todo extends PureComponent {
           this.inputText.current.value = '';
         },
       );
-    } catch (error) {}
+    } catch (error) { }
   };
 
   toggleComplete = async (item) => {
@@ -93,7 +93,7 @@ export default class Todo extends PureComponent {
           return x;
         }),
       }));
-    } catch (error) {}
+    } catch (error) { }
   };
 
   deleteTodo = async (item) => {
