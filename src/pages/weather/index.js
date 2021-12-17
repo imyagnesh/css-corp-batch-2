@@ -1,68 +1,55 @@
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef, lazy, Suspense } from 'react';
 import cn from 'classnames';
 import './style.css';
+const WeatherForm = lazy(() => import('./weatherForm'));
+const WeatherReport = lazy(() => import('./weatherReport'));
 
-export default class Weather extends Component {
+export default class Weather extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            report: "",
-            weatherList: [{
-                id: 1,
-                cityName: "Calicut",
-                temp: "33°C"
-            },
-            {
-                id: 2,
-                cityName: "Mumbai",
-                temp: "31°C"
-            },
-            {
-                id: 3,
-                cityName: "Bangalore",
-                temp: "29°C"
-            },
-            {
-                id: 4,
-                cityName: "Kolkatta",
-                temp: "25°C"
-            },
-            {
-                id: 5,
-                cityName: "Pune",
-                temp: "39°C"
-            },
-            {
-                id: 6,
-                cityName: "Jammu",
-                temp: "15°C"
-            }
-            ]
+            report: {},
+            weatherList: []
         };
         this.inputText = createRef();
     }
+    async componentDidMount() {
+        this.loadWeatherDetails();
+    }
+    loadWeatherDetails = async () => {
+        try {
+            let url = 'http://localhost:3000/weather-info';
+            const res = await fetch(url);
+            const json = await res.json();
+            this.setState({
+                weatherList: json,
+            });
+        } catch (error) {
 
+        }
+    }
     checkWeather = (event) => {
         event.preventDefault();
         const cityName = this.inputText.current.value;
+        this.inputText.current.value = "";
         const availableCity = this.state.weatherList.find(x => x.cityName.toLowerCase() === cityName.toLowerCase());
         this.setState(({ weatherList, report }) => ({
             weatherList,
-            report: availableCity ? `Temperature in ${cityName} is ${availableCity.temp}` : 'No data available',
+            report: availableCity ? availableCity : { "cityName": cityName },
         })
         )
     }
     render() {
         const { weatherList, report } = this.state;
         return (<div className="bg-[#FAFAFA] h-screen flex flex-col">
-            <h1 className="text-center my-2 text-lg font-bold">Weather Report</h1>
-            <form className="flex justify-center my-2" onSubmit={this.checkWeather}>
-                <input type="text" className="form-input" ref={this.inputText} />
-                <button type="submit" className="btn-primary">
-                    Check
-                </button>
-            </form>
-            <p className='text-center'>{report}</p>
+            <Suspense fallback={<h1>Loading...</h1>}>
+                <WeatherForm inputText={this.inputText} checkWeather={this.checkWeather} />
+            </Suspense>
+            {Object.keys(report).length > 0 && report.cityName && (
+                <Suspense fallback={<h1>Loading...</h1>}>
+                    <WeatherReport report={report} />
+                </Suspense>
+            )}
         </div >)
     }
 }

@@ -29,13 +29,49 @@
       "isDone": true,
       "timeStamp": "12-16-21 01:39",
       "id": 8
+    },
+    {
+      "text": "ddd",
+      "isDone": false,
+      "timeStamp": "12-16-21 08:29",
+      "id": 9
     }
   ],
   "weather-info": [
     {
       "id": 1,
-      "city": "Ahmedabad",
-      "temp": 33
+      "cityName": "Ahmedabad",
+      "temp": 31
+    },
+    {
+      "cityName": "calicut",
+      "temp": 33,
+      "id": 2
+    },
+    {
+      "cityName": "Jammu",
+      "temp": 15,
+      "id": 3
+    },
+    {
+      "cityName": "Pune",
+      "temp": 42,
+      "id": 4
+    },
+    {
+      "cityName": "Rajasthan",
+      "temp": 37,
+      "id": 5
+    },
+    {
+      "cityName": "Kochi",
+      "temp": 26,
+      "id": 6
+    },
+    {
+      "cityName": "Chennai",
+      "temp": 38,
+      "id": 7
     }
   ]
 }
