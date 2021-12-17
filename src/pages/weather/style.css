@@ -1,0 +1,3 @@
+.form-input {
+  @apply px-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border border-gray-300 mx-2;
+}
