@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './todoItem';
 
-const TodoList = ({ todoList, toggleComplete, deleteTodo, filterType }) => {
+const TodoList = ({ todoList, toggleComplete, deleteTodo, httpStatus }) => {
   console.log('TodoList render');
   return (
     <div className="flex-1 overflow-auto">
@@ -12,6 +12,7 @@ const TodoList = ({ todoList, toggleComplete, deleteTodo, filterType }) => {
           item={item}
           toggleComplete={toggleComplete}
           deleteTodo={deleteTodo}
+          httpStatus={httpStatus.filter((x) => x.id === item.id)}
         />
       ))}
     </div>
@@ -28,7 +29,13 @@ TodoList.propTypes = {
   ).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  filterType: PropTypes.oneOf(['all', 'pending', 'completed']).isRequired,
+  httpStatus: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      payload: PropTypes.objectOf(Error),
+      status: PropTypes.oneOf(['REQUEST', 'FAIL']),
+    }),
+  ).isRequired,
 };
 
 TodoList.displayName = 'TodoList';
