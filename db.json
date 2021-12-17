@@ -1,11 +1,6 @@
 {
   "todo-list": [
     {
-      "text": "Learn React",
-      "isDone": true,
-      "id": 2
-    },
-    {
       "text": "learn flutter",
       "isDone": false,
       "timeStamp": "12-16-21 12:47",
@@ -18,10 +13,52 @@
       "id": 5
     },
     {
-      "text": "tailwind-jit",
+      "text": "learn react",
       "isDone": false,
-      "timeStamp": "12-16-21 01:06",
+      "timeStamp": "12-16-21 01:34",
       "id": 6
+    },
+    {
+      "text": "learn react native",
+      "isDone": false,
+      "timeStamp": "12-16-21 01:34",
+      "id": 7
+    },
+    {
+      "text": "learn go lang",
+      "isDone": true,
+      "timeStamp": "12-16-21 01:39",
+      "id": 8
+    },
+    {
+      "text": "learn web assembaly",
+      "isDone": false,
+      "timeStamp": "12-17-21 12:50",
+      "id": 9
+    },
+    {
+      "text": "cvzxcvzcxv",
+      "isDone": true,
+      "timeStamp": "12-17-21 12:51",
+      "id": 10
+    },
+    {
+      "text": "adding record",
+      "isDone": true,
+      "timeStamp": "12-17-21 12:55",
+      "id": 11
+    },
+    {
+      "text": "adding record",
+      "isDone": false,
+      "timeStamp": "12-17-21 12:55",
+      "id": 12
+    },
+    {
+      "text": "adding record",
+      "isDone": false,
+      "timeStamp": "12-17-21 12:55",
+      "id": 13
     }
   ]
 }

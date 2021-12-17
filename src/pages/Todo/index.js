@@ -11,24 +11,69 @@ export default class Todo extends PureComponent {
     this.state = {
       todoList: [],
       filterType: 'all',
+      httpStatus: [],
     };
 
     this.inputText = createRef();
   }
 
   async componentDidMount() {
-    this.loadTodo();
+    this.loadTodo('all');
   }
 
-  loadTodo = async () => {
+  setRequestStatus = ({ type }) => {
+    this.setState(({ httpStatus }) => {
+      const index = httpStatus.findIndex((x) => x.type === type);
+      const data = { type, status: 'REQUEST' };
+      if (index === -1) {
+        return {
+          httpStatus: [...httpStatus, data],
+        };
+      }
+      return {
+        httpStatus: [
+          ...httpStatus.slice(0, index),
+          data,
+          ...httpStatus.slice(index + 1),
+        ],
+      };
+    });
+  };
+
+  setSuccessStatus = ({ type }) => {
+    this.setState(({ httpStatus }) => ({
+      httpStatus: httpStatus.filter((x) => x.type !== type),
+    }));
+  };
+
+  setFailStatus = ({ type, payload }) => {
+    this.setState(({ httpStatus }) => ({
+      httpStatus: httpStatus.map((x) => {
+        if (x.type === type) {
+          return { ...x, status: 'FAIL', payload };
+        }
+        return x;
+      }),
+    }));
+  };
+
+  loadTodo = async (filterType) => {
+    const type = 'LOAD_TODO';
     try {
-      const res = await fetch('http://localhost:3000/todo-list');
+      this.setRequestStatus({ type });
+      let url = 'http://localhost:3000/todo-list';
+      if (filterType !== 'all') {
+        url = `${url}?isDone=${filterType === 'completed'}`;
+      }
+      const res = await fetch(url);
       const json = await res.json();
       this.setState({
         todoList: json,
+        filterType,
       });
+      this.setSuccessStatus({ type });
     } catch (error) {
-      console.error(error);
+      this.setFailStatus({ type, payload: error });
     }
   };
   deleteTodo = (item) => {
@@ -41,7 +86,9 @@ export default class Todo extends PureComponent {
   };
 
   addTodo = async (event) => {
+    const type = 'ADD_TODO';
     try {
+      this.setRequestStatus({ type });
       event.preventDefault();
       const format = await import('date-fns/format');
       const todoText = this.inputText.current.value;
@@ -59,6 +106,7 @@ export default class Todo extends PureComponent {
       });
 
       const json = await res.json();
+      // throw new Error('Unable to add record...');
 
       this.setState(
         ({ todoList }) => ({
@@ -69,11 +117,16 @@ export default class Todo extends PureComponent {
           this.inputText.current.value = '';
         },
       );
-    } catch (error) { }
+      this.setSuccessStatus({ type });
+    } catch (error) {
+      this.setFailStatus({ type, payload: error });
+    }
   };
 
   toggleComplete = async (item) => {
+    const type = 'UPDATE_TODO';
     try {
+      this.setRequestStatus({ type });
       const res = await fetch(`http://localhost:3000/todo-list/${item.id}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -96,37 +149,54 @@ export default class Todo extends PureComponent {
           return x;
         }),
       }));
-    } catch (error) { }
+      this.setSuccessStatus({ type });
+    } catch (error) {
+      this.setFailStatus({ type, payload: error });
+    }
   };
 
   deleteTodo = async (item) => {
     try {
-      const res = await fetch(`http://localhost:3000/todo-list/${item.id}`, {
+      await fetch(`http://localhost:3000/todo-list/${item.id}`, {
         method: 'DELETE',
       });
-      if (res.status === 200) {
-        this.setState(({ todoList }) => ({
-          todoList: todoList.filter((x) => x.id !== item.id),
-        }));
-      }
-    } catch (error) { }
-  };
 
-  filterTodo = (filterType) => {
-    this.setState({
-      filterType,
-    });
+      this.setState(({ todoList }) => ({
+        todoList: todoList.filter((x) => x.id !== item.id),
+      }));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   render() {
-    console.log('render');
-    const { todoList, filterType } = this.state;
+    const { todoList, filterType, httpStatus } = this.state;
+    // O(3logN)
+    // O(N)
+    const loadTodoStatus = httpStatus.find((x) => x.type === 'LOAD_TODO');
+    const addTodoStatus = httpStatus.find((x) => x.type === 'ADD_TODO');
+    const updateTodoStatus = httpStatus.find((x) => x.type === 'UPDATE_TODO');
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
         <Suspense fallback={<h1>Loading...</h1>}>
-          <TodoForm addTodo={this.addTodo} ref={this.inputText} />
+          <TodoForm
+            addTodo={this.addTodo}
+            ref={this.inputText}
+            httpStatus={addTodoStatus}
+          />
         </Suspense>
+        {loadTodoStatus?.status === 'REQUEST' && (
+          <h1 className="text-center text-red-500">Loading...</h1>
+        )}
+        {loadTodoStatus?.status === 'FAIL' && (
+          <div className="flex justify-center items-center flex-1, flex-col">
+            <h1 className=" text-red-500">{loadTodoStatus.payload.message}</h1>
+            <button type="button" onClick={() => this.loadTodo('all')}>
+              Retry
+            </button>
+          </div>
+        )}
         <div className="flex-1">
           {todoList.length > 0 && (
             <Suspense fallback={<h1>Loading...</h1>}>
@@ -135,12 +205,13 @@ export default class Todo extends PureComponent {
                 filterType={filterType}
                 toggleComplete={this.toggleComplete}
                 deleteTodo={this.deleteTodo}
+                httpStatus={updateTodoStatus}
               />
             </Suspense>
           )}
         </div>
         <Suspense fallback={<h1>Loading...</h1>}>
-          <TodoFilter filterTodo={this.filterTodo} />
+          <TodoFilter filterTodo={this.loadTodo} filterType={filterType} />
         </Suspense>
       </div>
     );
