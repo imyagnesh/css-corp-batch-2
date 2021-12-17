@@ -1,11 +1,6 @@
 {
   "todo-list": [
     {
-      "text": "Learn React Native",
-      "isDone": false,
-      "id": 3
-    },
-    {
       "text": "learn flutter",
       "isDone": false,
       "timeStamp": "12-16-21 12:47",
@@ -22,6 +17,28 @@
       "isDone": false,
       "timeStamp": "12-16-21 01:46",
       "id": 6
+    },
+    {
+      "text": "Learn Node JS",
+      "isDone": false,
+      "timeStamp": "12-16-21 03:27",
+      "id": 7
+    },
+    {
+      "text": "Learn TS",
+      "isDone": false,
+      "timeStamp": "12-16-21 03:27",
+      "id": 8
+    }
+  ],
+  "weather-report": [
+    {
+      "city": "Namakkal",
+      "celcius": 35
+    },
+    {
+      "city": "Chennai",
+      "celcius": 45
     }
   ]
 }

@@ -1,16 +1,37 @@
 import React, { Component, createRef } from 'react';
 
+
 export default class WeatherReport extends Component {
-    state = {
-        weatherList: [
-            { id: 1, city: 'Namakkal', celcius: 35 },
-            { id: 2, city: 'Chennai', celcius: 45 }],
-        selectedCity: '',
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            weatherList: [],
+            selectedCity: '',
+        };
+
+        this.inputText = createRef();
+    }
+
 
     inputRef = createRef();
 
-    checkWeather = (event) => {
+    async componentDidMount() {
+        this.loadWeather();
+    }
+
+    loadWeather = async () => {
+        try {
+            let url = 'http://localhost:3000/weather-report';
+            const res = await fetch(url);
+            const json = await res.json();
+            this.setState({
+                weatherList: json,
+            });
+        } catch (error) {
+            console.error(error);
+        }
+    }
+    checkWeather = async (event) => {
         event.preventDefault();
         const cityVal = this.inputRef.current.value;
         const city = cityVal.charAt(0).toUpperCase() + cityVal.slice(1);
