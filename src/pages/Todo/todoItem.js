@@ -2,14 +2,16 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
 
-const TodoItem = ({ item, toggleComplete, deleteTodo }) => {
+const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
   console.log('TodoItem render');
   return (
     <div className="flex items-center m-2" key={item.id}>
       <input
         type="checkbox"
-        className="checkbox"
         checked={item.isDone}
+        disabled={httpStatus.some(
+          (x) => x.type === 'UPDATE_TODO' && x.status === 'REQUEST',
+        )}
         onChange={() => toggleComplete(item)}
       />
       <p
@@ -22,7 +24,14 @@ const TodoItem = ({ item, toggleComplete, deleteTodo }) => {
       <p>{item.timeStamp}</p>
       <button
         type="button"
-        className="btn-primary"
+        className={cn('btn-primary', {
+          'btn-disabled': httpStatus.some(
+            (x) => x.type === 'DELETE_TODO' && x.status === 'REQUEST',
+          ),
+        })}
+        disabled={httpStatus.some(
+          (x) => x.type === 'DELETE_TODO' && x.status === 'REQUEST',
+        )}
         onClick={() => deleteTodo(item)}
       >
         Delete
@@ -40,6 +49,13 @@ TodoItem.propTypes = {
   }).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
+  httpStatus: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      payload: PropTypes.objectOf(Error),
+      status: PropTypes.oneOf(['REQUEST', 'FAIL']),
+    }),
+  ).isRequired,
 };
 
 TodoItem.displayName = 'TodoItem';
