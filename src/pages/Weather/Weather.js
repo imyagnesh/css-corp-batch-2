@@ -4,26 +4,17 @@ export default class Weather extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            reports: [
-                { id: 1, city: 'Chennai', temperature: 40 },
-                { id: 2, city: 'Mumbai', temperature: 72 },
-                { id: 3, city: 'Punjab', temperature: 36 },
-                { id: 4, city: 'Delhi', temperature: 62 },
-                { id: 5, city: 'Bangalore', temperature: 53 },
-            ],
             fetchedReport: null
         }
         this.textBox = React.createRef();
     }
 
-    getWeather = (event) => {
+    getWeather = async (event) => {
         event.preventDefault();
-        this.setState(({ reports }) => {
-            const city = this.textBox.current.value;
-            var fetchedReport = reports.find(report => report.city.toLowerCase() === city.toLowerCase());
-            fetchedReport = (!fetchedReport) ? city : fetchedReport;
-            return { fetchedReport }
-        }, () => {
+        const city = this.textBox.current.value;
+        const res = await fetch(`http://localhost:3000/report/?city=${city.toLowerCase()}`);
+        const fetchedReport = await res.json();
+        this.setState({ fetchedReport: (!fetchedReport.length) ? city : fetchedReport[0] }, () => {
             this.textBox.current.value = '';
         });
     }
@@ -52,7 +43,7 @@ export default class Weather extends Component {
                     <div className="text-2xl">
                         {fetchedReport?.city
                             ? <div className="mt-10">
-                                <span className="underline decoration-indigo-600">{fetchedReport?.city}</span>'s
+                                <span className="underline decoration-indigo-600">{fetchedReport.city}</span>'s
                                 temporature is <span className="text-3xl font-bold">{fetchedReport.temperature}<span className="text-indigo-600">&#8451;</span></span>
                             </div>
                             : <div>{fetchedReport
