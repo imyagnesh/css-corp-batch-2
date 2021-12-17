@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './pages/Login';
+//import Login from './pages/Login';
 // import App from './app';
-//import Todo from './pages/Todo';
+import Todo from './pages/Todo';
 //import Weather from './pages/weather';
 import './root.css';
 // import UserGreet from './Input';
@@ -34,4 +34,4 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Login />, document.getElementById('root'));
+ReactDOM.render(<Todo />, document.getElementById('root'));

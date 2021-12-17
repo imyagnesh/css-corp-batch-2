@@ -109,14 +109,10 @@ export default class Todo extends PureComponent {
           this.inputText.current.value = '';
         },
       );
-<<<<<<< HEAD
-    } catch (error) { }
-=======
       this.setSuccessStatus({ type });
     } catch (error) {
       this.setFailStatus({ type, payload: error });
     }
->>>>>>> a36abc7531dbfaee47a8b9619ba4bb39aeb7a2dc
   };
 
   toggleComplete = async (item) => {
@@ -145,14 +141,10 @@ export default class Todo extends PureComponent {
           return x;
         }),
       }));
-<<<<<<< HEAD
-    } catch (error) { }
-=======
       this.setSuccessStatus({ type });
     } catch (error) {
       this.setFailStatus({ type, payload: error });
     }
->>>>>>> a36abc7531dbfaee47a8b9619ba4bb39aeb7a2dc
   };
 
   deleteTodo = async (item) => {
