@@ -21,10 +21,10 @@ export default class Todo extends PureComponent {
     this.loadTodo('all');
   }
 
-  setRequestStatus = ({ type }) => {
+  setRequestStatus = ({ type, id = -1 }) => {
     this.setState(({ httpStatus }) => {
-      const index = httpStatus.findIndex((x) => x.type === type);
-      const data = { type, status: 'REQUEST' };
+      const index = httpStatus.findIndex((x) => x.type === type && x.id === id);
+      const data = { type, status: 'REQUEST', id };
       if (index === -1) {
         return {
           httpStatus: [...httpStatus, data],
@@ -40,16 +40,16 @@ export default class Todo extends PureComponent {
     });
   };
 
-  setSuccessStatus = ({ type }) => {
+  setSuccessStatus = ({ type, id = -1 }) => {
     this.setState(({ httpStatus }) => ({
-      httpStatus: httpStatus.filter((x) => x.type !== type),
+      httpStatus: httpStatus.filter((x) => !(x.type === type && x.id === id)),
     }));
   };
 
-  setFailStatus = ({ type, payload }) => {
+  setFailStatus = ({ type, payload, id = -1 }) => {
     this.setState(({ httpStatus }) => ({
       httpStatus: httpStatus.map((x) => {
-        if (x.type === type) {
+        if (x.type === type && x.id === id) {
           return { ...x, status: 'FAIL', payload };
         }
         return x;
@@ -126,7 +126,7 @@ export default class Todo extends PureComponent {
   toggleComplete = async (item) => {
     const type = 'UPDATE_TODO';
     try {
-      this.setRequestStatus({ type });
+      this.setRequestStatus({ type, id: item.id });
       const res = await fetch(`http://localhost:3000/todo-list/${item.id}`, {
         method: 'PUT',
         body: JSON.stringify({
@@ -149,14 +149,16 @@ export default class Todo extends PureComponent {
           return x;
         }),
       }));
-      this.setSuccessStatus({ type });
+      this.setSuccessStatus({ type, id: item.id });
     } catch (error) {
-      this.setFailStatus({ type, payload: error });
+      this.setFailStatus({ type, payload: error, id: item.id });
     }
   };
 
   deleteTodo = async (item) => {
+    const type = 'DELETE_TODO';
     try {
+      this.setRequestStatus({ type, id: item.id });
       await fetch(`http://localhost:3000/todo-list/${item.id}`, {
         method: 'DELETE',
       });
@@ -164,8 +166,9 @@ export default class Todo extends PureComponent {
       this.setState(({ todoList }) => ({
         todoList: todoList.filter((x) => x.id !== item.id),
       }));
+      this.setSuccessStatus({ type, id: item.id });
     } catch (error) {
-      console.log(error);
+      this.setFailStatus({ type, payload: error, id: item.id });
     }
   };
 
@@ -175,7 +178,11 @@ export default class Todo extends PureComponent {
     // O(N)
     const loadTodoStatus = httpStatus.find((x) => x.type === 'LOAD_TODO');
     const addTodoStatus = httpStatus.find((x) => x.type === 'ADD_TODO');
-    const updateTodoStatus = httpStatus.find((x) => x.type === 'UPDATE_TODO');
+    const updateOrDeleteTodoStatus = httpStatus.filter(
+      (x) => x.type === 'UPDATE_TODO' || x.type === 'DELETE_TODO',
+    );
+
+    // const {loadTodoStatus, addTodoStatus,updateOrDeleteTodoStatus } = httpStatus.reduce()
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
@@ -205,7 +212,7 @@ export default class Todo extends PureComponent {
                 filterType={filterType}
                 toggleComplete={this.toggleComplete}
                 deleteTodo={this.deleteTodo}
-                httpStatus={updateTodoStatus}
+                httpStatus={updateOrDeleteTodoStatus}
               />
             </Suspense>
           )}
