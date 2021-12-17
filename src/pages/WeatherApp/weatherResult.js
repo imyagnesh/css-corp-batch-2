@@ -1,13 +1,14 @@
 import React, {memo} from 'react'
 
 const WeatherResult = ({ filteredCity, cityToFilter }) => {
+  const city = filteredCity.length ? filteredCity[0] : null;
   return (
     <div className="flex justify-center">
       {
-        Boolean(filteredCity) 
+        Boolean(city) 
           ? (
           <div className="flex items-center m-2">
-            Temperature of {filteredCity.name} is {filteredCity.temp} &deg;C
+            Temperature of {city.city} is {city.temp} &deg;C
           </div>
           ) : (
             Boolean(cityToFilter) && 
