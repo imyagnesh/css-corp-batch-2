@@ -167,14 +167,26 @@ export default class Todo extends PureComponent {
   render() {
     const { todoList, filterType, httpStatus } = this.state;
     // O(3logN)
-    // O(N)
+    /*
     const loadTodoStatus = httpStatus.find((x) => x.type === 'LOAD_TODO');
     const addTodoStatus = httpStatus.find((x) => x.type === 'ADD_TODO');
     const updateOrDeleteTodoStatus = httpStatus.filter(
       (x) => x.type === 'UPDATE_TODO' || x.type === 'DELETE_TODO',
     );
-
-    // const {loadTodoStatus, addTodoStatus,updateOrDeleteTodoStatus } = httpStatus.reduce()
+    */
+    // O(N)
+    const {loadTodoStatus, addTodoStatus, updateOrDeleteTodoStatus } = httpStatus.reduce((prevValue, currentValue) => {
+       if (currentValue.type === 'LOAD_TODO') {
+         return {...prevValue, loadTodoStatus: currentValue};
+       }
+       if (currentValue.type === 'ADD_TODO') {
+        return {...prevValue, addTodoStatus: currentValue};
+      }
+      if (currentValue.type === 'UPDATE_TODO' || currentValue.type === 'DELETE_TODO') {
+        let {updateOrDeleteTodoStatus} = prevValue;
+        return {...prevValue, updateOrDeleteTodoStatus: [...updateOrDeleteTodoStatus, currentValue]};
+      }
+    }, {updateOrDeleteTodoStatus: []})
     return (
       <div className="bg-[#FAFAFA] h-screen flex flex-col">
         <h1 className="text-center my-2 text-lg font-bold">Todo App</h1>
