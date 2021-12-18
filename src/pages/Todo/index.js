@@ -76,6 +76,14 @@ export default class Todo extends PureComponent {
       this.setFailStatus({ type, payload: error });
     }
   };
+  deleteTodo = (item) => {
+    this.setState(({ todoList }) => {
+      const index = this.state.todoList.indexOf(item);
+      return {
+        todoList: [...todoList.slice(0, index), ...todoList.slice(index + 1)]
+      }
+    });
+  };
 
   addTodo = async (event) => {
     const type = 'ADD_TODO';
