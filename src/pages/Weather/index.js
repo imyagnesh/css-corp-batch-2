@@ -7,40 +7,26 @@ export default class Weather extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityObjList: [{
-        city: 'ahmedabad',
-        temp: 33
-      },
-      {
-        city: 'bangalore',
-        temp: 27,
-
-      },
-      {
-        city: 'chennai',
-        temp: 31,
-
-      },
-      {
-        city: 'delhi',
-        temp: 40
-      },
-      {
-        city: 'mumbai',
-        temp: 35
-      }
-      ],
-      resultText: ''
+      cityObjList: [],
+      result: ''
     };
 
     this.inputText = createRef();
   }
 
-  searchCity = (city) => {
+  searchCity = async (city) => {
+    const resultStr = await fetch(`http://localhost:3000/weather-info?city=${city}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    });
+    const resultObj = await resultStr.json();
+    console.log(resultObj);
     this.setState(() => {
-      const result = this.state.cityObjList.find((item) => city === item.city);
       return {
-        resultText: (result) ? `Temperature in the city : ${result.city} is :  ${result.temp}` : `${city} not found`
+        resultText: (resultObj[0]) ? `Temperature in the city : ${resultObj[0].city} is :  ${resultObj[0].temp}` : `${city} not found`
       }
     });
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './app';
 import Todo from './pages/Todo';
+import Weather from './pages/Weather';
 import './root.css';
 // import UserGreet from './Input';
 
@@ -32,4 +33,5 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+//ReactDOM.render(<Todo />, document.getElementById('root'));
+ReactDOM.render(<Weather />, document.getElementById('root'));
