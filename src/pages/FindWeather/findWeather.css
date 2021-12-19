@@ -1,0 +1,4 @@
+.container {
+  @apply bg-slate-300 py-10;
+}
+  
