@@ -2,18 +2,12 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './todoItem';
 
-const TodoList = ({ todoList, toggleComplete, deleteTodo, httpStatus }) => {
+const TodoList = ({ todoList }) => {
   console.log('TodoList render');
   return (
     <div className="flex-1 overflow-auto">
       {todoList.map((item) => (
-        <TodoItem
-          key={item.id}
-          item={item}
-          toggleComplete={toggleComplete}
-          deleteTodo={deleteTodo}
-          httpStatus={httpStatus.filter((x) => x.id === item.id)}
-        />
+        <TodoItem key={item.id} item={item} />
       ))}
     </div>
   );

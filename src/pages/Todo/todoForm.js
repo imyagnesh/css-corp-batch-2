@@ -1,67 +1,38 @@
 import React, { forwardRef, memo } from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import { ThemeConsumer } from '../../context/themeContext';
-import { LocaleConsumer } from '../../context/localeContext';
+import { TodoConsumer } from '../../context/todoContext';
 
-const TodoForm = forwardRef(({ addTodo, httpStatus }, ref) => {
+const TodoForm = forwardRef((props, ref) => {
   console.log('TodoForm render');
   return (
-    <>
-      <ThemeConsumer>
-        {({ theme, toggleTheme }) => {
-          console.log('todo form theme consumer rerender');
-          return (
-            <div>
-              <p>{`Current Theme: ${theme}`}</p>
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={toggleTheme}
-              >
-                Change Theme
-              </button>
-            </div>
-          );
-        }}
-      </ThemeConsumer>
-
-      <LocaleConsumer>
-        {({ locale, toggleLocale }) => {
-          console.log('todo form locale consumer rerender');
-          return (
-            <div>
-              <p>{`Current Locale: ${locale}`}</p>
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={toggleLocale}
-              >
-                Change Locale
-              </button>
-            </div>
-          );
-        }}
-      </LocaleConsumer>
-      <form className="flex justify-center my-2" onSubmit={addTodo}>
-        <input type="text" className="input" ref={ref} />
-        <button
-          type="submit"
-          className={cn({
-            'btn-primary': httpStatus?.status !== 'REQUEST',
-            'btn-disabled': httpStatus?.status === 'REQUEST',
-          })}
-          disabled={httpStatus?.status === 'REQUEST'}
-        >
-          Add Todo
-        </button>
-      </form>
-      {httpStatus?.status === 'FAIL' && (
-        <p className="text-center text-red-600">
-          {httpStatus?.payload.message}
-        </p>
+    <TodoConsumer>
+      {({ addTodo, addTodoStatus }) => (
+        <>
+          <form
+            className="flex justify-center my-2"
+            onSubmit={(event) => addTodo(event, ref.current.value)}
+          >
+            <input type="text" className="input" ref={ref} />
+            <button
+              type="submit"
+              className={cn({
+                'btn-primary': addTodoStatus?.status !== 'REQUEST',
+                'btn-disabled': addTodoStatus?.status === 'REQUEST',
+              })}
+              disabled={addTodoStatus?.status === 'REQUEST'}
+            >
+              Add Todo
+            </button>
+          </form>
+          {addTodoStatus?.status === 'FAIL' && (
+            <p className="text-center text-red-600">
+              {addTodoStatus?.payload.message}
+            </p>
+          )}
+        </>
       )}
-    </>
+    </TodoConsumer>
   );
 });
 

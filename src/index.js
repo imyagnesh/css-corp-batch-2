@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LocaleProvider } from './context/localeContext';
+import { TodoProvider } from './context/todoContext';
 // import App from './app';
 import Todo from './pages/Todo';
 import './root.css';
@@ -34,8 +34,8 @@ import './root.css';
 // Class Component
 
 ReactDOM.render(
-  <LocaleProvider>
+  <TodoProvider>
     <Todo />
-  </LocaleProvider>,
+  </TodoProvider>,
   document.getElementById('root'),
 );
