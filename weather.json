@@ -1,0 +1,29 @@
+{
+    "reports": [
+        {
+            "id": 1,
+            "city": "chennai",
+            "temperature": 40
+        },
+        {
+            "id": 2,
+            "city": "mumbai",
+            "temperature": 72
+        },
+        {
+            "id": 3,
+            "city": "punjab",
+            "temperature": 36
+        },
+        {
+            "id": 4,
+            "city": "delhi",
+            "temperature": 62
+        },
+        {
+            "id": 5,
+            "city": "bangalore",
+            "temperature": 53
+        }
+    ]
+}
