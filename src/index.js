@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { LocaleProvider } from './context/localeContext';
 // import App from './app';
 import Todo from './pages/Todo';
 //import WeatherReport from './Pages/Todo/weather';
@@ -33,5 +34,9 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
-//ReactDOM.render(<WeatherReport />, document.getElementById('root'));
+ReactDOM.render(
+    <LocaleProvider>
+        <Todo />
+    </LocaleProvider>,
+    document.getElementById('root'),
+);
