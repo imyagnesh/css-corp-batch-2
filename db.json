@@ -1,16 +1,22 @@
 {
   "todo-list": [
     {
-      "text": "adding record",
+      "text": "adfasdf",
       "isDone": false,
-      "timeStamp": "12-17-21 12:55",
-      "id": 12
+      "timeStamp": "12-20-21 12:04",
+      "id": 1
     },
     {
-      "text": "adding record",
+      "text": "asdfadsf",
       "isDone": false,
-      "timeStamp": "12-17-21 12:55",
-      "id": 13
+      "timeStamp": "12-20-21 12:04",
+      "id": 2
+    },
+    {
+      "text": "aasfdasfs",
+      "isDone": true,
+      "timeStamp": "12-20-21 12:04",
+      "id": 3
     }
   ]
 }

@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { ThemeConsumer } from '../../context/themeContext';
+import { LocaleConsumer } from '../../context/localeContext';
 
 const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
   console.log('TodoItem render');
@@ -22,6 +24,13 @@ const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
         {item.text}
       </p>
       <p>{item.timeStamp}</p>
+      <ThemeConsumer>
+        {({ theme }) => <p>{`Current Theme: ${theme}`}</p>}
+      </ThemeConsumer>
+
+      <LocaleConsumer>
+        {({ locale }) => <p>{`Current Locale: ${locale}`}</p>}
+      </LocaleConsumer>
       <button
         type="button"
         className={cn('btn-primary', {
