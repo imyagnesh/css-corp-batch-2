@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { TestProvider } from './context/testContext';
 // import App from './app';
 import Todo from './pages/Todo-Practice';
 import './root.css';
@@ -32,4 +33,4 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+ReactDOM.render(<TestProvider value={{ test: 'on' }}><Todo /></TestProvider>, document.getElementById('root'));

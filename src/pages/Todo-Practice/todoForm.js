@@ -1,6 +1,7 @@
 import React, { forwardRef, memo } from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+import { TestConsumer } from '../../context/testContext';
 
 const TodoForm = forwardRef(({ addTodo, httpStatus }, ref) => {
     console.log('TodoForm');
@@ -24,6 +25,16 @@ const TodoForm = forwardRef(({ addTodo, httpStatus }, ref) => {
                     </button>
                 </div>
             </form>
+            <TestConsumer>
+                {({ testValue, toggleValue }) => {
+                    return (
+                        <>
+                            <h1>Test Context value: {testValue}</h1>
+                            <button type="button" onClick={toggleValue} className="py-2 px-4 border shadow-lg shadow-red-600/150 border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-indigo-700 focus:outline-none">Toggle Value</button>
+                        </>
+                    )
+                }}
+            </TestConsumer>
             {httpStatus?.status === 'FAILED' && <h2 className="flex w-full"><span>Failed to add </span> <span className="font-bold ml-1">{ref.current.value}</span></h2>}
         </div>
     )
