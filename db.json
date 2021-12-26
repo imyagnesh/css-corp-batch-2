@@ -1,43 +1,19 @@
 {
   "todo-list": [
     {
-      "text": "adfasdf",
-      "isDone": true,
-      "timeStamp": "12-20-21 12:04",
+      "text": "test",
+      "isDone": false,
       "id": 1
     },
     {
-      "text": "asdfadsf",
+      "text": "test",
       "isDone": true,
-      "timeStamp": "12-20-21 12:04",
       "id": 2
-    },
-    {
-      "text": "aasfdasfs",
-      "isDone": true,
-      "timeStamp": "12-20-21 12:04",
-      "id": 3
-    },
-    {
-      "text": "asdfdas",
-      "isDone": true,
-      "timeStamp": "12-20-21 01:53",
-      "id": 4
     },
     {
       "text": "test",
       "isDone": false,
-      "id": 5
-    },
-    {
-      "text": "add",
-      "isDone": false,
-      "id": 6
-    },
-    {
-      "text": "agasd",
-      "isDone": false,
-      "id": 7
+      "id": 3
     }
   ]
 }
