@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { TodoProvider } from './context/todoContext';
 // import App from './app';
 import Todo from './pages/Todo';
 import './root.css';
@@ -32,4 +33,9 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+ReactDOM.render(
+  <TodoProvider>
+    <Todo />
+  </TodoProvider>,
+  document.getElementById('root'),
+);
