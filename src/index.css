@@ -3,7 +3,26 @@
 @tailwind utilities;
 
 @layer components {
-    .is-loading {
-        @apply normal-case text-sm;
-    }
+  .spinner-border {
+    vertical-align: -0.125em;
+    border: 0.25em solid;
+    border-right: 0.25em solid transparent;
+  }
+
+  .middle {
+    left: calc(50% - 15px);
+    top: calc(50% - 15px);
+  }
+
+  .top-middle {
+    top: calc(50% - 8px);
+  }
+
+  .is-loading {
+    @apply spinner-border absolute middle animate-spin border-0 inline-block w-8 h-8 rounded-full text-transparent bg-gradient-to-b from-rose-500 to-fuchsia-700;
+  }
+
+  .error-panel {
+    @apply absolute right-0 top-middle px-2 text-red-600 border-red-600 border text-sm normal-case font-semibold before:content-['Failed_try_again\!'];
+  }
 }
