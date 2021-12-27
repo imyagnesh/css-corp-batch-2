@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .is-loading {
+        @apply normal-case text-sm;
+    }
+}
