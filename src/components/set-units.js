@@ -9,7 +9,7 @@ const SetUnits = ({ setUnits, apiStatus }) => {
     <div>
       <h3 className="sub-title">Units</h3>
       <select onChange={(e) => setUnits(e.target.value)} className="w-full focus:ring-indigo-500 focus:outline-none focus:border-indigo-500 p-0 border-transparent bg-transparent text-sm font-semibold text-black rounded-md">
-        <option value="celsius">Celcuis</option>
+        <option value="celsius">Celsius</option>
         <option value="fahrenheit">Farenheit</option>
       </select>
       {isLoading && <Overlay className="is-loading" />}

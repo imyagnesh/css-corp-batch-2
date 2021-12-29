@@ -4,11 +4,11 @@
 
 @layer components {
   .wrapper {
-    @apply w-full min-h-[100vh] bg-slate-100 flex flex-col items-center justify-start;
+    @apply w-full min-h-[100vh] font-sans bg-slate-100 flex flex-col items-center justify-start;
   }
 
   .container {
-    @apply w-[90vw] mt-4 flex flex-col uppercase sm:max-w-[90%];
+    @apply w-[90vw] max-w-[700px] mt-4 flex flex-col uppercase;
   }
 
   .title {
@@ -48,7 +48,7 @@
   }
 
   .info-text {
-    @apply text-sm mt-1 normal-case;
+    @apply text-sm mt-4 normal-case text-center;
   }
 
   .code-text {

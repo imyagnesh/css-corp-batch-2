@@ -134,12 +134,12 @@ class App extends PureComponent {
         <div className="container">
           <h3 className="title">Weather Watch</h3>
           <div className="w-full flex justify-around relative">
-            <div className="card mr-1">
+            <div className="card w-full mr-1">
               <Suspense fallback={<div className="is-loading" />}>
                 <Input searchCities={this.searchCities} ref={this.inputText} apiStatus={searchLocationAPIStatus} />
               </Suspense>
             </div>
-            <div className="card w-32">
+            <div className="card w-48 md:w-30">
               <Suspense fallback={<div className="is-loading" />}>
                 <SetUnits setUnits={this.setUnits} apiStatus={searchLocationAPIStatus} />
               </Suspense>
@@ -149,8 +149,9 @@ class App extends PureComponent {
             </Suspense>
           </div>
           <div className="card weather-report">
-            {currentCity
-              ?
+            {currentCity === null
+              ? <div>{<div className="info-text">Weather report comes here...</div>}</div>
+              :
               <>
                 <Suspense fallback={<div className="is-loading" />}>
                   <WeatherReport city={currentCity} currentUnit={currentUnit} />
@@ -158,7 +159,6 @@ class App extends PureComponent {
                 {getWeatherAPIStatus?.status === 'REQUEST' && <Overlay className="is-loading" />}
                 {getWeatherAPIStatus?.status === 'FAILED' && <Overlay className="error-panel" />}
               </>
-              : <>{!getWeatherAPIStatus && <div className="info-text">Weather report goes here...</div>}</>
             }
           </div>
         </div>
