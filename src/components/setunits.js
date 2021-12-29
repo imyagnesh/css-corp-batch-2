@@ -1,9 +1,11 @@
-import React, { PureComponent } from 'react';
+import React, { forwardRef, memo } from 'react';
+import cn from 'classnames';
 import PropTypes from 'prop-types';
+import { WeatherConsumer } from '../../context/WeatherContext';
 
-class SetUnits extends PureComponent {
-    render() {
-        return (
+const Input = forwardRef((props, ref) => {
+    return (
+        <WeatherConsumer>
             <div className="pt-6 w-1/4">
                 <div className="border border-3">
                     <div>
@@ -20,8 +22,8 @@ class SetUnits extends PureComponent {
                     </div>
                 </div>
             </div>
-        );
-    }
-}
+        </WeatherConsumer>
+    );
+});
 
-export default SetUnits;
+export default memo(SetUnits);
