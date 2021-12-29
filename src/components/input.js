@@ -6,18 +6,25 @@ const Input = forwardRef(({ searchCities, apiStatus }, ref) => {
   const isFailed = apiStatus?.status === 'FAILED';
   return (
     <div className="relative min-h-[52px]">
-      {isLoading
-        ? <div className="is-loading" role="status" />
-        : <>
-          <h3 className="text-md font-semibold">Location</h3>
-          <input
-            type="text"
-            ref={ref}
-            onChange={searchCities}
-            className="w-full text-md font-semibold rounded-none pt-1 placeholder:text-sm placeholder:font-normal placeholder:normal-case placeholder-gray-500 capitalize rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10"
-            placeholder="Enter the location"
-            required />
-          {isFailed && <div className="error-panel" />}
+      <h3 className="sub-title">Location</h3>
+      <input
+        type="text"
+        ref={ref}
+        onChange={searchCities}
+        className="text-box"
+        placeholder="Enter the location"
+        required />
+
+      {isLoading &&
+        <>
+          <div className="loader-overlay" />
+          <div className="is-loading" />
+        </>
+      }
+      {isFailed &&
+        <>
+          <div className="loader-overlay" />
+          <div className="error-panel" />
         </>
       }
     </div>

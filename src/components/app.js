@@ -16,10 +16,10 @@ class App extends PureComponent {
       cities: [],
       invalidCity: null,
       currentCity: null,
-      currentUnit: 'C',
+      currentUnit: 'celsius',
       apiStatus: []
     }
-    this.baseURL = 'http://localhost:3000/weather-reports';
+    this.baseURL = 'http://localhost:3000/';
     this.inputText = createRef();
   }
 
@@ -31,41 +31,30 @@ class App extends PureComponent {
     const apiType = "SEARCH_LOCATION";
     try {
       this.addRequestAPIStatus(apiType);
-      const res = await fetch(this.baseURL + `?name_like=${keyword}`, {
+      const res = await fetch(this.baseURL + `cities?name_like=${keyword}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
       });
       const json = await res.json();
-      this.setState({ cities: json, invalidCity: !json.length ? keyword : null });
+      this.setState({ cities: json, invalidCity: !json?.length ? keyword : null });
       this.removeSuccessAPIStatus(apiType);
     } catch (error) {
       this.setFailedAPIStatus({ type: apiType, payload: error });
     }
   }
 
-  getWeather = async (cityId) => {
-    const { currentCity } = this.state;
-    if (currentCity?.id === cityId) {
-      this.setState({ currentCity, cities: [] }, () => {
-        // this.inputText.current.value = ''
-      });
-      return true;
-    }
+  getWeather = async (cityId, unit) => {
+    let { currentUnit } = this.state;
+    unit = unit || currentUnit;
     const apiType = 'GET_WEATHER';
     try {
       this.addRequestAPIStatus(apiType);
-      const res = await fetch(this.baseURL + `/${cityId}`, {
+      const res = await fetch(this.baseURL + `cities/${cityId}/report/?_embed=${unit}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
       });
       const json = await res.json();
-      this.setState({ currentCity: json, cities: [], invalidCity: null }, () => {
-        // this.inputText.current.value = '';
-        const { currentUnit } = this.state;
-        if (currentUnit !== 'C') {
-          this.setUnits(currentUnit);
-        }
-      });
+      this.setState({ currentCity: json[0], currentUnit: unit, cities: [], invalidCity: null });
       this.removeSuccessAPIStatus(apiType);
     } catch (error) {
       this.setFailedAPIStatus({ type: apiType, payload: error });
@@ -79,23 +68,14 @@ class App extends PureComponent {
 
   setUnits = (unit) => {
     const { currentCity } = this.state;
-    let { temp, temp_max, temp_min } = currentCity;
-    if (unit === 'F') {
-      temp = Math.round((temp * 9 / 5) + 32);
-      temp_max = Math.round((temp_max * 9 / 5) + 32);
-      temp_min = Math.round((temp_min * 9 / 5) + 32);
-    } else {
-      temp = Math.round((temp - 32) * 5 / 9);
-      temp_max = Math.round((temp_max - 32) * 5 / 9);
-      temp_min = Math.round((temp_min - 32) * 5 / 9);
-    }
-    this.setState({ currentCity: { ...currentCity, temp, temp_max, temp_min }, currentUnit: unit });
+    this.getWeather(currentCity.id, unit);
   }
 
   addRequestAPIStatus = (type) => {
     this.setState(({ apiStatus }) => {
       const index = apiStatus.findIndex(x => x.type === type);
       const apiData = { type, status: 'REQUEST' };
+
       return {
         apiStatus: (index === -1)
           ? [...apiStatus, apiData]
@@ -141,40 +121,51 @@ class App extends PureComponent {
 
   render() {
     const { cities, invalidCity, currentCity, currentUnit, apiStatus } = this.state;
-
     const { searchLocationAPIStatus, getWeatherAPIStatus } = apiStatus.reduce((previousValue, currentValue) => {
-      if (currentValue.type === 'SEARCH_LOCATION')
-        return { ...previousValue, searchLocationAPIStatus: currentValue }
-      return { ...previousValue, getWeatherAPIStatus: currentValue }
+      const type = (currentValue.type === 'SEARCH_LOCATION') ? 'searchLocationAPIStatus' : 'getWeatherAPIStatus';
+      return { ...previousValue, [type]: currentValue }
     }, {});
 
     return (
-      <div className="w-full min-h-[100vh] bg-slate-100 flex flex-col items-center justify-start">
-        <div className="w-[90vw] mt-4 flex flex-col sm:max-w-[90%] uppercase">
-          <h3 className="mb-3 text-lg font-semibold border-b-2 border-red-600 normal-case">Weather Watch</h3>
+      <div className="wrapper">
+        <div className="container">
+          <h3 className="title">Weather Watch</h3>
           <div className="w-full flex justify-around relative">
-            <div className="grow min-h-[52px] bg-white px-5 py-3 mr-1 rounded-md relative shadow">
+            <div className="card mr-1">
               <Suspense fallback={<div className="is-loading" />}>
                 <Input searchCities={this.searchCities} ref={this.inputText} apiStatus={searchLocationAPIStatus} />
               </Suspense>
             </div>
-            <div className="w-32 min-h-[52px] bg-white px-5 py-3 rounded-md relative shadow">
+            <div className="card w-32">
               <Suspense fallback={<div className="is-loading" />}>
                 <SetUnits setUnits={this.setUnits} apiStatus={searchLocationAPIStatus} />
               </Suspense>
             </div>
             <Suspense fallback={''}>
-              <SearchResults cities={cities} invalidCity={invalidCity} apiStatus={getWeatherAPIStatus} getWeather={this.getWeather} />
+              <SearchResults cities={cities} getWeather={this.getWeather} invalidCity={invalidCity} apiStatus={getWeatherAPIStatus} />
             </Suspense>
           </div>
-          <div className="w-full bg-white min-h-[52px] mt-2 p-5 rounded-md relative shadow">
+          <div className="card weather-report">
             {currentCity
               ?
-              <Suspense fallback={<div className="is-loading" />}>
-                <WeatherReport city={currentCity} currentUnit={currentUnit} apiStatus={getWeatherAPIStatus} />
-              </Suspense>
-              :
-              <div className="is-loading" />
+              <>
+                <Suspense fallback={<div className="is-loading" />}>
+                  <WeatherReport city={currentCity} currentUnit={currentUnit} />
+                </Suspense>
+                {getWeatherAPIStatus?.status === 'REQUEST' &&
+                  <>
+                    <div className="loader-overlay" />
+                    <div className="is-loading" />
+                  </>
+                }
+                {getWeatherAPIStatus?.status === 'FAILED' &&
+                  <>
+                    <div className="loader-overlay" />
+                    <div className="error-panel" />
+                  </>
+                }
+              </>
+              : <>{!getWeatherAPIStatus && <div className="info-text">Weather report goes here...</div>}</>
             }
           </div>
         </div>

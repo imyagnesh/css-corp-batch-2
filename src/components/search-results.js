@@ -6,20 +6,17 @@ const SearchResults = ({ cities, getWeather, invalidCity, apiStatus }) => {
   const isLoading = apiStatus?.status === 'REQUEST';
   const isFailed = apiStatus?.status === 'FAILED';
   return (
-    <div className={cn("absolute w-full top-full flex mt-1 mr-1 bg-white p-8 rounded-md shadow-xl z-10 capitalize", {
-      "hidden": (!invalidCity && !cities.length)
-    })}>
-
+    <div className={cn("popover", { "hidden": (!invalidCity && !cities.length) })}>
       {isLoading
         ? <div className="is-loading" role="status" />
         : <div className="relative w-full">
           {invalidCity
             ? <h3 className="normal-case">
-              <span className="font-semibold underline decoration-pink-500 decoration-2">{invalidCity}</span> is not exists in the record <span className="text-sm text-slate-500">{`{Ex: Che}`}</span>
+              <span className="code-text">{invalidCity}</span> is not exists in the record <span className="text-sm text-slate-500">{`{Try like 'Che' or 'Ban'}`}</span>
             </h3>
             : cities?.map(city => {
               return (
-                <button key={city.id} type="button" onClick={() => getWeather(city.id)} className="px-5 py-1 mr-2 text-sm font-semibold tracking-wider bg-gradient-to-r from-rose-500 to-fuchsia-800 text-white rounded-full">
+                <button key={city.id} type="button" onClick={() => getWeather(city.id)} className="pink-button">
                   {city.name}
                 </button>
               )
@@ -34,18 +31,25 @@ const SearchResults = ({ cities, getWeather, invalidCity, apiStatus }) => {
 SearchResults.propTypes = {
   cities: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      location: PropTypes.string.isRequired,
-      icon: PropTypes.string.isRequired,
-      feels_like: PropTypes.number.isRequired,
-      conditions: PropTypes.string.isRequired,
-      temp: PropTypes.number.isRequired,
-      temp_max: PropTypes.number.isRequired,
-      temp_min: PropTypes.number.isRequired,
-      wind_speed: PropTypes.number.isRequired,
-      wind_direction: PropTypes.number.isRequired,
-      pressure: PropTypes.number.isRequired,
-      humidity: PropTypes.number.isRequired,
+      id: PropTypes.number,
+      location: PropTypes.string,
+      icon: PropTypes.string,
+      feels_like: PropTypes.number,
+      conditions: PropTypes.string,
+      celsius: PropTypes.shape({
+        temp: PropTypes.number,
+        temp_max: PropTypes.number,
+        temp_min: PropTypes.number
+      }),
+      fahrenheit: PropTypes.shape({
+        temp: PropTypes.number,
+        temp_max: PropTypes.number,
+        temp_min: PropTypes.number
+      }),
+      wind_speed: PropTypes.number,
+      wind_direction: PropTypes.number,
+      pressure: PropTypes.number,
+      humidity: PropTypes.number,
     })
   ),
   getWeather: PropTypes.func.isRequired,
@@ -57,9 +61,12 @@ SearchResults.propTypes = {
   })
 }
 
-SearchResults.defaultValues = {
+SearchResults.defaultProps = {
+  cities: [],
   invalidCity: null,
-  apiStatus: null
+  apiStatus: null,
+  celsius: { temp: 0, temp_max: 0, temp_min: 0 },
+  fahrenheit: { temp: 0, temp_max: 0, temp_min: 0 }
 }
 
 export default memo(SearchResults);

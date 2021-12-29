@@ -2,61 +2,67 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const WeatherReport = ({ city, currentUnit }) => {
-  const { location, icon, conditions, feels_like, temp, temp_max, temp_min, wind_speed, wind_direction, pressure, humidity } = city;
-  const unit = currentUnit === 'C' ? <span>&#8451;</span> : <span>&#8457;</span>;
-
+  const { location, icon, conditions, feels_like, wind_speed, wind_direction, pressure, humidity } = city;
+  const temporature = city?.[currentUnit]?.[0];
+  const { temp, temp_max, temp_min } = temporature;
+  const unit = currentUnit === 'celsius' ? <span>&#8451;</span> : <span>&#8457;</span>;
   return (
     <div>
-      <h3 className="mb-1 text-3xl font-semibold capitalize">{location}</h3>
-      <span className="absolute -top-3 -right-3 rounded-full">
-        <img className="w-[128px]" src={icon} />
-      </span>
-      <div className="text-xs text-slate-500 font-semibold">
-        {conditions} | Feels Like {feels_like}&#8451;
-      </div>
+      {temporature
+        ?
+        <div>
+          <h3 className="large-text">{location}</h3>
+          <span className="icon-wrapper">
+            <img className="w-[128px]" src={icon} />
+          </span>
+          <div className="medium-text">
+            {conditions} | Feels Like {feels_like}&#8451;
+          </div>
 
-      <div className="mt-12">
-        <div className="flex justify-around">
-          <div className="flex-1 p-2 rounded-md text-center bg-gradient-to-b from-fuchsia-600 to-orange-500 text-white">
-            <div className="text-xs tracking-wider">Current temperature</div>
-            <div className="text-xl">{temp}{unit}</div>
+          <div className="mt-12">
+            <div className="tile-wrapper">
+              <div className="tile tile--fuchsia-orange m-0">
+                <div className="tile__title">Current temperature</div>
+                <div className="tile__unit">{temp}{unit}</div>
+              </div>
+              <div className="tile tile--fuchsia-orange">
+                <div className="tile__title">Maximum temperature</div>
+                <div className="tile__unit">{temp_max}{unit}</div>
+              </div>
+              <div className="tile tile--fuchsia-orange">
+                <div className="tile__title">Minimum temperature</div>
+                <div className="tile__unit">{temp_min}{unit}</div>
+              </div>
+            </div>
           </div>
-          <div className="flex-1 p-2 rounded-md ml-1 text-center bg-gradient-to-b from-fuchsia-600 to-orange-500 text-white">
-            <div className="text-xs tracking-wider">Maximum temperature</div>
-            <div className="text-xl">{temp_max}{unit}</div>
+
+          <div className="mt-2">
+            <div className="tile-wrapper">
+              <div className="tile tile--fuchsia-pink">
+                <div className="tile__title mb-3">Wind Speed</div>
+                <div className="tile__unit">{wind_speed} meter/sec</div>
+              </div>
+              <div className="tile tile--fuchsia-pink">
+                <div className="tile__title mb-3">Wind Direction</div>
+                <div className="tile__unit">{wind_direction} degrees</div>
+              </div>
+            </div>
           </div>
-          <div className="flex-1 p-2 rounded-md ml-1 text-center bg-gradient-to-b from-fuchsia-600 to-orange-500 text-white">
-            <div className="text-xs tracking-wider">Minimum temperature</div>
-            <div className="text-xl">{temp_min}{unit}</div>
+
+          <div className="mt-2">
+            <div className="tile-wrapper">
+              <div className="tile tile--cyan-indigo">
+                <div className="tile__title mb-3">Pressure</div>
+                <div className="tile__unit">{pressure} meter/sec</div>
+              </div>
+              <div className="tile tile--cyan-indigo">
+                <div className="tile__title mb-3">Humidity</div>
+                <div className="tile__unit">{humidity} %</div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="mt-2">
-        <div className="flex justify-around">
-          <div className="flex-1 p-2 rounded-md text-center bg-gradient-to-r from-fuchsia-800 to-pink-500 text-white">
-            <div className="mb-3 text-xs tracking-wider">Wind Speed</div>
-            <div className="text-xl lowercase">{wind_speed} meter/sec</div>
-          </div>
-          <div className="flex-1 p-2 ml-1 rounded-md text-center bg-gradient-to-r from-fuchsia-800 to-pink-500 text-white">
-            <div className="mb-3 text-xs tracking-wider">Wind Direction</div>
-            <div className="text-xl lowercase">{wind_direction} degrees</div>
-          </div>
-        </div>
-      </div>
-
-      <div className="mt-2">
-        <div className="flex justify-around">
-          <div className="flex-1 p-2 rounded-md text-center bg-gradient-to-r from-cyan-500 to-indigo-600 text-white">
-            <div className="mb-3 text-xs tracking-wider">Pressure</div>
-            <div className="text-xl lowercase">{pressure} meter/sec</div>
-          </div>
-          <div className="flex-1 p-2 ml-1 rounded-md text-center bg-gradient-to-r from-cyan-500 to-indigo-600 text-white">
-            <div className="mb-3 text-xs tracking-wider">Humidity</div>
-            <div className="text-xl lowercase">{humidity} %</div>
-          </div>
-        </div>
-      </div>
+        : <h3>City not found</h3>}
     </div>
   )
 }
@@ -67,9 +73,16 @@ WeatherReport.propType = {
     location: PropTypes.string.isRequired,
     icon: PropTypes.string.isRequired,
     feels_like: PropTypes.number.isRequired,
-    temp: PropTypes.number.isRequired,
-    temp_max: PropTypes.number.isRequired,
-    temp_min: PropTypes.number.isRequired,
+    celsius: PropTypes.shape({
+      temp: PropTypes.number.isRequired,
+      temp_max: PropTypes.number.isRequired,
+      temp_min: PropTypes.number.isRequired
+    }),
+    fahrenheit: PropTypes.shape({
+      temp: PropTypes.number.isRequired,
+      temp_max: PropTypes.number.isRequired,
+      temp_min: PropTypes.number.isRequired
+    }),
     wind_speed: PropTypes.number.isRequired,
     wind_direction: PropTypes.number.isRequired,
     pressure: PropTypes.number.isRequired,
@@ -78,5 +91,8 @@ WeatherReport.propType = {
   })
 }
 
-
+WeatherReport.defaultProps = {
+  celsius: { temp: 0, temp_max: 0, temp_min: 0 },
+  fahrenheit: { temp: 0, temp_max: 0, temp_min: 0 }
+}
 export default memo(WeatherReport);

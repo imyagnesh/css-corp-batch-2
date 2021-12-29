@@ -1,11 +1,45 @@
 {
-  "weather-reports": [
+  "cities": [
     {
       "id": 1,
-      "name": "Chennai",
-      "location": "Chennai",     
+      "name": "Chennai"
+    },
+    {
+      "id": 2,
+      "name": "Chengalpattu"
+    },
+    {
+      "id": 3,
+      "name": "Chethpattu"
+    },
+    {
+      "id": 4,
+      "name": "Bangalore"
+    },
+    {
+      "id": 5,
+      "name": "Bangkok"
+    },
+    {
+      "id": 6,
+      "name": "Tokyo"
+    },
+    {
+      "id": 7,
+      "name": "London"
+    },
+    {
+      "id": 8,
+      "name": "Los Angels"
+    }
+  ],
+  "report": [
+    {
+      "id": 1,
+      "cityId": 1,
+      "location": "Chennai",
       "conditions": "Full Sunny",
-      "icon": "/images/weather_icon_full_sun.svg" ,
+      "icon": "/images/weather_icon_full_sun.svg",
       "temp": 29,
       "temp_max": 29,
       "temp_min": 28,
@@ -17,10 +51,10 @@
     },
     {
       "id": 2,
-      "name": "Chengalpattu",
-      "location": "Chengalpattu",     
+      "cityId": 2,
+      "location": "Chengalpattu",
       "conditions": "Partly Clouds",
-      "icon": "/images/weather_icon_partly_cloudy.svg" ,
+      "icon": "/images/weather_icon_partly_cloudy.svg",
       "temp": 32,
       "temp_max": 35,
       "temp_min": 30,
@@ -32,13 +66,10 @@
     },
     {
       "id": 3,
-      "name": "Chethpattu",
-      "location": "Chethpattu",     
+      "cityId": 3,
+      "location": "Chethpattu",
       "conditions": "Partly Sunny",
-      "icon": "/images/weather_icon_full_sun.svg" ,
-      "temp": 46,
-      "temp_max": 52,
-      "temp_min": 37,
+      "icon": "/images/weather_icon_full_sun.svg",
       "feels_like": 50,
       "wind_speed": 1.8,
       "wind_direction": 75,
@@ -47,18 +78,179 @@
     },
     {
       "id": 4,
-      "name": "Bangalore",
-      "location": "Bangalore",     
+      "cityId": 4,
+      "location": "Bangalore",
       "conditions": "Cloud Slight Rain",
-      "icon": "/images/weather_icon_cloud_slight_rain.svg" ,
-      "temp": 25,
-      "temp_max": 26,
-      "temp_min": 22,
+      "icon": "/images/weather_icon_cloud_slight_rain.svg",
       "feels_like": 23,
       "wind_speed": 4.6,
       "wind_direction": 130,
       "pressure": 2150,
       "humidity": 38
+    },
+    {
+      "id": 5,
+      "cityId": 5,
+      "location": "Bangkok",
+      "conditions": "Full Sunny",
+      "icon": "/images/weather_icon_full_sun.svg",
+      "feels_like": 30,
+      "wind_speed": 3.1,
+      "wind_direction": 220,
+      "pressure": 1016,
+      "humidity": 54
+    },
+    {
+      "id": 6,
+      "cityId": 6,
+      "location": "Tokyo",
+      "conditions": "Partly Clouds",
+      "icon": "/images/weather_icon_partly_cloudy.svg",
+      "feels_like": 33,
+      "wind_speed": 2.5,
+      "wind_direction": 170,
+      "pressure": 842,
+      "humidity": 48
+    },
+    {
+      "id": 7,
+      "cityId": 7,
+      "location": "London",
+      "conditions": "Partly Sunny",
+      "icon": "/images/weather_icon_full_sun.svg",
+      "feels_like": 50,
+      "wind_speed": 1.8,
+      "wind_direction": 75,
+      "pressure": 1200,
+      "humidity": 32
+    },
+    {
+      "id": 8,
+      "cityId": 8,
+      "location": "Los Angels",
+      "conditions": "Cloud Slight Rain",
+      "icon": "/images/weather_icon_cloud_slight_rain.svg",
+      "feels_like": 23,
+      "wind_speed": 4.6,
+      "wind_direction": 130,
+      "pressure": 2150,
+      "humidity": 38
+    }
+  ],
+  "celsius": [
+    {
+      "id": 1,
+      "reportId": 1,
+      "temp": 29,
+      "temp_max": 29,
+      "temp_min": 28
+    },
+    {
+      "id": 2,
+      "reportId": 2,
+      "temp": 32,
+      "temp_max": 35,
+      "temp_min": 30
+    },
+    {
+      "id": 3,
+      "reportId": 3,
+      "temp": 46,
+      "temp_max": 52,
+      "temp_min": 37
+    },
+    {
+      "id": 4,
+      "reportId": 4,
+      "temp": 25,
+      "temp_max": 26,
+      "temp_min": 22
+    },
+    {
+      "id": 5,
+      "reportId": 5,
+      "temp": 29,
+      "temp_max": 29,
+      "temp_min": 28
+    },
+    {
+      "id": 6,
+      "reportId": 6,
+      "temp": 32,
+      "temp_max": 35,
+      "temp_min": 30
+    },
+    {
+      "id": 7,
+      "reportId": 7,
+      "temp": 46,
+      "temp_max": 52,
+      "temp_min": 37
+    },
+    {
+      "id": 8,
+      "reportId": 8,
+      "temp": 25,
+      "temp_max": 26,
+      "temp_min": 22
+    }
+  ],
+  "fahrenheit": [
+    {
+      "id": 1,
+      "reportId": 1,
+      "temp": 84,
+      "temp_max": 85,
+      "temp_min": 84
+    },
+    {
+      "id": 2,
+      "reportId": 2,
+      "temp": 89,
+      "temp_max": 95,
+      "temp_min": 86
+    },
+    {
+      "id": 3,
+      "reportId": 3,
+      "temp": 115,
+      "temp_max": 125,
+      "temp_min": 98
+    },
+    {
+      "id": 4,
+      "reportId": 4,
+      "temp": 77,
+      "temp_max": 79,
+      "temp_min": 72
+    },
+    {
+      "id": 5,
+      "reportId": 5,
+      "temp": 84,
+      "temp_max": 84,
+      "temp_min": 75
+    },
+    {
+      "id": 6,
+      "reportId": 6,
+      "temp": 89,
+      "temp_max": 95,
+      "temp_min": 86
+    },
+    {
+      "id": 7,
+      "reportId": 7,
+      "temp": 114,
+      "temp_max": 125,
+      "temp_min": 99
+    },
+    {
+      "id": 8,
+      "reportId": 8,
+      "temp": 77,
+      "temp_max": 79,
+      "temp_min": 71
     }
   ]
 }
