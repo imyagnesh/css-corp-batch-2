@@ -1,35 +1,24 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Input from './input';
-import SetUnits from './setunits';
+import React, { PureComponent, createRef, lazy, Suspense } from 'react';
+import { WeatherConsumer } from '../context/weatherContext';
 import WeatherReport from './WeatherReport';
+import SetUnits from './setunits';
+import Input from './input';
 
+//const Input = lazy(() => import('./input'));
+//const SetUnits = lazy(() => import('./setunits'));
+//const WeatherReport = lazy(() => import('./WeatherReport'));
 
-class App extends Component {
+class App extends PureComponent {
+    inputText = createRef();
     constructor(props) {
         super(props);
 
     }
 
-    componentWillMount() {
-
-    }
 
     componentDidMount() {
         // api call
-        //  https://api.weatherapi.com/v1/forecast.json?key=1f03305478394edd87e150846212712&q=London&days=1&aqi=no&alerts=no
-    }
-
-    componentWillReceiveProps(nextProps) {
-
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-
+        this.loadWeather('Bengaluru');
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -47,9 +36,18 @@ class App extends Component {
                     <h1 className="w-full text-lg text-gray-500">WeatherWatch</h1>
                 </div>
                 <div className="flex">
-                    <Input /><SetUnits />
+
+                    <Input />
+
+                    <Suspense fallback={<h1>Loading......</h1>}>
+                        <SetUnits />
+                    </Suspense>
                 </div>
-                <WeatherReport />
+                <WeatherConsumer>
+                    {({ weatherData }) => (
+                        <WeatherReport weatherResult={weatherData} />
+                    )}
+                </WeatherConsumer>
             </div>
         );
     }

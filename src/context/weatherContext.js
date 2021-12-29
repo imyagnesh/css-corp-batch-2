@@ -69,7 +69,12 @@ export class WeatherProvider extends PureComponent {
         const { weatherData, httpStatus } = this.state;
 
         return (
-            <WeatherContext.Provider>
+            <WeatherContext.Provider
+                value={{
+                    weatherData,
+                    httpStatus,
+                    loadWeather: this.loadWeather
+                }}>
                 {children}
             </WeatherContext.Provider>
         )
