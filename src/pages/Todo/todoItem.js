@@ -1,19 +1,22 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import { TodoConsumer } from '../../context/todoContext';
 
-const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
+const TodoItem = ({ item }) => {
   console.log('TodoItem render');
   return (
     <div className="flex items-center m-2" key={item.id}>
-      <input
-        type="checkbox"
-        checked={item.isDone}
-        disabled={httpStatus.some(
-          (x) => x.type === 'UPDATE_TODO' && x.status === 'REQUEST',
+      <TodoConsumer>
+        {({ toggleComplete, updateTodoStatus }) => (
+          <input
+            type="checkbox"
+            checked={item.isDone}
+            disabled={!!updateTodoStatus('REQUEST', item.id)}
+            onChange={() => toggleComplete(item)}
+          />
         )}
-        onChange={() => toggleComplete(item)}
-      />
+      </TodoConsumer>
       <p
         className={cn('flex-1 px-2', {
           'line-through': item.isDone,
@@ -22,20 +25,20 @@ const TodoItem = ({ item, toggleComplete, deleteTodo, httpStatus }) => {
         {item.text}
       </p>
       <p>{item.timeStamp}</p>
-      <button
-        type="button"
-        className={cn('btn-primary', {
-          'btn-disabled': httpStatus.some(
-            (x) => x.type === 'DELETE_TODO' && x.status === 'REQUEST',
-          ),
-        })}
-        disabled={httpStatus.some(
-          (x) => x.type === 'DELETE_TODO' && x.status === 'REQUEST',
+      <TodoConsumer>
+        {({ deleteTodo, deleteTodoStatus }) => (
+          <button
+            type="button"
+            // className={cn('btn-primary', {
+            //   'btn-disabled': deleteTodoStatus('REQUEST', item.id),
+            // })}
+            disabled={() => !!deleteTodoStatus('REQUEST', item.id)}
+            onClick={() => deleteTodo(item)}
+          >
+            Delete
+          </button>
         )}
-        onClick={() => deleteTodo(item)}
-      >
-        Delete
-      </button>
+      </TodoConsumer>
     </div>
   );
 };
