@@ -1,29 +1,27 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
+import Overlay from './overlay';
 
-const SearchResults = ({ cities, getWeather, invalidCity, apiStatus }) => {
-  const isLoading = apiStatus?.status === 'REQUEST';
-  const isFailed = apiStatus?.status === 'FAILED';
+const SearchResults = ({ cities, getWeather, invalidCity, allApiStatus }) => {
+  const isLoading = allApiStatus?.some(x => x.status === 'REQUEST');
+  const isFailed = allApiStatus?.some(x => x.status === 'FAILED');
   return (
     <div className={cn("popover", { "hidden": (!invalidCity && !cities.length) })}>
-      {isLoading
-        ? <div className="is-loading" role="status" />
-        : <div className="relative w-full">
-          {invalidCity
-            ? <h3 className="normal-case">
-              <span className="code-text">{invalidCity}</span> is not exists in the record <span className="text-sm text-slate-500">{`{Try like 'Che' or 'Ban'}`}</span>
-            </h3>
-            : cities?.map(city => {
-              return (
-                <button key={city.id} type="button" onClick={() => getWeather(city.id)} className="pink-button">
-                  {city.name}
-                </button>
-              )
-            })}
-          {isFailed && <div className="error-panel" />}
-        </div>
+      {invalidCity
+        ? <h3 className="normal-case">
+          <span className="code-text">{invalidCity}</span> is not exists in the record <span className="text-sm text-slate-500">{`{Try like 'Che' or 'Ban'}`}</span>
+        </h3>
+        : cities?.map(city => {
+          return (
+            <button key={city.id} type="button" onClick={() => getWeather(city.id)} className="pink-button">
+              {city.name}
+            </button>
+          )
+        })
       }
+      {isLoading && <Overlay className="is-loading" />}
+      {isFailed && <Overlay className="error-panel" />}
     </div>
   )
 }
@@ -54,17 +52,19 @@ SearchResults.propTypes = {
   ),
   getWeather: PropTypes.func.isRequired,
   invalidCity: PropTypes.string,
-  apiStatus: PropTypes.shape({
-    type: PropTypes.string,
-    status: PropTypes.oneOf(['REQUEST', 'FAILED']),
-    payload: PropTypes.objectOf(Error)
-  })
+  allApiStatus: PropTypes.arrayOf(
+    PropTypes.shape({
+      type: PropTypes.string,
+      status: PropTypes.oneOf(['REQUEST', 'FAILED']),
+      payload: PropTypes.objectOf(Error)
+    })
+  )
 }
 
 SearchResults.defaultProps = {
   cities: [],
   invalidCity: null,
-  apiStatus: null,
+  allApiStatus: null,
   celsius: { temp: 0, temp_max: 0, temp_min: 0 },
   fahrenheit: { temp: 0, temp_max: 0, temp_min: 0 }
 }

@@ -1,3 +1,0 @@
-{
-    "cities/:id/:category/report/": "cities/:id/report/?_embed=:category"
-}

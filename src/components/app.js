@@ -2,6 +2,7 @@ import React, { createRef, PureComponent, lazy, Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { _debounce } from 'lodash';
 import '../index.css';
+import Overlay from './overlay';
 
 const Input = lazy(() => import('./input'));
 const WeatherReport = lazy(() => import('./weather-report'));
@@ -19,7 +20,7 @@ class App extends PureComponent {
       currentUnit: 'celsius',
       apiStatus: []
     }
-    this.baseURL = 'http://localhost:3000/';
+    this.baseURL = 'https://my-json-server.typicode.com/SeenivasanBalakrishnan/weather-api/';
     this.inputText = createRef();
   }
 
@@ -54,7 +55,9 @@ class App extends PureComponent {
         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
       });
       const json = await res.json();
-      this.setState({ currentCity: json[0], currentUnit: unit, cities: [], invalidCity: null });
+      this.setState({ currentCity: json[0], currentUnit: unit, cities: [], invalidCity: null }, () => {
+        this.inputText.current.value = '';
+      });
       this.removeSuccessAPIStatus(apiType);
     } catch (error) {
       this.setFailedAPIStatus({ type: apiType, payload: error });
@@ -121,10 +124,10 @@ class App extends PureComponent {
 
   render() {
     const { cities, invalidCity, currentCity, currentUnit, apiStatus } = this.state;
-    const { searchLocationAPIStatus, getWeatherAPIStatus } = apiStatus.reduce((previousValue, currentValue) => {
+    const { searchLocationAPIStatus, getWeatherAPIStatus, allApiStatus } = apiStatus.reduce((previousValue, currentValue) => {
       const type = (currentValue.type === 'SEARCH_LOCATION') ? 'searchLocationAPIStatus' : 'getWeatherAPIStatus';
-      return { ...previousValue, [type]: currentValue }
-    }, {});
+      return { ...previousValue, [type]: currentValue, allApiStatus: [...previousValue.allApiStatus, currentValue] }
+    }, { allApiStatus: [] });
 
     return (
       <div className="wrapper">
@@ -142,7 +145,7 @@ class App extends PureComponent {
               </Suspense>
             </div>
             <Suspense fallback={''}>
-              <SearchResults cities={cities} getWeather={this.getWeather} invalidCity={invalidCity} apiStatus={getWeatherAPIStatus} />
+              <SearchResults cities={cities} getWeather={this.getWeather} invalidCity={invalidCity} allApiStatus={allApiStatus} />
             </Suspense>
           </div>
           <div className="card weather-report">
@@ -152,18 +155,8 @@ class App extends PureComponent {
                 <Suspense fallback={<div className="is-loading" />}>
                   <WeatherReport city={currentCity} currentUnit={currentUnit} />
                 </Suspense>
-                {getWeatherAPIStatus?.status === 'REQUEST' &&
-                  <>
-                    <div className="loader-overlay" />
-                    <div className="is-loading" />
-                  </>
-                }
-                {getWeatherAPIStatus?.status === 'FAILED' &&
-                  <>
-                    <div className="loader-overlay" />
-                    <div className="error-panel" />
-                  </>
-                }
+                {getWeatherAPIStatus?.status === 'REQUEST' && <Overlay className="is-loading" />}
+                {getWeatherAPIStatus?.status === 'FAILED' && <Overlay className="error-panel" />}
               </>
               : <>{!getWeatherAPIStatus && <div className="info-text">Weather report goes here...</div>}</>
             }

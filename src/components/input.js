@@ -1,5 +1,7 @@
 import React, { forwardRef, memo } from 'react';
 import PropTypes from 'prop-types';
+import Overlay from './overlay';
+
 
 const Input = forwardRef(({ searchCities, apiStatus }, ref) => {
   const isLoading = apiStatus?.status === 'REQUEST';
@@ -14,19 +16,8 @@ const Input = forwardRef(({ searchCities, apiStatus }, ref) => {
         className="text-box"
         placeholder="Enter the location"
         required />
-
-      {isLoading &&
-        <>
-          <div className="loader-overlay" />
-          <div className="is-loading" />
-        </>
-      }
-      {isFailed &&
-        <>
-          <div className="loader-overlay" />
-          <div className="error-panel" />
-        </>
-      }
+      {isLoading && <Overlay className="is-loading" />}
+      {isFailed && <Overlay className="error-panel" />}
     </div>
   )
 });
