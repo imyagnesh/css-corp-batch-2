@@ -1,21 +1,9 @@
-import Xyz, { a as aa, d } from './app';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import App from "./components/app";
+import './root.css';
 
-// import { a as aa } from './app'
-
-console.log(Xyz(1, 2));
-
-console.log(d);
-
-// import * as test from './app';
-
-// New Javascript import syntax
-// import * as test from  './app'
-
-// OLD JAVASCRIPT Syntax
-// const app = require('./app');
-
-console.log(aa);
-
-console.log('hello');
-
-console.log('how are you?');
+ReactDOM.render(
+    <App />,
+    document.getElementById('root'),
+);
