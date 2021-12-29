@@ -35,18 +35,24 @@ class App extends PureComponent {
                     <h1 className="w-full text-lg text-gray-500">WeatherWatch</h1>
                 </div>
                 <div className="flex">
+                    <WeatherConsumer>
+                        {({ setContextState, loadWeather }) => (
+                            <>
+                                <Input ref={this.inputText} setContextState={setContextState} loadWeather={loadWeather} />
+                                <SetUnits setContextState={setContextState} />
+                            </>
+                        )}
+                    </WeatherConsumer>
 
-                    <Input />
-
-                    <Suspense fallback={<h1>Loading......</h1>}>
-                        <SetUnits />
-                    </Suspense>
                 </div>
                 <WeatherConsumer>
-                    {({ weatherData }) => (
+                    {({ weatherData, units }) => (
                         <>
+                            {Object.entries(weatherData).length === 0 && (<div className="is-loading">Loading.......</div>)}
                             {Object.entries(weatherData).length !== 0 && (
-                                <WeatherReport weatherResult={weatherData} />
+                                <Suspense fallback={<h1>Loading...</h1>}>
+                                    <WeatherReport weatherResult={weatherData} units={units} />
+                                </Suspense>
                             )}
                         </>
                     )}
