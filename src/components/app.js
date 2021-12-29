@@ -1,5 +1,5 @@
-import React, { PureComponent, createRef, lazy, Suspense } from 'react';
-import { WeatherConsumer } from '../context/weatherContext';
+import React, { PureComponent, createRef, lazy, Suspense, useContext } from 'react';
+import { WeatherConsumer, WeatherContext } from '../context/weatherContext';
 import WeatherReport from './WeatherReport';
 import SetUnits from './setunits';
 import Input from './input';
@@ -16,9 +16,8 @@ class App extends PureComponent {
     }
 
 
-    componentDidMount() {
-        // api call
-        this.loadWeather('Bengaluru');
+    async componentDidMount() {
+
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -45,7 +44,11 @@ class App extends PureComponent {
                 </div>
                 <WeatherConsumer>
                     {({ weatherData }) => (
-                        <WeatherReport weatherResult={weatherData} />
+                        <>
+                            {Object.entries(weatherData).length !== 0 && (
+                                <WeatherReport weatherResult={weatherData} />
+                            )}
+                        </>
                     )}
                 </WeatherConsumer>
             </div>

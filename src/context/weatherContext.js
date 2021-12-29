@@ -1,6 +1,6 @@
 import React, { createContext, PureComponent } from 'react';
 
-const WeatherContext = createContext();
+export const WeatherContext = createContext();
 
 export const WeatherConsumer = WeatherContext.Consumer;
 
@@ -45,17 +45,24 @@ export class WeatherProvider extends PureComponent {
         }));
     };
     async componentDidMount() {
-        this.loadWeather();
+        this.loadWeather('Bengaluru');
     }
 
-    loadWeather = async () => {
+    loadWeather = async (city) => {
         const type = 'LOAD_WEATHER';
         try {
             this.setRequestStatus({ type });
-            let url = 'https://api.weatherapi.com/v1/forecast.json?key=1f03305478394edd87e150846212712&q=' + city + '&days=1&aqi=no&alerts=no';
+            let url = 'http://api.weatherapi.com/v1/forecast.json?key=1f03305478394edd87e150846212712&q=' + city + '&days=1&aqi=no&alerts=no';
 
-            const res = await fetch(url);
+            const res = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                },
+            });
             const json = await res.json();
+            console.log(json);
             this.setState({
                 weatherData: json
             });
