@@ -42,5 +42,42 @@
       "timeStamp": "12-20-21 01:55",
       "id": 7
     }
+  ],
+  "weather-infor": [
+    {
+      "id": 1,
+      "city": "Ahmedabad",
+      "temp": 33
+    },
+    {
+      "id": 2,
+      "city": "Chennai",
+      "temp": 34
+    },
+    {
+      "id": 3,
+      "city": "Dindigul",
+      "temp": 23
+    },
+    {
+      "id": 4,
+      "city": "Coonoor",
+      "temp": 16
+    },
+    {
+      "id": 4,
+      "city": "Delhi",
+      "temp": 19
+    },
+    {
+      "id": 4,
+      "city": "Mumbai",
+      "temp": 20
+    },
+    {
+      "id": 4,
+      "city": "Bangalore",
+      "temp": 16
+    }
   ]
 }
