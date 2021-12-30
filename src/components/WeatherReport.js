@@ -8,6 +8,7 @@ class WeatherReport extends PureComponent {
 
     }
     render() {
+        console.log('WeatherReport render');
         const weatherResult = this.props.weatherResult;
         const units = this.props.units;
         console.log("weatherResult");

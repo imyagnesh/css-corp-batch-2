@@ -3,17 +3,18 @@ import { debounce } from "lodash";
 
 const Input = forwardRef((props, ref) => {
     const setContextState = props.setContextState;
-    const units = props.units;
+    const state = props.getContextState;
     const handler = useCallback(debounce(props.loadWeather, 1000), []);
     function handleChange(e) {
         console.log(e.target.value);
         setContextState({
             city: e.target.value || 'Bengaluru',
             weatherData: {},
-            units,
+            units: state.units
         });
         handler();
     }
+    console.log('Input render');
     return (
         <div className="pt-6 w-3/4">
             <div className="border border-3">

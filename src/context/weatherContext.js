@@ -5,12 +5,10 @@ export const WeatherContext = createContext();
 export const WeatherConsumer = WeatherContext.Consumer;
 
 export class WeatherProvider extends PureComponent {
-    defaultStatus = 'COMPLETE';
     state = {
         weatherData: {},
         city: 'Bengaluru',
-        units: 'C',
-        status: defaultStatus
+        units: 'C'
     };
 
 
@@ -21,8 +19,11 @@ export class WeatherProvider extends PureComponent {
             weatherData,
         })
     }
-
+    getContextState = () => {
+        return this.state;
+    }
     async componentDidMount() {
+        console.log('weatherContext render');
         this.loadWeather();
     }
 
@@ -62,7 +63,8 @@ export class WeatherProvider extends PureComponent {
                     units,
                     city,
                     setContextState: this.setContextState,
-                    loadWeather: this.loadWeather
+                    loadWeather: this.loadWeather,
+                    getContextState: this.getContextState
                 }}>
                 {children}
             </WeatherContext.Provider>
