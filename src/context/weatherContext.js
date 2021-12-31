@@ -5,69 +5,77 @@ export const WeatherContext = createContext();
 export const WeatherConsumer = WeatherContext.Consumer;
 
 export class WeatherProvider extends PureComponent {
-    state = {
-        weatherData: {},
-        city: 'Bengaluru',
-        units: 'C'
-    };
+  state = {
+    weatherData: {},
+    city: 'Bengaluru',
+    units: 'C',
+    rerender: 0
+  };
+
+  setContextState = ({ weatherData, city, units, rerender }) => {
+    this.setState({
+      city,
+      units,
+      weatherData,
+      rerender,
+    });
+  };
 
 
-    setContextState = ({ weatherData, city, units }) => {
-        this.setState({
-            city,
-            units,
-            weatherData,
-        })
-    }
-    getContextState = () => {
-        return this.state;
-    }
-    async componentDidMount() {
-        console.log('weatherContext render');
-        this.loadWeather();
-    }
+  getContextState = () => this.state;
 
-    loadWeather = async () => {
-        const type = 'LOAD_WEATHER';
-        this.setState({
-            status: type
-        })
-        try {
-            let url = 'http://api.weatherapi.com/v1/forecast.json?key=1f03305478394edd87e150846212712&q=' + this.state.city + '&days=1&aqi=no&alerts=no';
-            const res = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: 'application/json',
-                },
-            });
-            const json = await res.json();
-            console.log(json);
-            this.setState({
-                weatherData: json,
-                status: defaultStatus
-            });
-
-        } catch (error) {
-            // Error
-        }
+  async componentDidMount() {
+    console.log('weatherContext render');
+    this.loadWeather();
+  }
+  async componentDidUpdate() {
+    console.log('weatherContext updated');
+    if (this.state['rerender'] && this.state.rerender === 1) {
+      console.log('rerendering.....');
+      this.loadWeather();
+      document.getElementById('citysearch').style.display = "none";
     }
-    render() {
-        const { children } = this.props;
-        const { weatherData, city, units } = this.state;
+  }
 
-        return (
-            <WeatherContext.Provider
-                value={{
-                    weatherData,
-                    units,
-                    city,
-                    setContextState: this.setContextState,
-                    loadWeather: this.loadWeather,
-                    getContextState: this.getContextState
-                }}>
-                {children}
-            </WeatherContext.Provider>
-        )
+  loadWeather = async () => {
+    try {
+      const url = `http://api.weatherapi.com/v1/forecast.json?key=1f03305478394edd87e150846212712&q=${this.state.city}&days=1&aqi=no&alerts=no`;
+      const res = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      });
+      const json = await res.json();
+      console.log(json);
+      this.setState({
+        weatherData: json,
+        rerender: 0
+      });
+    } catch (error) {
+      // Error
     }
+  };
+
+  render() {
+    const { children } = this.props;
+    const { weatherData, city, units, rerender } = this.state;
+
+    return (
+      <WeatherContext.Provider
+        value={{
+          weatherData,
+          units,
+          city,
+          setContextState: this.setContextState,
+          loadWeather: this.loadWeather,
+          getContextState: this.getContextState,
+          rerender,
+        }}
+      >
+        {children}
+      </WeatherContext.Provider>
+    );
+  }
 }
