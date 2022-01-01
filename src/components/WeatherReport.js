@@ -6,7 +6,10 @@ class WeatherReport extends PureComponent {
   constructor(props) {
     super(props);
   }
-
+  static propTypes = {
+    weatherResult: PropTypes.object,
+    units: PropTypes.oneOf(['C', 'F'])
+  }
   render() {
     console.log('WeatherReport render');
     const { weatherResult } = this.props;
@@ -87,17 +90,5 @@ class WeatherReport extends PureComponent {
       );
   }
 }
-/*
-WeatherReport.propTypes = {
-    weatherResult: PropTypes.shape({
-        PropTypes.string
-    }),
-    httpStatus: PropTypes.shape({
-        type: PropTypes.string,
-        payload: PropTypes.objectOf(Error),
-        status: PropTypes.oneOf(['REQUEST', 'FAIL']),
-    }),
-};
-*/
 
 export default WeatherReport;

@@ -1,7 +1,8 @@
-import React, { createRef, PureComponent, useCallback } from 'react';
+import React, { Component, createRef, PureComponent, useCallback } from 'react';
 import _ from 'lodash';
 import SearchResults from './SearchResults'
 import { WeatherConsumer } from '../context/weatherContext';
+import PropTypes from 'prop-types';
 
 class Input extends PureComponent {
   constructor(props) {
@@ -10,8 +11,13 @@ class Input extends PureComponent {
       searchResults: [],
     })
   }
+  static propTypes = {
+    setContextState: PropTypes.func.isRequired,
+    getContextState: PropTypes.func.isRequired,
+
+  }
   setContextState = this.props.setContextState;
-  state = this.props.getContextState;
+  stateObj = this.props.getContextState();
   inputText = createRef();
   result = [];
   //handler = useCallback(debounce(this.searchLocations, 1000), []);
@@ -20,16 +26,14 @@ class Input extends PureComponent {
   handleChange = (e) => {
     console.log(e.target.value);
     if (e.target.value.length > 2) {
+      (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = "block" : '';
+      this.setContextState({
+        ...this.stateObj,
+        unitsChanged: 0
+      });
+      document.getElementById('cityname').value = e.target.value;
       this.handleInputTextChangeDebounced(e.target.value);
-      //debounce(function () {
-      //this.searchLocations(e.target.value)
-      //}, 1000);
     }
-    /*setContextState({
-      city: e.target.value || 'Bengaluru',
-      weatherData: {},
-      units: state.units,
-    });*/
   }
 
   searchLocations = async (keyword) => {
@@ -58,12 +62,12 @@ class Input extends PureComponent {
         <div className="border border-3">
           <div>
             <div><label className="w-full pl-3 font-bold">LOCATION</label></div>
-            <input className="pb-4" type="text" ref={this.inputText} onChange={this.handleChange} />
+            <input className="pb-4" type="text" id="cityname" ref={this.inputText} onChange={this.handleChange} />
             <WeatherConsumer>
-              {({ units, setContextState, loadWeather }) => (
+              {({ units, setContextState, getContextState }) => (
                 <>
                   {this.state.searchResults.length > 0 && (
-                    <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} loadWeather={loadWeather} />
+                    <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
                   )}
                 </>
               )}
@@ -74,4 +78,5 @@ class Input extends PureComponent {
     );
   }
 };
+
 export default Input;

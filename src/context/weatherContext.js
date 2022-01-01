@@ -12,12 +12,13 @@ export class WeatherProvider extends PureComponent {
     rerender: 0
   };
 
-  setContextState = ({ weatherData, city, units, rerender }) => {
+  setContextState = ({ weatherData, city, units, rerender, unitsChanged }) => {
     this.setState({
       city,
       units,
       weatherData,
       rerender,
+      unitsChanged,
     });
   };
 

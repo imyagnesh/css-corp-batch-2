@@ -1,9 +1,10 @@
 import React, { PureComponent, createRef, lazy, Suspense, useContext } from 'react';
-import { WeatherConsumer, WeatherContext } from '../context/weatherContext';
+import { WeatherConsumer } from '../context/weatherContext';
 import WeatherReport from './WeatherReport';
 import SetUnits from './setunits';
 import Input from './input';
 import SearchResults from './SearchResults';
+import PropTypes from 'prop-types';
 
 // const Input = lazy(() => import('./input'));
 // const SetUnits = lazy(() => import('./setunits'));
@@ -11,7 +12,6 @@ import SearchResults from './SearchResults';
 
 class App extends PureComponent {
   inputText = createRef();
-  prevRef = null;
   constructor(props) {
     super(props);
   }
@@ -20,12 +20,6 @@ class App extends PureComponent {
 
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.prevRef !== this.ref.current) {
-      console.log("ref changed!");
-    }
-    this.prevRef = this.ref.current;
-  }
 
   componentWillUnmount() {
 
@@ -41,7 +35,7 @@ class App extends PureComponent {
           <WeatherConsumer>
             {({ setContextState, loadWeather, weatherData, getContextState, searchLocations }) => (
               <>
-                <Input ref={this.inputText} setContextState={setContextState} loadWeather={loadWeather} getContextState={getContextState} />
+                <Input ref={this.inputText} setContextState={setContextState} getContextState={getContextState} />
                 <SetUnits setContextState={setContextState} weatherResult={weatherData} />
               </>
             )}
@@ -70,9 +64,5 @@ class App extends PureComponent {
     );
   }
 }
-
-App.propTypes = {
-
-};
 
 export default App;
