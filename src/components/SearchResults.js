@@ -12,6 +12,7 @@ const SearchResults = forwardRef((props, ref) => {
             weatherData: {},
             rerender: 1
         })
+        document.getElementById('cityname').value = e.target.innerText;
     }
 
     useEffect(() => {

@@ -31,7 +31,7 @@ class Input extends PureComponent {
         ...this.stateObj,
         unitsChanged: 0
       });
-      document.getElementById('cityname').value = e.target.value;
+
       this.handleInputTextChangeDebounced(e.target.value);
     }
   }
