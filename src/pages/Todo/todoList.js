@@ -2,12 +2,18 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import TodoItem from './todoItem';
 
-const TodoList = ({ todoList }) => {
+const TodoList = ({ todoList, toggleComplete, deleteTodo, httpStatus }) => {
   console.log('TodoList render');
   return (
     <div className="flex-1 overflow-auto">
       {todoList.map((item) => (
-        <TodoItem key={item.id} item={item} />
+        <TodoItem
+          key={item.id}
+          item={item}
+          toggleComplete={toggleComplete}
+          deleteTodo={deleteTodo}
+          httpStatus={httpStatus}
+        />
       ))}
     </div>
   );
@@ -23,13 +29,15 @@ TodoList.propTypes = {
   ).isRequired,
   toggleComplete: PropTypes.func.isRequired,
   deleteTodo: PropTypes.func.isRequired,
-  httpStatus: PropTypes.arrayOf(
-    PropTypes.shape({
-      type: PropTypes.string,
-      payload: PropTypes.objectOf(Error),
-      status: PropTypes.oneOf(['REQUEST', 'FAIL']),
-    }),
-  ).isRequired,
+  httpStatus: PropTypes.shape({
+    type: PropTypes.string,
+    payload: PropTypes.objectOf(Error),
+    status: PropTypes.oneOf(['REQUEST', 'FAIL']),
+  }),
+};
+
+TodoList.defaultProps = {
+  httpStatus: undefined,
 };
 
 TodoList.displayName = 'TodoList';
