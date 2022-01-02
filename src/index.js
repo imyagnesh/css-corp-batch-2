@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import App from './app';
-import Todo from './pages/Todo';
+import WeatherApp from './pages/Weather';
 import './root.css';
+import './pages/Weather/weatherStyle.css';
 // import UserGreet from './Input';
 
 // component
@@ -32,4 +33,4 @@ import './root.css';
 
 // Class Component
 
-ReactDOM.render(<Todo />, document.getElementById('root'));
+ReactDOM.render(<WeatherApp />, document.getElementById('root'));
