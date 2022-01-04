@@ -1,0 +1,58 @@
+.weather_container {
+    padding: 15px;
+    margin: 15px;
+    border: 6px solid lightgray;  
+    background-color: rgb(240, 240, 245); 
+}
+
+.watch_text {
+    font-size: 20px;
+    font-family: arial;
+    font-weight: bold;
+}
+
+.weather_city {
+    padding: 10px 0;
+    width: 80%;
+}
+.weather_unit {
+    padding: 10px 0 0;
+}
+
+.weather_desc {
+    font-size: 11px; 
+}
+
+.city_search {
+    border-radius: 0.8rem;
+    background-color: #99004d;
+    color: white;
+    margin: 7px 10px;
+    padding: 5px;
+}
+
+.watch_block {
+    background-color: #e60073;
+    color: white;
+    font-size: 13px;
+    text-align: center;
+    margin: 3px;
+    padding: 5px;
+    width: 33.3%;
+    height: 15vh;
+    border-radius: 0.5rem;
+}
+.watch_block_text {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.watch_block2 {
+    background-color: #990099;
+    width: 50%;
+}
+
+.watch_block_blue {
+    background-color: #4747d1;
+    width: 50%;
+}
