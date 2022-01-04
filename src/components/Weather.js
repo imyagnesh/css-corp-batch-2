@@ -53,7 +53,7 @@ class Weather extends React.Component {
                 <div className="flex">
                     <div className="w-1/2 mb-2 mr-1">
                         <div className="text-center p-3 bg-gradient-to-r from-pink-700 to-pink-500 rounded">
-                            <p className="uppercase text-xs font-semibold text-white mb-3">Wind Speed</p>
+                            <p className="uppercase text-xs font-semibold text-white mb-3">Wind Speeds</p>
                             <h5 className="text-md font-semibold text-white">{this.props.weatherResult.wind.speed} meter/sec</h5>
                         </div>
                     </div>

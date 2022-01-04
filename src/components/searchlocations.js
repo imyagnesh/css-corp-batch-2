@@ -32,7 +32,7 @@ class searchlocations extends React.Component {
                             <p className="uppercase text-xs font-semibold">Units</p>
                             <select className="h-8 text-xs px-0 w-full" onChange={(event) => this.setState({ searchtemperature: event.target.value })}>
                                 <option value="celcius">Celsius</option>
-                                <option value="fahrenheit">Fahrenheit</option>
+                                <option value="fahrenheit">Fahrenheits</option>
                             </select>
                         </div>
                     </div>
