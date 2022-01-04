@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.city-weather-details {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-column-gap: 6px;
+  grid-row-gap: 12px;
+  @apply text-white text-center;
+}
+
+.city-weather-details-padding {
+  @apply py-2 px-2 rounded-lg;
+}
+
+.city-weather-details__label {
+  @apply uppercase text-xs;
+}
+
+.city-weather-details__values {
+  @apply text-lg mt-3;
+}
+
+.city-weather-details__current-temperature {
+  grid-area: 1 / 1 / 2 / 3;
+  @apply bg-gradient-to-b from-purple-500 to-orange-500 city-weather-details-padding;
+}
+
+.city-weather-details__maximum-temperature {
+  grid-area: 1 / 3 / 2 / 5;
+  @apply bg-gradient-to-b from-purple-500 to-orange-500 city-weather-details-padding;
+}
+
+.city-weather-details__minimum-temperature {
+  grid-area: 1 / 5 / 2 / 7;
+  @apply bg-gradient-to-b from-purple-500 to-orange-500 city-weather-details-padding;
+}
+
+.city-weather-details__wind-speed {
+  grid-area: 2 / 1 / 3 / 4;
+  @apply bg-gradient-to-r from-fuchsia-800 to-rose-600 city-weather-details-padding;
+}
+
+.city-weather-details__wind-direction {
+  grid-area: 2 / 4 / 3 / 7;
+  @apply bg-gradient-to-r from-fuchsia-800 to-rose-600 city-weather-details-padding;
+}
+
+.city-weather-details__pressure {
+  grid-area: 3 / 1 / 4 / 4;
+  @apply bg-gradient-to-r from-blue-400 to-blue-900 city-weather-details-padding;
+}
+
+.city-weather-details__humidity {
+  grid-area: 3 / 4 / 4 / 7;
+  @apply bg-gradient-to-r from-blue-400 to-blue-900 city-weather-details-padding;
+}
+.weather-app-wrapper {
+  @apply flex flex-col items-start w-full m-auto;
+}
+.is-loading {
+  @apply inline-flex items-center px-4 py-2 font-semibold leading-6 text-sm shadow rounded-md text-white bg-indigo-500 hover:bg-indigo-400 transition ease-in-out duration-150 cursor-not-allowed;
+}
+.error-panel {
+  @apply p-3 bg-white text-red-600 mt-3 w-full;
+}

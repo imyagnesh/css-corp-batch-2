@@ -1,162 +1,161 @@
-import React, { Component } from 'react';
-import Child1 from './Child1';
-import Child2 from './Child2';
+import React, { Component, Suspense, lazy } from 'react';
+import PropTypes from 'prop-types';
 
-// render method will call when ever state or props value change
+const Input = lazy(() => import('./components/Input'));
+const SetUnits = lazy(() => import('./components/SetUnits'));
+const SearchResults = lazy(() => import('./components/SearchResults'));
+const WeatherReport = lazy(() => import('./components/WeatherReport'));
+import Loading from './components/Loading';
 
-// React Life Cycle Method
+import cityInfo from '../__mockData__/cityDetails';
 
-// 4 stages of React life cycle method
-
-// Mounting
-// 1. Constructor
-// 2. getDerivedStateFromProps
-// 3. render
-// 4. componentDidMount
-
-// Updating
-// 1. getDerivedStateFromProps
-// 2. shouldComponentUpdate(MIMP)
-// 3. render
-// 4. getSnapshotBeforeUpdate
-// 5. componentDidUpdate
-
-// Unmounting
-// componentWillUnmount
-
-// Error
-//
 class App extends Component {
-  // base on props set state value(optional)
-  // Analytics
-  // Bind Methods (optional arrow methods)
-  // call only once
   constructor(props) {
-    // call parent class contructor
     super(props);
     this.state = {
-      counter: 0,
-      greet: `Hello, ${props.name}`,
-      user: {
-        name: 'yagnesh',
-        age: 30,
-      },
-    };
-    // this.setCounter(5);
-    // Pass user info to server through HTTP Call
-    // this.changeGreet = this.changeGreet.bind(this);
-  }
-
-  //   state = {
-  //     counter: 0,
-  //   };
-
-  //  calls everytime when value or state value change
-  // static getDerivedStateFromProps(props, prevState) {
-  //   console.log('getDerivedStateFromProps');
-  //   if (!prevState.greet) {
-  //     return {
-  //       greet: `Hello, ${props.name}`,
-  //     };
-  //   }
-  //   return null;
-  // }
-
-  // Manipulate Dom element
-  // call only once
-  // display data on page load
-  // register event
-  // Analytics
-  componentDidMount() {
-    console.log(document.getElementById('heading'));
-    document.addEventListener('copy', () => {
-      console.log('copied');
-    });
-    this.setCounter(5);
-    // API call and get data
-    // setstate data
-  }
-
-  getSnapshotBeforeUpdate(prevProps, prevState) {
-    return 'hello from getSnapshotBeforeUpdate';
-  }
-
-  // Manipulate dom base on prev Props and prev State
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log(snapshot);
-  }
-
-  static getDerivedStateFromError(error) {
-    return {
-      error,
-    };
-  }
-
-  componentDidCatch(error, info) {
-    console.log(error);
-    console.log(info);
-    // log error on server
-  }
-
-  setCounter = async (value) => {
-    try {
-      this.setState(({ counter }) => ({
-        counter: counter + value,
-      }));
-    } catch (error) {}
-  };
-
-  changeUserName = () => {
-    try {
-      this.setState(({ user }) =>
-        //   user.name = 'Virat';
-        ({
-          user: { ...user, name: 'Virat' },
-        }),
-      );
-    } catch (error) {}
-  };
-
-  render() {
-    const { counter, greet, user, error } = this.state;
-
-    if (error) {
-      return <h1>{error.message}</h1>;
+      weatherDetails: {},
+      httpStatus: [],
+      city: 'Bengaluru',
+      cityDetails: [],
+      cityInput: '',
+      temperatureUnits: 'metric'
     }
-    return (
-      <div>
-        <h1 id="heading">{greet}</h1>
-        <h2>{counter}</h2>
-        <button type="button" onClick={() => this.setCounter(1)}>
-          Increment Counter
-        </button>
-        <button type="button" onClick={() => this.setCounter(-1)}>
-          Decrement Counter
-        </button>
-        <button type="button" onClick={this.changeUserName}>
-          Change User name
-        </button>
-        <h2>{user.name}</h2>
-        <Child1 counter={counter} />
-        {counter < 10 && <Child2 userInfo={user} />}
-        <button
-          type="button"
-          onClick={() => {
-            this.setState({
-              stateColor: 'blue',
-            });
-          }}
-        >
-          Change Color
-        </button>
-      </div>
+    this.cityInputRef = React.createRef();
+    this.baseUrl = 'http://api.openweathermap.org/data/2.5/weather?appid=333458e05b25c5e69a7c22d64b7bc47f';
+  }
+
+  setRequestStatus = ({ type, id = -1 }) => {
+    this.setState(({ httpStatus }) => {
+      const index = httpStatus.findIndex((x) => x.type === type && x.id === id);
+      const data = { type, status: 'REQUEST', id };
+      if (index === -1) {
+        return {
+          httpStatus: [...httpStatus, data],
+        };
+      }
+      return {
+        httpStatus: [
+          ...httpStatus.slice(0, index),
+          data,
+          ...httpStatus.slice(index + 1),
+        ],
+      };
+    });
+  };
+
+  setSuccessStatus = ({ type, id = -1 }) => {
+    this.setState(({ httpStatus }) => ({
+      httpStatus: httpStatus.filter((x) => !(x.type === type && x.id === id)),
+    }));
+  };
+
+  setFailStatus = ({ type, payload, id = -1 }) => {
+    this.setState(({ httpStatus }) => ({
+      httpStatus: httpStatus.map((x) => {
+        if (x.type === type && x.id === id) {
+          return { ...x, status: 'FAIL', payload };
+        }
+        return x;
+      }),
+    }));
+  };
+
+  loadCityDetails = () => {
+    this.setState(({cityDetails}) => {
+      return {
+        cityDetails: cityInfo
+      }
+    });
+  };
+
+  filterCity = (input) => {
+    return this.state.cityDetails.filter(
+      cityDetails => input.toString().trim() && cityDetails.name.toLowerCase().indexOf(input.toLowerCase()) > -1
     );
   }
-}
 
-App.getDerivedStateFromProps = (props, state) => ({
-  greet: `Hello, ${props.name} ${state.stateColor || props.color}`,
-  stateColor: props.color,
-});
+  updateTemperatureUnits = (event) => {
+    const selectedOption = event.target.value;
+    this.setState(({temperatureUnits}) => {
+      return {
+        temperatureUnits: selectedOption
+      }
+    }, this.searchLocations);
+  }
+
+  searchText = (event) => {
+    const searchTextValue = this.cityInputRef.current.value;
+    if (searchTextValue) {
+      this.setState(({cityInput}) => {
+        return {
+          cityInput: searchTextValue
+        }
+      });
+      this.cityInputRef.current.focus();
+    }
+  }
+
+  searchLocations = async (city) => {
+    const cityName = city ? city : this.state.city;
+    this.setState(({city, cityInput}) => ({
+        city: cityName,
+        cityInput: ''
+    }));
+    if (this.cityInputRef.current) {
+      this.cityInputRef.current.value = '';
+    }
+    await this.getWeather(cityName, this.state.temperatureUnits);
+  };
+
+  getWeather = async (city, temperatureUnits) => {
+    const type = 'LOAD_WEATHER_DETAILS';
+    try {
+      this.setRequestStatus({ type });
+      let url = this.baseUrl + `&q=${city}&units=${temperatureUnits}`;
+      const res = await fetch(url);
+      const json = await res.json();
+      this.setState({
+        weatherDetails: json,
+      });
+      this.setSuccessStatus({ type });
+    } catch (error) {
+      this.setFailStatus({ type, payload: error });
+    }
+  };
+
+  async componentDidMount() {
+    this.loadCityDetails();
+    this.searchLocations();
+  }
+
+  render() {
+    const {cityInput, weatherDetails, temperatureUnits, httpStatus, city} = this.state;
+    const filteredCity = this.filterCity(cityInput);
+    const fail = httpStatus.some((httpStatusObj) => httpStatusObj.status === 'FAIL');
+    return (
+      <div className='w-1/2 m-auto p-3 bg-slate-50'>
+        <div className='weather-app-wrapper p-3 bg-zinc-200'>
+          <div className='pt-3 pb-1 text-base font-semibold border-b border-solid border-red-600 w-full'>Weather Watch</div>
+          <div className='flex p-3 w-full gap-5 bg-white mt-3'>
+            <Suspense fallback={<Loading />}>
+              <Input searchText={this.searchText} ref={this.cityInputRef}/>
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <SetUnits temperatureUnits={temperatureUnits} updateTemperatureUnits={this.updateTemperatureUnits}/>
+            </Suspense> 
+          </div>
+          <Suspense fallback={<Loading />}>
+              {!fail && filteredCity.length > 0 && <SearchResults searchLocations={this.searchLocations} data={filteredCity}/>}
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              {fail && <div className="error-panel">Network error</div>}
+              {!fail && <WeatherReport data={weatherDetails} temperatureUnits={temperatureUnits} city={city}/>}
+            </Suspense>
+        </div>
+        
+      </div>
+    )
+  }
+}
 
 export default App;
