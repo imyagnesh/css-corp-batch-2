@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  #root {
+    @apply bg-gray-300 p-6 h-full;
+  }
+  .weather-group {
+      @apply bg-white rounded-2xl border-slate-800 outline-2 w-8/12 m-auto content-around content-center items-center align-middle p-4;
+  }
+  .weather-title {
+    @apply border-b-2 border-rose-500 border-solid font-sans text-4xl font-extrabold text-stone-900;
+  }
+  .location-search {
+    @apply my-3 flex w-full;
+  }
+  .location-input  {
+    @apply flex-auto mr-1.5;
+  }
+  .btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 flex-auto;
+  }
+
+  .input {
+    @apply px-2 focus:ring-indigo-500 focus:border-indigo-500 block shadow-sm sm:text-sm border-gray-300 rounded-md border border-current border-solid p-3.5 w-full;
+  }
+  .location-temp {
+    @apply my-3 flex w-full;
+  }
+  .location-temp p {
+    @apply my-3 flex-auto mr-1.5 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-5 text-center text-white text-lg font-semibold rounded-3xl;
+  }
+  .location-wind {
+    @apply my-3 flex w-full;
+  }
+  .location-wind p {
+    @apply my-3 flex-auto mr-1.5 bg-gradient-to-r from-cyan-500 to-blue-500 p-5 text-center text-white text-lg font-semibold rounded-3xl;
+  }
+  .location-pres {
+    @apply my-3 flex w-full;
+  }
+  .location-pres p {
+    @apply my-3 flex-auto mr-1.5 bg-gradient-to-r from-green-400 to-blue-500 p-5 text-center text-white text-lg font-semibold rounded-3xl;
+  }
+  .location-input .search-icon {
+    @apply hidden;
+  }
+}
