@@ -1,0 +1,31 @@
+{
+  "todo-list": [
+    {
+      "text": "Get milk 2",
+      "isDone": true,
+      "id": 1
+    },
+    {
+      "text": "Learn React",
+      "isDone": true,
+      "id": 2
+    },
+    {
+      "text": "Learn React Native",
+      "isDone": false,
+      "id": 3
+    },
+    {
+      "text": "learn flutter",
+      "isDone": false,
+      "timeStamp": "12-16-21 12:47",
+      "id": 4
+    },
+    {
+      "text": "learn node js",
+      "isDone": false,
+      "timeStamp": "12-16-21 12:48",
+      "id": 5
+    }
+  ]
+}
