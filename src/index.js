@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { TodoProvider } from './context/todoContext';
 // import App from './app';
-import Todo from './pages/Todo';
+//import Todo from './pages/Todo';
+import App from './components/app';
 import './root.css';
 // import UserGreet from './Input';
 
@@ -34,8 +35,8 @@ import './root.css';
 // Class Component
 
 ReactDOM.render(
-  <TodoProvider>
-    <Todo />
-  </TodoProvider>,
-  document.getElementById('root'),
+    <TodoProvider>
+        <App />
+    </TodoProvider>,
+    document.getElementById('root'),
 );
