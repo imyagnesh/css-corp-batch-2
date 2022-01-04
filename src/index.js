@@ -4,6 +4,7 @@ import { TodoProvider } from './context/todoContext';
 // import App from './app';
 import Todo from './pages/Todo';
 import './root.css';
+import WeatherWatch from './pages/WeatherWatch'
 // import UserGreet from './Input';
 
 // component
@@ -34,8 +35,8 @@ import './root.css';
 // Class Component
 
 ReactDOM.render(
-  <TodoProvider>
-    <Todo />
-  </TodoProvider>,
+
+  <WeatherWatch />,
+
   document.getElementById('root'),
 );
