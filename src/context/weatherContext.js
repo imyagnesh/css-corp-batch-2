@@ -5,12 +5,16 @@ export const WeatherContext = createContext();
 export const WeatherConsumer = WeatherContext.Consumer;
 
 export class WeatherProvider extends PureComponent {
+  constructor(props) {
+    super(props);
+  }
   state = {
     weatherData: {},
     city: 'Bengaluru',
     units: 'C',
     rerender: 0
   };
+
 
   setContextState = ({ weatherData, city, units, rerender, unitsChanged }) => {
     this.setState({
@@ -52,6 +56,7 @@ export class WeatherProvider extends PureComponent {
       console.log(json);
       this.setState({
         weatherData: json,
+        units: this.state.units || 'C',
         rerender: 0
       });
     } catch (error) {

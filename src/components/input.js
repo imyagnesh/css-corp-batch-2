@@ -29,7 +29,8 @@ class Input extends PureComponent {
       (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = "block" : '';
       this.setContextState({
         ...this.stateObj,
-        unitsChanged: 0
+        unitsChanged: 0,
+        units: this.props.units
       });
 
       this.handleInputTextChangeDebounced(e.target.value);
@@ -67,7 +68,9 @@ class Input extends PureComponent {
               {({ units, setContextState, getContextState }) => (
                 <>
                   {this.state.searchResults.length > 0 && (
-                    <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
+                    <h1>
+                      {units} <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
+                    </h1>
                   )}
                 </>
               )}

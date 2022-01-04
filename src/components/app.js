@@ -33,9 +33,9 @@ class App extends PureComponent {
         </div>
         <div className="flex">
           <WeatherConsumer>
-            {({ setContextState, loadWeather, weatherData, getContextState, searchLocations }) => (
+            {({ setContextState, units, weatherData, getContextState, searchLocations }) => (
               <>
-                <Input ref={this.inputText} setContextState={setContextState} getContextState={getContextState} />
+                <Input ref={this.inputText} setContextState={setContextState} getContextState={getContextState} units={units} />
                 <SetUnits setContextState={setContextState} weatherResult={weatherData} />
               </>
             )}
@@ -43,7 +43,7 @@ class App extends PureComponent {
 
         </div>
         <WeatherConsumer>
-          {({ weatherData, units, rerender }) => (
+          {({ weatherData, units, getContextState }) => (
             <>
               {Object.entries(weatherData).length === 0 && (
                 <div className="animate-spin h-5 w-5 text-center">
@@ -54,7 +54,7 @@ class App extends PureComponent {
               )}
               {(Object.entries(weatherData).length !== 0) && (
                 <Suspense fallback={<h1>Loading...</h1>}>
-                  <WeatherReport weatherResult={weatherData} units={units} />
+                  <WeatherReport weatherResult={weatherData} units={units} getContextState={getContextState} />
                 </Suspense>
               )}
             </>
