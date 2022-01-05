@@ -68,9 +68,7 @@ class Input extends PureComponent {
               {({ units, setContextState, getContextState }) => (
                 <>
                   {this.state.searchResults.length > 0 && (
-                    <h1>
-                      {units} <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
-                    </h1>
+                    <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
                   )}
                 </>
               )}
