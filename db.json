@@ -1,46 +1,121 @@
 {
-  "todo-list": [
+  "weather-list": [
     {
-      "text": "adfasdf",
-      "isDone": true,
-      "timeStamp": "12-20-21 12:04",
-      "id": 1
+      "id": 1,
+      "location": "Chennai",
+      "icon": 30,
+      "conditions": 10,
+      "temp": 80,
+      "temp_max": 100,
+      "temp_min": 20,
+      "temp_f": 100,
+      "temp_max_f": 10,
+      "temp_min_f": 20,
+      "feels_like": 10,
+      "wind_speed": 40,
+      "wind_direction": "left",
+      "pressure": 42,
+      "humidity": 51
     },
     {
-      "text": "asdfadsf",
-      "isDone": true,
-      "timeStamp": "12-20-21 12:04",
-      "id": 2
+      "id": 2,
+      "location": "bangalore",
+      "icon": 32,
+      "conditions": 11,
+      "temp": 50,
+      "temp_max": 100,
+      "temp_min": 20,
+      "temp_f": 100,
+      "temp_max_f": 20,
+      "temp_min_f": 10,
+      "feels_like": 32,
+      "wind_speed": 55,
+      "wind_direction": "left",
+      "pressure": 50,
+      "humidity": 20
     },
     {
-      "text": "aasfdasfs",
-      "isDone": true,
-      "timeStamp": "12-20-21 12:04",
-      "id": 3
+      "id": 3,
+      "location": "pune",
+      "icon": 32,
+      "conditions": 12,
+      "temp": 103,
+      "temp_max": 103,
+      "temp_min": 101,
+      "temp_f": 100,
+      "temp_max_f": 20,
+      "temp_min_f": 10,
+      "feels_like": 129,
+      "wind_speed": 400,
+      "wind_direction": "left",
+      "pressure": 44,
+      "humidity": 67
     },
     {
-      "text": "asdfdas",
-      "isDone": false,
-      "timeStamp": "12-20-21 01:53",
-      "id": 4
+      "location": "Mumbai",
+      "icon": 44,
+      "conditions": 13,
+      "temp": 44,
+      "temp_max": 44,
+      "temp_min": 240,
+      "temp_f": 100,
+      "temp_max_f": 10,
+      "temp_min_f": 20,
+      "feels_like": 14,
+      "wind_speed": 44,
+      "wind_direction": "left",
+      "pressure": 64,
+      "humidity": 74
+    }
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "name": "Pune"
     },
     {
-      "text": "asdfdasf",
-      "isDone": false,
-      "timeStamp": "12-20-21 01:54",
-      "id": 5
+      "id": 2,
+      "name": "Mumbai"
     },
     {
-      "text": "asfdsaf",
-      "isDone": false,
-      "timeStamp": "12-20-21 01:54",
-      "id": 6
+      "id": 3,
+      "name": "Nasik"
     },
     {
-      "text": "asdfdasf",
-      "isDone": false,
-      "timeStamp": "12-20-21 01:55",
-      "id": 7
+      "id": 4,
+      "name": "Hydrabad"
+    },
+    {
+      "id": 5,
+      "name": "New Delhi"
+    },
+    {
+      "id": 6,
+      "name": "Jammu"
+    },
+    {
+      "id": 7,
+      "name": "Shrinagar"
+    },
+    {
+      "id": 8,
+      "name": "Chandigarh"
+    },
+    {
+      "id": 9,
+      "name": "Kolkatta"
+    },
+    {
+      "id": 10,
+      "name": "Aurangabad"
+    },
+    {
+      "id": 11,
+      "name": "Chennai"
+    },
+    {
+      "id": 12,
+      "name": "Bengaluru"
     }
   ]
 }
