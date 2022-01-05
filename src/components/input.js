@@ -48,9 +48,16 @@ class Input extends PureComponent {
         },
       });
       const json = await res.json();
+      if (Object.entries(json) === 0) {
+        this.setState({
+          searchResults: json,
+          emptyResult: 1
+        })
+      }
       console.log(json);
       this.setState({
-        searchResults: json
+        searchResults: json,
+        emptyResult: 0
       })
     } catch (error) {
       // Error
@@ -67,6 +74,9 @@ class Input extends PureComponent {
             <WeatherConsumer>
               {({ units, setContextState, getContextState }) => (
                 <>
+                  {this.state.searchResults.length === 0 && this.state.emptyResult === 0 && (
+                    <h1>No matching cities found</h1>
+                  )}
                   {this.state.searchResults.length > 0 && (
                     <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
                   )}
