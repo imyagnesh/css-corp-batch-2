@@ -14,4 +14,8 @@
   .checkbox {
     @apply focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded;
   }
+  
+  .container_weather {
+    @apply m-10 border-gray-300 rounded-lg;
+  }
 }
