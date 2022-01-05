@@ -10,9 +10,8 @@ export class WeatherProvider extends PureComponent {
     httpStatus: [],
     locations: [],
     units: [
-      { key: 'standard', title: 'kelvin' },
-      { key: 'imperial', title: 'Farenheit' },
-      { key: 'metric', title: 'celcius' },
+      { key: 'farTemp', title: 'Farenheit' },
+      { key: 'celTemp', title: 'celcius' },
     ],
   };
 
@@ -34,7 +33,7 @@ export class WeatherProvider extends PureComponent {
 
   loadReportData = async (currentCityId, currentUnit) => {
     const cityId = currentCityId || 'Bengaluru,in';
-    const unitId = currentUnit || 'standard';
+    const unitId = currentUnit || 'celTemp';
     const urlParams = `&q=${cityId}&units=${unitId}`;
     const { locations } = this.state;
     const type = currentUnit ? 'CHANGE_UNIT' : 'LOAD_DATA';
@@ -56,7 +55,7 @@ export class WeatherProvider extends PureComponent {
           wind_direction: json.wind?.deg,
           humidity: json.main?.humidity,
           pressure: json.main?.pressure,
-          unit: unitId === 'imperial' ? 'ºF' : unitId === 'metric' ? 'ºC' : 'K',
+          unit: unitId === 'celTemp' ? 'ºC' : 'ºF',
         };
       }
       this.setState({
@@ -64,7 +63,7 @@ export class WeatherProvider extends PureComponent {
         locations: currentCityId ? [] : locations,
       });
       document.getElementById('searchInput').value = currentCityId ? '' : document.getElementById('searchInput').value;
-      document.getElementById('unit-filter').value = currentUnit ? document.getElementById('unit-filter').value : 'standard';
+      document.getElementById('unit-filter').value = currentUnit ? document.getElementById('unit-filter').value : 'celTemp';
       this.setSuccessHttpStatus({ type });
     } catch (error) {
       this.setFailedHttpStatus({ type, error });
