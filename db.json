@@ -1,0 +1,138 @@
+{
+  "todo-list": [
+    {
+      "text": "adfasdf",
+      "isDone": true,
+      "timeStamp": "12-20-21 12:04",
+      "id": 1
+    },
+    {
+      "text": "asdfadsf",
+      "isDone": true,
+      "timeStamp": "12-20-21 12:04",
+      "id": 2
+    },
+    {
+      "text": "aasfdasfs",
+      "isDone": true,
+      "timeStamp": "12-20-21 12:04",
+      "id": 3
+    },
+    {
+      "text": "asdfdas",
+      "isDone": false,
+      "timeStamp": "12-20-21 01:53",
+      "id": 4
+    },
+    {
+      "text": "asdfdasf",
+      "isDone": false,
+      "timeStamp": "12-20-21 01:54",
+      "id": 5
+    },
+    {
+      "text": "asfdsaf",
+      "isDone": false,
+      "timeStamp": "12-20-21 01:54",
+      "id": 6
+    },
+    {
+      "text": "asdfdasf",
+      "isDone": false,
+      "timeStamp": "12-20-21 01:55",
+      "id": 7
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "weatherlist": [
+    {
+      "city": "Hyderabed",
+      "temp": "16F"
+    },
+    {
+      "city": "Cheenai",
+      "temp": "16F"
+    }
+  ],
+  "weatherreport": [
+    {
+      "city": "Hyderabed",
+      "image": "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png",
+      "wind_speed": "3.1 Metwr/Sec",
+      "wind_dir": "220 degrees",
+      "pressure": "1016hPa",
+      "humidity": "54%",
+      "celsius": [
+        {
+          "curr_temp": "19C",
+          "max_temp": "30C",
+          "min_temp": "28C"
+        }
+      ],
+      "Fahrenheit": [
+        {
+          "curr_temp": "28F",
+          "max_temp": "20F",
+          "min_temp": "29F"
+        }
+      ]
+    },
+    {
+      "city": "Bangalore",
+      "image": "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png",
+      "wind_speed": "3.1 Metwr/Sec",
+      "wind_dir": "220 degrees",
+      "pressure": "1016hPa",
+      "humidity": "54%",
+      "celsius": [
+        {
+          "curr_temp": "29C",
+          "max_temp": "32C",
+          "min_temp": "20C"
+        }
+      ],
+      "Fahrenheit": [
+        {
+          "curr_temp": "27F",
+          "max_temp": "28F",
+          "min_temp": "30F"
+        }
+      ]
+    },
+    {
+      "city": "Chennai",
+      "image": "https://cdn2.iconfinder.com/data/icons/weather-flat-14/64/weather02-512.png",
+      "wind_speed": "3.1 Metwr/Sec",
+      "wind_dir": "220 degrees",
+      "pressure": "1016hPa",
+      "humidity": "54%",
+      "celsius": [
+        {
+          "curr_temp": "29C",
+          "max_temp": "30C",
+          "min_temp": "28C"
+        }
+      ],
+      "Fahrenheit": [
+        {
+          "curr_temp": "28F",
+          "max_temp": "30F",
+          "min_temp": "29F"
+        }
+      ]
+    }
+  ]
+}
