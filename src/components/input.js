@@ -75,7 +75,7 @@ class Input extends PureComponent {
               {({ units, setContextState, getContextState }) => (
                 <>
                   {this.state.searchResults.length === 0 && this.state.emptyResult === 0 && (
-                    <h1>No matching cities found</h1>
+                    <h1 className="text-black-50">No matching cities found</h1>
                   )}
                   {this.state.searchResults.length > 0 && (
                     <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />
