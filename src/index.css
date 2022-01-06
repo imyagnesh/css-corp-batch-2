@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .wrapper {
+    @apply w-full min-h-[100vh] font-sans bg-slate-100 flex flex-col items-center justify-start;
+  }
+
+  .container {
+    @apply w-[90vw] max-w-[700px] mt-4 flex flex-col uppercase;
+  }
+
+  .title {
+    @apply mb-3 text-lg font-semibold border-b-2 border-red-600 normal-case;
+  }
+
+  .sub-title {
+    @apply text-base font-semibold;
+  }
+
+  .card {
+    @apply grow min-h-[52px] bg-white px-5 py-3 rounded-md relative shadow;
+  }
+
+  .popover {
+    @apply absolute w-full top-full flex mt-1 mr-1 bg-white p-8 pb-4 rounded-md shadow-xl z-10 capitalize
+  }
+
+  .pink-button {
+    @apply px-5 py-1 mr-2 mb-4 text-sm font-semibold tracking-wider bg-gradient-to-r from-rose-500 to-fuchsia-800 text-white rounded-full
+  }
+
+  .text-box {
+    @apply w-full text-base font-semibold rounded-none pt-1 placeholder:text-sm placeholder:font-normal placeholder:normal-case placeholder-gray-500 capitalize rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10
+  }
+
+  .invalid-text {
+    @apply font-semibold underline decoration-pink-500 decoration-2;
+  }
+
+  .large-text {
+    @apply mb-1 text-3xl font-semibold capitalize;
+  }
+
+  .medium-text {
+    @apply text-xs text-slate-500 font-semibold;
+  }
+
+  .info-text {
+    @apply text-sm mt-4 normal-case text-center;
+  }
+
+  .code-text {
+    @apply px-2 py-1 bg-slate-100 rounded-md font-semibold;
+  }
+
+  .icon-wrapper {
+    @apply absolute -top-3 -right-3 rounded-full;
+  }
+
+  .tile-wrapper {
+    @apply flex justify-around;
+  }
+
+  .tile {
+    @apply flex-1 p-2 ml-1 rounded-md text-center text-white;
+  }
+
+  .tile:first-child {
+    @apply m-0;
+  }
+
+  .tile--fuchsia-orange {
+    @apply bg-gradient-to-b from-fuchsia-600 to-orange-500;
+  }
+
+  .tile--fuchsia-pink {
+    @apply bg-gradient-to-r from-fuchsia-800 to-pink-500
+  }
+
+  .tile--cyan-indigo {
+    @apply bg-gradient-to-r from-cyan-500 to-indigo-600;
+  }
+
+  .tile__title {
+    @apply text-xs tracking-wider;
+  }  
+
+  .tile__unit {
+    @apply text-xl lowercase;
+  }
+
+  .middle {
+    left: calc(50% - 15px);
+    top: calc(50% - 15px);
+  }
+
+  .top-middle {
+    top: calc(50% - 8px);
+  }
+
+  .spinner-border {
+    border: 0.25em solid;
+    border-right: 0.25em solid transparent;
+    vertical-align: -0.125em;
+  }
+
+  .is-loading {
+    @apply spinner-border absolute middle animate-spin border-0 inline-block w-8 h-8 rounded-full text-transparent bg-gradient-to-b from-rose-500 to-fuchsia-700;
+  }
+  
+  .loader-overlay {
+    @apply absolute w-full h-full bg-white opacity-80 left-0 top-0;
+  }
+
+  .error-panel {
+    @apply absolute right-0 top-middle px-2 text-red-600 border-red-600 border text-sm normal-case font-semibold before:content-['Failed!_check_network\!'];
+  }
+
+  .weather-report {
+    @apply mt-2 pb-8
+  }
+
+  .weather-report .error-panel {
+    @apply right-[40%]
+  }
+}
