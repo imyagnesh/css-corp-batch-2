@@ -39,7 +39,7 @@ p {
 
 .weather-app {
   position: relative;
-  margin: 20px;
+  margin: 20px auto;
   width: 550px;
   height: 500px;
   border-radius: 5px;
@@ -148,7 +148,7 @@ p {
 
 .set-units > select {
   position: absolute;
-  left: 7px;
+  left: 11px;
   top: 35px;
   width: 140px;
   border: none;
@@ -162,7 +162,7 @@ p {
 .big {
   font-size: 1.8rem;
   font-weight: 600;
-  margin: 0px;
+  margin: 0 0 10px -2px;
 }
 
 .weather-report > .conditions {
