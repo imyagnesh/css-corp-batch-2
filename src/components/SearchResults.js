@@ -39,8 +39,8 @@ const SearchResults = forwardRef((props, ref) => {
                 <div className="border border-3">
                     <div className="absolute z-50 flex">
                         {searchresults.map((item) => (
-                            <div className="bg-gradient-to-r from-purple-500 to-orange-500  w-full text-center rounded-md ml-2" key={item.id}>
-                                <span className="text-white h-auto" onClick={setCity}>{item.name}</span>
+                            <div className="bg-gradient-to-r from-purple-500 to-orange-500  w-full text-center rounded-md ml-2" onClick={setCity} key={item.id}>
+                                <span className="text-white h-auto" >{item.name}</span>
                             </div>
                         ))}
                     </div>
