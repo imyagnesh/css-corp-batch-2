@@ -60,7 +60,9 @@ class Input extends PureComponent {
         emptyResult: 0
       })
     } catch (error) {
-      // Error
+      this.setContextState({
+        error,
+      })
     }
   }
 
@@ -72,10 +74,13 @@ class Input extends PureComponent {
             <div><label className="w-full pl-3 font-bold">LOCATION</label></div>
             <input className="pb-4" type="text" id="cityname" ref={this.inputText} onChange={this.handleChange} />
             <WeatherConsumer>
-              {({ units, setContextState, getContextState }) => (
+              {({ units, setContextState, getContextState, error }) => (
                 <>
                   {this.state.searchResults.length === 0 && this.state.emptyResult === 0 && (
                     <h1 className="text-black-50">No matching cities found</h1>
+                  )}
+                  {error && error.message && (
+                    <h1 className="text-red-500">{error.message}</h1>
                   )}
                   {this.state.searchResults.length > 0 && (
                     <SearchResults result={this.state.searchResults} units={units} setContextState={setContextState} getContextState={getContextState} />

@@ -43,9 +43,9 @@ class App extends PureComponent {
 
         </div>
         <WeatherConsumer>
-          {({ weatherData, units, getContextState }) => (
+          {({ weatherData, units, getContextState, error }) => (
             <>
-              {Object.entries(weatherData).length === 0 && (
+              {Object.entries(weatherData).length === 0 && !error && (
                 <div className="animate-spin h-5 w-5 text-center">
                   <div className="w-4 h-4 rounded-full flex justify-center items-center text-center">
                     <p>*X*</p>

@@ -60,13 +60,18 @@ export class WeatherProvider extends PureComponent {
         rerender: 0
       });
     } catch (error) {
-      // Error
+      this.setState({
+        error: error
+      })
     }
   };
+  componentDidCatch(error, info) {
+
+  }
 
   render() {
     const { children } = this.props;
-    const { weatherData, city, units, rerender } = this.state;
+    const { weatherData, city, units, rerender, error } = this.state;
 
     return (
       <WeatherContext.Provider
@@ -78,6 +83,7 @@ export class WeatherProvider extends PureComponent {
           loadWeather: this.loadWeather,
           getContextState: this.getContextState,
           rerender,
+          error
         }}
       >
         {children}
