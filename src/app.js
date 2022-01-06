@@ -112,8 +112,7 @@ class App extends Component {
         //   user.name = 'Virat';
         ({
           user: { ...user, name: 'Virat' },
-        }),
-      );
+        }));
     } catch (error) {}
   };
 
