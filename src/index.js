@@ -1,9 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './app';
-import weatherServer from './server';
+import Weatherwatch from './Weatherwatch';
 
-weatherServer();
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Weatherwatch />, document.getElementById('root'));
