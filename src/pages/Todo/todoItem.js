@@ -3,20 +3,23 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import { TodoConsumer } from '../../context/todoContext';
 
-const TodoItem = ({ item }) => {
+const TodoItem = ({
+  item,
+  toggleComplete,
+  updateTodoStatus,
+  deleteTodo,
+  deleteTodoStatus,
+}) => {
   console.log('TodoItem render');
   return (
     <div className="flex items-center m-2" key={item.id}>
-      <TodoConsumer>
-        {({ toggleComplete, updateTodoStatus }) => (
-          <input
-            type="checkbox"
-            checked={item.isDone}
-            disabled={!!updateTodoStatus('REQUEST', item.id)}
-            onChange={() => toggleComplete(item)}
-          />
-        )}
-      </TodoConsumer>
+      <input
+        type="checkbox"
+        checked={item.isDone}
+        disabled={!!updateTodoStatus('REQUEST', item.id)}
+        onChange={() => toggleComplete(item)}
+      />
+
       <p
         className={cn('flex-1 px-2', {
           'line-through': item.isDone,
@@ -25,20 +28,17 @@ const TodoItem = ({ item }) => {
         {item.text}
       </p>
       <p>{item.timeStamp}</p>
-      <TodoConsumer>
-        {({ deleteTodo, deleteTodoStatus }) => (
-          <button
-            type="button"
-            // className={cn('btn-primary', {
-            //   'btn-disabled': deleteTodoStatus('REQUEST', item.id),
-            // })}
-            disabled={() => !!deleteTodoStatus('REQUEST', item.id)}
-            onClick={() => deleteTodo(item)}
-          >
-            Delete
-          </button>
-        )}
-      </TodoConsumer>
+
+      <button
+        type="button"
+        // className={cn('btn-primary', {
+        //   'btn-disabled': deleteTodoStatus('REQUEST', item.id),
+        // })}
+        disabled={() => !!deleteTodoStatus('REQUEST', item.id)}
+        onClick={() => deleteTodo(item)}
+      >
+        Delete
+      </button>
     </div>
   );
 };

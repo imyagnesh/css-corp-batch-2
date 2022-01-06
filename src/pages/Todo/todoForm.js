@@ -3,36 +3,32 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { TodoConsumer } from '../../context/todoContext';
 
-const TodoForm = forwardRef((props, ref) => {
+const TodoForm = forwardRef(({ addTodo, addTodoStatus }, ref) => {
   console.log('TodoForm render');
   return (
-    <TodoConsumer>
-      {({ addTodo, addTodoStatus }) => (
-        <>
-          <form
-            className="flex justify-center my-2"
-            onSubmit={(event) => addTodo(event, ref.current.value)}
-          >
-            <input type="text" className="input" ref={ref} />
-            <button
-              type="submit"
-              className={cn({
-                'btn-primary': addTodoStatus?.status !== 'REQUEST',
-                'btn-disabled': addTodoStatus?.status === 'REQUEST',
-              })}
-              disabled={addTodoStatus?.status === 'REQUEST'}
-            >
-              Add Todo
-            </button>
-          </form>
-          {addTodoStatus?.status === 'FAIL' && (
-            <p className="text-center text-red-600">
-              {addTodoStatus?.payload.message}
-            </p>
-          )}
-        </>
+    <>
+      <form
+        className="flex justify-center my-2"
+        onSubmit={(event) => addTodo(event, ref.current.value)}
+      >
+        <input type="text" className="input" ref={ref} />
+        <button
+          type="submit"
+          className={cn({
+            'btn-primary': addTodoStatus?.status !== 'REQUEST',
+            'btn-disabled': addTodoStatus?.status === 'REQUEST',
+          })}
+          disabled={addTodoStatus?.status === 'REQUEST'}
+        >
+          Add Todo
+        </button>
+      </form>
+      {addTodoStatus?.status === 'FAIL' && (
+        <p className="text-center text-red-600">
+          {addTodoStatus?.payload.message}
+        </p>
       )}
-    </TodoConsumer>
+    </>
   );
 });
 

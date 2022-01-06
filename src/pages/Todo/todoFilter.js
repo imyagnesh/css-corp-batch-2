@@ -3,42 +3,38 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { TodoConsumer } from '../../context/todoContext';
 
-const TodoFilter = () => {
-  console.log('TodoFilter render');
+const TodoFilter = ({ filterType, loadTodo }) => {
+  console.log('TodoFilter');
   return (
-    <TodoConsumer>
-      {(filterType, loadTodo) => (
-        <div className="flex">
-          <button
-            type="button"
-            className={cn('flex-1', {
-              'text-red-400': filterType === 'all',
-            })}
-            onClick={() => loadTodo('all')}
-          >
-            All
-          </button>
-          <button
-            type="button"
-            className={cn('flex-1', {
-              'text-red-400': filterType === 'pending',
-            })}
-            onClick={() => loadTodo('pending')}
-          >
-            Pending
-          </button>
-          <button
-            type="button"
-            className={cn('flex-1', {
-              'text-red-400': filterType === 'completed',
-            })}
-            onClick={() => loadTodo('completed')}
-          >
-            Completed
-          </button>
-        </div>
-      )}
-    </TodoConsumer>
+    <div className="flex">
+      <button
+        type="button"
+        className={cn('flex-1', {
+          'text-red-400': filterType === 'all',
+        })}
+        onClick={() => loadTodo('all')}
+      >
+        All
+      </button>
+      <button
+        type="button"
+        className={cn('flex-1', {
+          'text-red-400': filterType === 'pending',
+        })}
+        onClick={() => loadTodo('pending')}
+      >
+        Pending
+      </button>
+      <button
+        type="button"
+        className={cn('flex-1', {
+          'text-red-400': filterType === 'completed',
+        })}
+        onClick={() => loadTodo('completed')}
+      >
+        Completed
+      </button>
+    </div>
   );
 };
 
