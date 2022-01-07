@@ -1,5 +1,12 @@
 import React from 'react';
 
+// Name
+// Email
+// Gender -> Radio Button
+// Country -> Select
+// Password
+// Confirm Password
+
 const Register = () => {
   return (
     <div>
