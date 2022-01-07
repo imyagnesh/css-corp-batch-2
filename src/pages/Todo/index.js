@@ -27,7 +27,7 @@ const Todo = () => {
     todoInitialValues,
   );
 
-  const setRequestStatus = ({ type, id = -1 }) => {
+  const setRequestStatus = useCallback(({ type, id = -1 }) => {
     setHttpStatus((val) => {
       const index = val.findIndex((x) => x.type === type && x.id === id);
       const data = { type, status: 'REQUEST', id };
@@ -36,15 +36,15 @@ const Todo = () => {
       }
       return [...val.slice(0, index), data, ...val.slice(index + 1)];
     });
-  };
+  }, []);
 
-  const setSuccessStatus = ({ type, id = -1 }) => {
+  const setSuccessStatus = useCallback(({ type, id = -1 }) => {
     setHttpStatus((val) =>
       val.filter((x) => !(x.type === type && x.id === id)),
     );
-  };
+  }, []);
 
-  const setFailStatus = ({ type, payload, id = -1 }) => {
+  const setFailStatus = useCallback(({ type, payload, id = -1 }) => {
     setHttpStatus((val) =>
       val.map((x) => {
         if (x.type === type && x.id === id) {
@@ -53,7 +53,7 @@ const Todo = () => {
         return x;
       }),
     );
-  };
+  }, []);
 
   const loadTodo = useCallback(
     async (ft) => {
@@ -79,7 +79,7 @@ const Todo = () => {
         setFailStatus({ type, payload: error });
       }
     },
-    [setRequestStatus],
+    [setRequestStatus, setSuccessStatus, setFailStatus],
   );
 
   useEffect(() => {

@@ -170,11 +170,11 @@ export class TodoProvider extends PureComponent {
           loadTodoStatus: httpStatus.find((x) => x.type === 'LOAD_TODO'),
           addTodoStatus: httpStatus.find((x) => x.type === 'ADD_TODO'),
           updateTodoStatus: (status, id) => httpStatus.find(
-            (x) => x.type === 'UPDATE_TODO' && x.status === status && x.id === id,
-          ),
+              (x) => x.type === 'UPDATE_TODO' && x.status === status && x.id === id,
+            ),
           deleteTodoStatus: (status, id) => httpStatus.find(
-            (x) => x.type === 'DELETE_TODO' && x.status === status && x.id === id,
-          ),
+              (x) => x.type === 'DELETE_TODO' && x.status === status && x.id === id,
+            ),
           loadTodo: this.loadTodo,
           addTodo: this.addTodo,
           toggleComplete: this.toggleComplete,
