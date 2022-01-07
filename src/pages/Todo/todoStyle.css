@@ -1,8 +1,0 @@
-.container {
-  background-color: #fafafa;
-  height: 100vh;
-}
-
-.box {
-  @apply h-24 m-1 bg-red-600;
-}
