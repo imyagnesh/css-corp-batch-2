@@ -72,7 +72,7 @@ class Input extends PureComponent {
         <div className="border border-3">
           <div>
             <div><label className="w-full pl-3 font-bold">LOCATION</label></div>
-            <input className="pb-4" type="text" id="cityname" ref={this.inputText} onChange={this.handleChange} />
+            <input className="pb-4 w-full" type="text" id="cityname" ref={this.inputText} onChange={this.handleChange} />
             <WeatherConsumer>
               {({ units, setContextState, getContextState, error }) => (
                 <>
