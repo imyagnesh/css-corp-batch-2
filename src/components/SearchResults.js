@@ -2,15 +2,15 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 const SearchResults = ({ cities, searchCities }) => {
-  const cityData = cities?.map((item) => (
+  const cityData = Object.keys(cities)?.map((item, i) => (
     <button
       type="button"
-      className="btn-city btn-primary"
-      key={item.id}
+      className="btn-city btn-primary my-1"
+      key={i}
       name={item}
-      onClick={() => searchCities(item)}
+      onClick={() => searchCities(cities[item].id)}
     >
-      {item}
+      {cities[item].name}
     </button>
   ));
   return (
@@ -28,7 +28,10 @@ const SearchResults = ({ cities, searchCities }) => {
 
 SearchResults.propTypes = {
   searchCities: PropTypes.func.isRequired,
-  cities: PropTypes.array.isRequired,
+  cities: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+  }).isRequired,
 };
 
 export default memo(SearchResults);

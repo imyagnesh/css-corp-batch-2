@@ -33,41 +33,17 @@ export default class App extends PureComponent {
           </WeatherConsumer>
 
           <WeatherConsumer>
-            {({ name, searchCities }) => (
+            {({ cities, searchCities }) => (
               <Suspense fallback={<h1>Cities Loading...</h1>}>
-                <SearchResults cities={name} searchCities={searchCities} />
+                <SearchResults cities={cities} searchCities={searchCities} />
               </Suspense>
             )}
           </WeatherConsumer>
 
           <WeatherConsumer>
-            {({
-              city,
-              description,
-              units,
-              currentTemp,
-              windSpeed,
-              maxTemp,
-              minTemp,
-              windDct,
-              pressure,
-              humidity,
-              feelsLike,
-            }) => (
+            {({ result, units }) => (
               <Suspense fallback={<h1>Result Loading...</h1>}>
-                <WeatherReports
-                  city={city}
-                  description={description}
-                  units={units}
-                  currentTemp={currentTemp}
-                  windSpeed={windSpeed}
-                  maxTemp={maxTemp}
-                  minTemp={minTemp}
-                  windDct={windDct}
-                  pressure={pressure}
-                  humidity={humidity}
-                  feelsLike={feelsLike}
-                />
+                <WeatherReports result={result} units={units} />
               </Suspense>
             )}
           </WeatherConsumer>

@@ -12,6 +12,7 @@ const Input = forwardRef((props, ref) => (
               <input
                 type="text"
                 className="pb-4 outline-0 pl-4"
+                size="50"
                 onChange={(event) => getWeatherResults(event)}
                 ref={ref}
               />

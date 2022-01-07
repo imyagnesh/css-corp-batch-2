@@ -1,4 +1,5 @@
-import React, { forwardRef, memo } from 'react';
+import React, { memo } from 'react';
+import PropTypes from 'prop-types';
 
 const SetUnits = ({ currentUnit, changeUnits }) => (
   <div className="pt-6 inline-block pr-2 w-1/4">
@@ -17,4 +18,10 @@ const SetUnits = ({ currentUnit, changeUnits }) => (
     </div>
   </div>
 );
+
+SetUnits.propTypes = {
+  currentUnit: PropTypes.string,
+  changeUnits: PropTypes.func.isRequired,
+};
+
 export default memo(SetUnits);
