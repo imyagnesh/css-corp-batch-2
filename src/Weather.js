@@ -2,13 +2,15 @@ import React, { PureComponent, createRef, lazy, Suspense } from 'react';
 import { stockData } from "./city";
 import { ReactSearchAutocomplete } from 'react-search-autocomplete';
 
-const WeatherUnits = lazy(() => import('./weatherUnit'));
-//const WeatherReport = lazy(() => import('./weatherReport'));
-
 export default class Weather extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
+            options: [
+                { name: "imperial", value: "" },
+                { name: "celcius", value: "°C" },
+                { name: "farenheet", value: "°F" }
+            ],
             weatherList: [],
             selectedCity: 'Chennai',
         };
@@ -49,6 +51,11 @@ export default class Weather extends PureComponent {
         return item
         // return (<p dangerouslySetInnerHTML={{__html: '<strong>'+item+'</strong>'}}></p>); //To format result as html
     }
+
+    UpdateTemp = (event) => {
+        event.preventDefault();
+        this.setState({ value: event.target.value });
+    }
     checkWeather = (event) => {
         event.preventDefault();
         const cityVal = this.state.selectedCity;
@@ -78,7 +85,7 @@ export default class Weather extends PureComponent {
     }
 
     render() {
-        const { weatherList, selectedCity } = this.state;
+        const { weatherList, selectedCity, options, value } = this.state;
         return (
             <div className="weather-group">
                 <h1 className="weather-title">Weather Watch</h1>
@@ -99,7 +106,16 @@ export default class Weather extends PureComponent {
 
                         <div className="location-btn">
                             <Suspense fallback={<h1>Loading...</h1>}>
-                                <WeatherUnits />
+                                <div className="order-2 flex-grow border px-5 py-5 bg-white">
+                                    <h1 className="uppercase font-medium">units</h1>
+                                    <select onChange={this.UpdateTemp} value={value} className='border'>
+                                        {options.map(item => (
+                                            <option key={item.name} value={item.value}>
+                                                {item.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
                             </Suspense>
                         </div>
                     </form>
@@ -110,7 +126,7 @@ export default class Weather extends PureComponent {
                         <div key={weather.id}>
                             <div className="location-details">
                                 <div className="location-cloud">
-                                    <h2>{weather.name}</h2>
+                                    <h2 className="uppercase font-medium">{weather.name}</h2>
                                     <p>{weather.weather[0].description}</p>
                                 </div>
                             </div>
@@ -118,17 +134,17 @@ export default class Weather extends PureComponent {
                                 <p>
                                     Current Temperature
                                     <br />
-                                    {weather.main.temp}
+                                    {weather.main.temp} {value}
                                 </p>
                                 <p>
                                     Minimum Temperature
                                     <br />
-                                    {weather.main.temp_min}
+                                    {weather.main.temp_min} {value}
                                 </p>
                                 <p>
                                     Maximum Temperature
                                     <br />
-                                    {weather.main.temp_max}
+                                    {weather.main.temp_max} {value}
                                 </p>
                             </div>
                             <div className="location-wind">
