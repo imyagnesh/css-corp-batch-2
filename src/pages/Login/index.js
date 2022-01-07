@@ -34,6 +34,13 @@ const Login = () => (
 
       if (!values.password) {
         errors.password = 'Required...';
+      } else if (
+        !/^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/i.test(
+          values.password,
+        )
+      ) {
+        errors.password =
+          'Password must contain at least 8 characters, one uppercase, one number and one special case character';
       }
       return errors;
     }}
