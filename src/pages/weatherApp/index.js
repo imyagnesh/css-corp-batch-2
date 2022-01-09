@@ -14,7 +14,7 @@ export default class WeatherWatchApp extends PureComponent {
     return (
       <WeatherConsumer>
         {({ locations }) => (
-          <div className="p-3 h-screen border-5 border-b-red-600 flex justify-center flex-col bg-[#ececec] font-bold text-xs w-3/6">
+          <div className="p-3 h-screen border-5 border-b-red-600 flex justify-center flex-col bg-[#ececec] font-bold text-xs w-3/6 md:w-4/6 sm:w-5/6">
             <div className="p-5 bg-[#F8F8F8] rounded-md">
               <h2 className="border-b-2 border-b-red-600 w-full text-xl mt-2">WeatherWatch</h2>
               <div className="mt-3 flex flex-row mb-2 relative">

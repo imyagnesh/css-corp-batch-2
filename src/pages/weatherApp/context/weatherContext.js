@@ -10,8 +10,8 @@ export class WeatherProvider extends PureComponent {
     httpStatus: [],
     locations: [],
     units: [
-      { key: 'farTemp', title: 'Farenheit' },
       { key: 'celTemp', title: 'celcius' },
+      { key: 'fareTemp', title: 'Farenheit' },
     ],
   };
 
@@ -33,7 +33,7 @@ export class WeatherProvider extends PureComponent {
 
   loadReportData = async (currentCityId, currentUnit) => {
     const cityId = currentCityId || 'Bengaluru,in';
-    const unitId = currentUnit || 'celTemp';
+    const unitId = currentUnit || 'fareTemp';
     const urlParams = `&q=${cityId}&units=${unitId}`;
     const { locations } = this.state;
     const type = currentUnit ? 'CHANGE_UNIT' : 'LOAD_DATA';
@@ -63,7 +63,7 @@ export class WeatherProvider extends PureComponent {
         locations: currentCityId ? [] : locations,
       });
       document.getElementById('searchInput').value = currentCityId ? '' : document.getElementById('searchInput').value;
-      document.getElementById('unit-filter').value = currentUnit ? document.getElementById('unit-filter').value : 'celTemp';
+      document.getElementById('unit-filter').value = currentUnit ? document.getElementById('unit-filter').value : 'fareTemp';
       this.setSuccessHttpStatus({ type });
     } catch (error) {
       this.setFailedHttpStatus({ type, error });
@@ -123,8 +123,7 @@ export class WeatherProvider extends PureComponent {
   render() {
     const { children } = this.props;
     const { report, locations, httpStatus, units } = this.state;
-    const { loadDataStatus, loadCityStatus, defaultStatus, changeUnitStatus } =
-    httpStatus.reduce((p, c) => {
+    const { loadDataStatus, loadCityStatus, defaultStatus, changeUnitStatus } = httpStatus.reduce((p, c) => {
       if (c.type === 'LOAD_DATA') return { ...p, loadDataStatus: c };
       if (c.type === 'LOAD_CITY') return { ...p, loadCityStatus: c };
       if (c.type === 'CHANGE_UNIT') return { ...p, changeUnitStatus: c };
