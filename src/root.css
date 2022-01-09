@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .weather-app {
+    @apply w-full min-h-[100vh] font-sans bg-zinc-300 flex flex-col items-center justify-start;
+  }
+  .weather-app-container {
+    @apply w-[90vw] max-w-[700px] mt-4 flex flex-col uppercase;
+  }
+  .weather-app-title {
+    @apply mb-3 text-lg font-semibold border-b-2 border-red-600 normal-case;
+  }
+  .weather-app-search {
+    @apply w-full flex relative;
+  }
+  .weather-app-search--input {
+    @apply w-full mr-1 grow min-h-[52px] bg-white px-5 py-3 rounded-md relative shadow;
+  }
+
+  .weather-app-search--input input {
+    @apply w-full border rounded;
+  }
+  .weather-app-results {
+    @apply bg-white mt-2 rounded-md p-5;
+  }
+
+  .weather-city-results--title {
+    @apply mb-1 text-2xl font-semibold capitalize;
+  }
+
+  .weather-city-results--img {
+    @apply absolute -top-3 -right-3 rounded-full;
+  }
+
+  .weather-city-results--details {
+    @apply text-xs text-slate-500 font-semibold;
+  }
+
+  .weather-city-results--additional {
+    @apply mt-5;
+  }
+
+  .weather-city-results--container {
+    @apply relative;
+  }
+  .weather-app-search--metric {
+    @apply grow min-h-[52px] bg-white px-5 py-3 rounded-md relative shadow;
+  }
+
+  .weather-city-results--temperature {
+    @apply flex justify-around;
+  }
+
+  .weather-city-results--temperature div {
+    @apply m-0 flex-1 p-2 ml-1 rounded-md text-center text-white bg-gradient-to-b from-fuchsia-600 to-orange-500;
+  }
+
+  .weather-city-results--temperature div:first-child {
+    @apply mx-0;
+  }
+
+  .weather-city-results--wind {
+    @apply flex justify-around mt-4;
+  }
+
+  .weather-city-results--wind div {
+    @apply bg-gradient-to-r from-fuchsia-800 to-pink-500 flex-1 p-4 ml-1 rounded-md text-center text-white;
+  }
+  .weather-city-results--humidity {
+    @apply flex justify-around mt-4;
+  }
+
+  .weather-city-results--humidity div {
+    @apply flex-1 p-4 ml-1 rounded-md text-center text-white bg-gradient-to-r from-cyan-500 to-indigo-600;
+  }
+  .weather-app-search-results {
+    @apply absolute w-full top-full flex mt-1 mr-1 bg-white p-8 pb-4 rounded-md shadow-xl z-10 capitalize;
+  }
+  .weather-app-search-results button {
+    @apply px-5 py-1 mr-2 mb-4 text-sm font-semibold tracking-wider bg-gradient-to-r from-rose-500 to-fuchsia-800 text-white rounded-full;
+  }
+}
