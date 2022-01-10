@@ -1,40 +1,38 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useReducer, lazy, Suspense } from 'react';
 import Input from '../../conponents/Input';
 import Select from '../../conponents/Select';
+import { units } from '../../constants/variables';
 import '../../index.css';
-import SearchResults from './SearchResults';
+import {
+  weatherInitValue,
+  WeatherReducer,
+} from '../../reducers/weatherReducer';
 
-const units = [
-  {
-    value: 'C',
-    text: 'Celsius',
-  },
-  {
-    value: 'F',
-    text: 'Fahrenheit',
-  },
-];
+const SearchResults = lazy(() => import('./SearchResults'));
+const WeatherInfo = lazy(() => import('./WeatherInfo'));
 
 const Weather = () => {
-  const [location, setLocation] = useState('');
-  const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState(null);
-  const [unit, setUnit] = useState('C');
+  const [state, dispatch] = useReducer(WeatherReducer, weatherInitValue);
+
+  const { location, cities, selectedCity, unit } = state;
 
   const loadCities = useCallback(async (city) => {
     try {
+      dispatch({ type: 'LOAD_CITIES_REQUEST' });
       const res = await fetch(
         `https://api.weatherserver.com/weather/cities/${city}`,
       );
       const json = await res.json();
-      setCities(json.results);
-    } catch (error) {}
+      dispatch({ type: 'LOAD_CITIES_SUCCESS', payload: json.results });
+    } catch (error) {
+      dispatch({ type: 'LOAD_CITIES_FAIL', payload: error });
+    }
   }, []);
 
   const onChangeLocation = useCallback(
     (event) => {
       const city = event.target.value;
-      setLocation(city);
+      dispatch({ type: 'CHANGE_LOCATION', payload: city });
       loadCities(city);
     },
     [loadCities],
@@ -43,19 +41,21 @@ const Weather = () => {
   const getCityInfo = useCallback(
     async (id) => {
       try {
+        dispatch({ type: 'LOAD_SELECTED_CITY_REQUEST' });
         const res = await fetch(
           `https://api.weatherserver.com/weather/current/${id}/${unit}`,
         );
         const json = await res.json();
-        setSelectedCity(json);
-        setLocation('');
-      } catch (error) {}
+        dispatch({ type: 'LOAD_SELECTED_CITY_SUCCESS', payload: json });
+      } catch (error) {
+        dispatch({ type: 'LOAD_SELECTED_CITY_FAIL', payload: error });
+      }
     },
     [unit],
   );
 
   const onChangeUnit = useCallback((event) => {
-    setUnit(event.target.value);
+    dispatch({ type: 'CHANGE_UNIT', payload: event.target.value });
   }, []);
 
   console.log('Weather Render');
@@ -78,9 +78,16 @@ const Weather = () => {
           onChange={onChangeUnit}
         />
         {location.length > 0 && (
-          <SearchResults cities={cities} getCityInfo={getCityInfo} />
+          <Suspense fallback={<h3>Loading...</h3>}>
+            <SearchResults cities={cities} getCityInfo={getCityInfo} />
+          </Suspense>
         )}
       </div>
+      {selectedCity && (
+        <Suspense fallback={<h3>Loading...</h3>}>
+          <WeatherInfo data={selectedCity || {}} />
+        </Suspense>
+      )}
     </div>
   );
 };
