@@ -41,9 +41,10 @@ p {
   position: relative;
   margin: 20px;
   width: 550px;
-  height: 500px;
+  height: 570px;
   border-radius: 5px;
   padding: 20px;
+  margin: 0 auto;
   background-color: rgb(248, 248, 248);
 }
 
@@ -84,7 +85,6 @@ p {
 }
 
 .search-results {
-  position: absolute;
   width: 500px;
   top: 145px;
   padding: 25px;
@@ -97,6 +97,7 @@ p {
 
 .search-option {
   position: relative;
+  border: none;
   background: rgb(255, 149, 63);
   background: linear-gradient(
     90deg,
@@ -167,11 +168,17 @@ p {
 
 .weather-report > .conditions {
   position: absolute;
-  top: 45px;
+  top: 65px;
   left: 26px;
   font-size: 0.6rem;
   color: rgba(0, 0, 0, 0.6);
   letter-spacing: 0.2px;
+}
+
+.weather-report .label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
 }
 
 .weather-report > img {
@@ -241,6 +248,7 @@ p {
   border-radius: 6px;
   background-color: rgba(0, 0, 0, 0.3);
   flex: auto;
+  width: 50%;
 }
 
 .weather-report > .pressure > div {
@@ -255,17 +263,17 @@ p {
   color: rgb(255, 255, 255);
   padding: 8px;
   margin: 2px;
+  width: 50%;
   border-radius: 6px;
   background-color: rgba(0, 0, 0, 0.3);
   flex: auto;
 }
 
 .error-panel {
-  position: absolute;
   top: 150px;
   content: 'DD';
   width: 500px;
-  height: 325px;
+  height: 30px;
   padding: 25px;
   border: 1px solid rgba(0, 0, 0, 0.07);
   border-radius: 5px;
