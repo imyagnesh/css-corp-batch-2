@@ -1,10 +1,21 @@
 import React, { memo } from 'react';
 
 const WeatherInfo = ({
-  data: { location: cityLocation, conditions, icon, temp, temp_max, temp_min },
+  data: {
+    location,
+    conditions,
+    icon,
+    temp,
+    temp_max,
+    temp_min,
+    wind_direction,
+    wind_speed,
+    pressure,
+    humidity,
+  },
 }) => (
   <div className="weather-report">
-    <h2 className="big">{cityLocation}</h2>
+    <h2 className="big">{location}</h2>
     <p className="conditions">{conditions}</p>
     {icon && <img src={icon} alt="icon" />}
     <div className="temperature">
@@ -23,18 +34,22 @@ const WeatherInfo = ({
     </div>
     <div className="wind">
       <div>
-        <h2 />
+        <h2>Wind Speed</h2>
+        <p>{wind_speed}</p>
       </div>
       <div>
-        <h2 />
+        <h2>Wind Direction</h2>
+        <p>{wind_direction}</p>
       </div>
     </div>
     <div className="pressure">
       <div>
-        <h2 />
+        <h2>Pressure</h2>
+        <p>{pressure}</p>
       </div>
       <div>
-        <h2 />
+        <h2>Humidity</h2>
+        <p>{humidity}</p>
       </div>
     </div>
   </div>

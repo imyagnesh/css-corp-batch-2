@@ -1,41 +1,51 @@
-import React, { useCallback, useReducer, lazy, Suspense } from 'react';
+import React, {
+  useCallback,
+  useReducer,
+  lazy,
+  Suspense,
+  useEffect,
+} from 'react';
 import Input from '../../conponents/Input';
 import Select from '../../conponents/Select';
+import WeatherInfo from './WeatherInfo';
 import { units } from '../../constants/variables';
 import '../../index.css';
 import {
   weatherInitValue,
   WeatherReducer,
 } from '../../reducers/weatherReducer';
+import useDebounce from '../../hooks/useDebounce';
 
 const SearchResults = lazy(() => import('./SearchResults'));
-const WeatherInfo = lazy(() => import('./WeatherInfo'));
+// const WeatherInfo = lazy(() => import('./WeatherInfo'));
 
 const Weather = () => {
   const [state, dispatch] = useReducer(WeatherReducer, weatherInitValue);
-
-  const { location, cities, selectedCity, unit } = state;
+  const { location, cities, selectedCity, unit, loading, error } = state;
 
   const loadCities = useCallback(async (city) => {
     try {
+      console.log('load cities');
       dispatch({ type: 'LOAD_CITIES_REQUEST' });
       const res = await fetch(
         `https://api.weatherserver.com/weather/cities/${city}`,
       );
       const json = await res.json();
       dispatch({ type: 'LOAD_CITIES_SUCCESS', payload: json.results });
-    } catch (error) {
-      dispatch({ type: 'LOAD_CITIES_FAIL', payload: error });
+    } catch (err) {
+      dispatch({ type: 'LOAD_CITIES_FAIL', payload: err });
     }
   }, []);
+
+  const debounceLoadCities = useDebounce(loadCities);
 
   const onChangeLocation = useCallback(
     (event) => {
       const city = event.target.value;
       dispatch({ type: 'CHANGE_LOCATION', payload: city });
-      loadCities(city);
+      if (city.length > 0) debounceLoadCities(city);
     },
-    [loadCities],
+    [debounceLoadCities],
   );
 
   const getCityInfo = useCallback(
@@ -47,8 +57,9 @@ const Weather = () => {
         );
         const json = await res.json();
         dispatch({ type: 'LOAD_SELECTED_CITY_SUCCESS', payload: json });
-      } catch (error) {
-        dispatch({ type: 'LOAD_SELECTED_CITY_FAIL', payload: error });
+        // throw new Error('Something went wrong');
+      } catch (err) {
+        dispatch({ type: 'LOAD_SELECTED_CITY_FAIL', payload: err });
       }
     },
     [unit],
@@ -58,7 +69,9 @@ const Weather = () => {
     dispatch({ type: 'CHANGE_UNIT', payload: event.target.value });
   }, []);
 
-  console.log('Weather Render');
+  useEffect(() => {
+    getCityInfo(1277333);
+  }, []);
 
   return (
     <div className="weather-app">
@@ -79,14 +92,20 @@ const Weather = () => {
         />
         {location.length > 0 && (
           <Suspense fallback={<h3>Loading...</h3>}>
-            <SearchResults cities={cities} getCityInfo={getCityInfo} />
+            <SearchResults
+              cities={cities}
+              getCityInfo={getCityInfo}
+              loading={loading}
+            />
           </Suspense>
         )}
       </div>
-      {selectedCity && (
-        <Suspense fallback={<h3>Loading...</h3>}>
-          <WeatherInfo data={selectedCity || {}} />
-        </Suspense>
+      {error ? (
+        <div className="error-panel" />
+      ) : loading ? (
+        <div className="is-loading" />
+      ) : (
+        selectedCity && <WeatherInfo data={selectedCity || {}} />
       )}
     </div>
   );

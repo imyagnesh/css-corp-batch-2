@@ -24,7 +24,13 @@ export const WeatherReducer = (state, { type, payload }) => {
       return { ...state, error: payload };
 
     case 'LOAD_CITIES_SUCCESS':
-      return { ...state, cities: payload, loading: false, error: null };
+      return {
+        ...state,
+        cities: payload,
+        loading: false,
+        error: null,
+        selectedCity: null,
+      };
 
     case 'LOAD_SELECTED_CITY_SUCCESS':
       return {

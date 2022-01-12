@@ -1,18 +1,23 @@
 import React, { memo } from 'react';
 
-const SearchResults = ({ cities, getCityInfo }) => (
+const SearchResults = ({ cities, getCityInfo, loading }) => (
   <div className="search-results">
-    {cities.length === 0 && <p>City not found</p>}
-    {cities.map((city) => (
-      <div
-        className="search-option"
-        key={city.id}
-        role="button"
-        onClick={() => getCityInfo(city.id)}
-      >
-        {city.name}
-      </div>
-    ))}
+    {loading ? (
+      <p>Loading...</p>
+    ) : cities.length > 0 ? (
+      cities.map((city) => (
+        <div
+          className="search-option"
+          key={city.id}
+          role="button"
+          onClick={() => getCityInfo(city.id)}
+        >
+          {city.name}
+        </div>
+      ))
+    ) : (
+      <p>City not found</p>
+    )}
   </div>
 );
 
