@@ -8,13 +8,13 @@ export class WeatherProvider extends PureComponent {
   constructor(props) {
     super(props);
   }
+
   state = {
     weatherData: {},
     city: 'Bengaluru',
     units: 'C',
-    rerender: 0
+    rerender: 0,
   };
-
 
   setContextState = ({ weatherData, city, units, rerender, unitsChanged }) => {
     this.setState({
@@ -26,19 +26,19 @@ export class WeatherProvider extends PureComponent {
     });
   };
 
-
   getContextState = () => this.state;
 
   async componentDidMount() {
     console.log('weatherContext render');
     this.loadWeather();
   }
+
   async componentDidUpdate() {
     console.log('weatherContext updated');
-    if (this.state['rerender'] && this.state.rerender === 1) {
+    if (this.state.rerender && this.state.rerender === 1) {
       console.log('rerendering.....');
       this.loadWeather();
-      document.getElementById('citysearch').style.display = "none";
+      document.getElementById('citysearch').style.display = 'none';
     }
   }
 
@@ -57,14 +57,15 @@ export class WeatherProvider extends PureComponent {
       this.setState({
         weatherData: json,
         units: this.state.units || 'C',
-        rerender: 0
+        rerender: 0,
       });
     } catch (error) {
       this.setState({
-        error: error
-      })
+        error,
+      });
     }
   };
+
   componentDidCatch(error, info) {
 
   }
@@ -83,7 +84,7 @@ export class WeatherProvider extends PureComponent {
           loadWeather: this.loadWeather,
           getContextState: this.getContextState,
           rerender,
-          error
+          error,
         }}
       >
         {children}

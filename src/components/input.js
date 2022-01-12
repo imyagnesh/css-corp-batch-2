@@ -1,41 +1,50 @@
 import React, { Component, createRef, PureComponent, useCallback } from 'react';
 import _ from 'lodash';
-import SearchResults from './SearchResults'
-import { WeatherConsumer } from '../context/weatherContext';
 import PropTypes from 'prop-types';
+import SearchResults from './SearchResults';
+import { WeatherConsumer } from '../context/weatherContext';
 
 class Input extends PureComponent {
   constructor(props) {
     super(props);
     this.state = ({
       searchResults: [],
-    })
+    });
   }
+
   static propTypes = {
     setContextState: PropTypes.func.isRequired,
     getContextState: PropTypes.func.isRequired,
 
-  }
+  };
+
   setContextState = this.props.setContextState;
+
   stateObj = this.props.getContextState();
+
   inputText = createRef();
+
   result = [];
-  //handler = useCallback(debounce(this.searchLocations, 1000), []);
-  //debounceCalculate = debounce(function () { this.searchLocations(), 1000);
+
+  // handler = useCallback(debounce(this.searchLocations, 1000), []);
+  // debounceCalculate = debounce(function () { this.searchLocations(), 1000);
   handleInputTextChangeDebounced = _.debounce((value) => this.searchLocations(value), 700);
+
   handleChange = (e) => {
     console.log(e.target.value);
     if (e.target.value.length > 2) {
-      (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = "block" : '';
+      (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = 'block' : '';
       this.setContextState({
         ...this.stateObj,
         unitsChanged: 0,
-        units: this.props.units
+        units: this.props.units,
       });
 
       this.handleInputTextChangeDebounced(e.target.value);
+    } else {
+      (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = 'none' : '';
     }
-  }
+  };
 
   searchLocations = async (keyword) => {
     try {
@@ -51,20 +60,21 @@ class Input extends PureComponent {
       if (Object.entries(json) === 0) {
         this.setState({
           searchResults: json,
-          emptyResult: 1
-        })
+          emptyResult: 1,
+        });
+      } else {
+        console.log(json);
+        this.setState({
+          searchResults: json,
+          emptyResult: 0,
+        });
       }
-      console.log(json);
-      this.setState({
-        searchResults: json,
-        emptyResult: 0
-      })
     } catch (error) {
       this.setContextState({
         error,
-      })
+      });
     }
-  }
+  };
 
   render() {
     return (
@@ -93,6 +103,6 @@ class Input extends PureComponent {
       </div>
     );
   }
-};
+}
 
 export default Input;

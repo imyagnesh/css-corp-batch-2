@@ -6,15 +6,17 @@ class WeatherReport extends PureComponent {
   constructor(props) {
     super(props);
   }
+
   static propTypes = {
     weatherResult: PropTypes.object,
-    units: PropTypes.oneOf(['C', 'F'])
-  }
+    units: PropTypes.oneOf(['C', 'F']),
+  };
+
   render() {
     console.log('WeatherReport render');
-    const weatherResult = this.props.weatherResult;
-    const units = this.props.units;
-    console.log('weatherResult');
+    const { weatherResult } = this.props;
+    const { units } = this.props;
+    // console.log('weatherResult');
     console.log(weatherResult);
     console.log(`units=${units}`);
     return weatherResult.error ? (<h1 className="text-center text-red-400">{weatherResult.error.message}</h1>)

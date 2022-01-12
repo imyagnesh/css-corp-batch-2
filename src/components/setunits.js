@@ -6,18 +6,20 @@ class SetUnits extends Component {
     super(props);
     this.setContextState = props.setContextState;
   }
+
   static propTypes = {
     setContextState: PropTypes.func.isRequired,
-    weatherData: PropTypes.object
-  }
+    weatherData: PropTypes.object,
+  };
+
   handleChange = (e) => {
     console.log(e.target.value);
-    (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = "none" : '';
+    (document.getElementById('citysearch')) ? document.getElementById('citysearch').style.display = 'none' : '';
     if (e.target.value) {
       this.setContextState({
         units: e.target.value,
         weatherData: this.props.weatherResult,
-        unitsChanged: 1
+        unitsChanged: 1,
       });
     }
   };

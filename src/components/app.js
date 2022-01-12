@@ -1,10 +1,10 @@
 import React, { PureComponent, createRef, lazy, Suspense, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { WeatherConsumer } from '../context/weatherContext';
 import WeatherReport from './WeatherReport';
 import SetUnits from './setunits';
 import Input from './input';
 import SearchResults from './SearchResults';
-import PropTypes from 'prop-types';
 
 // const Input = lazy(() => import('./input'));
 // const SetUnits = lazy(() => import('./setunits'));
@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 
 class App extends PureComponent {
   inputText = createRef();
+
   constructor(props) {
     super(props);
   }
@@ -19,7 +20,6 @@ class App extends PureComponent {
   async componentDidMount() {
 
   }
-
 
   componentWillUnmount() {
 
