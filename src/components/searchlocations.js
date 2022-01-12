@@ -18,7 +18,7 @@ class searchlocations extends React.Component {
                 <div className="mt-2 flex">
                     <div className="w-2/3">
                         <div className="border-gray-100 rounded border bg-white p-3">
-                            <p className="uppercase text-xs font-semibold">Location</p>
+                            <p className="uppercase text-xs font-semibold">Locations</p>
                             <input
                                 type="text"
                                 name="city"

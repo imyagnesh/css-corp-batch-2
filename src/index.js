@@ -4,7 +4,7 @@ import { TodoProvider } from './context/todoContext';
 // import App from './app';
 //import Todo from './pages/Todo';
 import App from './components/app';
-import './root.css';
+import './roots.css';
 // import UserGreet from './Input';
 
 // component

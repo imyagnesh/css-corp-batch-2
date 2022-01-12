@@ -39,7 +39,7 @@ class Weather extends React.Component {
                     </div>
                     <div className="w-1/3 mb-2 mx-1">
                         <div className="text-center p-3 bg-gradient-to-b from-purple-500 to-red-500 rounded">
-                            <p className="uppercase text-xs font-semibold text-white">Maximum Temperature</p>
+                            <p className="uppercase text-xs font-semibold text-white">Maximum Temperatures</p>
                             <h5 className="text-md font-semibold text-white">{this.celcius(this.props.weatherResult.main.temp_max)}&deg;C</h5>
                         </div>
                     </div>
