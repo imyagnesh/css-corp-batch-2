@@ -1,5 +1,5 @@
 {
-  "name": "react-training",
+  "name": "react-initial-project",
   "version": "0.0.1",
   "description": "react and javascript training",
   "main": "index.js",
@@ -16,7 +16,8 @@
   },
   "keywords": [
     "react",
-    "javascript"
+    "javascript",
+    "es6"
   ],
   "author": "Shobha Rani (shobharani.baben@csscorp.com)",
   "license": "MIT",
@@ -25,6 +26,13 @@
   },
   "homepage": "https://github.com/ShobhaRani0603/css-corp-batch-2#readme",
   "devDependencies": {
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/plugin-transform-runtime": "^7.16.5",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "@tailwindcss/jit": "^0.1.18",
+    "autoprefixer": "^10.4.0",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.5.1",
     "eslint": "^8.3.0",
@@ -34,22 +42,24 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
-    "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.5",
-    "postcss-cli": "^9.1.0",
     "postcss-loader": "^6.2.1",
     "prettier": "2.5.1",
-    "sass": "^1.44.0",
-    "sass-loader": "^12.4.0",
+    "react": "^17.0.2",
     "style-loader": "^3.3.1",
-    "tailwindcss": "^3.0.1",
-    "webpack": "^5.64.4",
+    "tailwindcss": "^3.0.2",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.6.0"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.4.0",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.27.0",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-addons-shallow-compare": "^15.6.3",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-search-autocomplete": "^5.4.4",
+    "webpack": "^5.64.4"
   }
 }
