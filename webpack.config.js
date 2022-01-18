@@ -10,7 +10,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx', '.json', '.ts', '.tsx'],
   },
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -31,4 +31,7 @@ module.exports = {
       filename: 'index.html',
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+  },
 };

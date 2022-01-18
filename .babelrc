@@ -4,5 +4,18 @@
     "@babel/preset-react",
     "@babel/preset-typescript"
   ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    [
+      "module-resolver",
+      {
+        "root": ["."],
+        "alias": {
+          "@components": "./src/components",
+          "@pages": "./src/Pages",
+          "@layout": "./src/Layout"
+        }
+      }
+    ]
+  ]
 }
