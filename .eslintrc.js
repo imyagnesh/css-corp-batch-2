@@ -18,5 +18,11 @@ module.exports = {
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
     'react/function-component-definition': 0,
     'object-curly-newline': 0,
+    'comma-dangle': 0,
+  },
+  settings: {
+    'import/resolver': {
+      'babel-module': {},
+    },
   },
 };

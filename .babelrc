@@ -13,7 +13,8 @@
         "alias": {
           "@components": "./src/components",
           "@pages": "./src/Pages",
-          "@layout": "./src/Layout"
+          "@layout": "./src/Layout",
+          "@assets": "./src/assets"
         }
       }
     ]
