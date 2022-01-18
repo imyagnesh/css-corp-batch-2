@@ -73,7 +73,7 @@ const Register = () => (
       dirty,
       onSubmit,
     }) => (
-      <Form className="mt-8 space-y-6">
+      <form className="mt-8 space-y-6" onSubmit={onSubmit}>
         <div className="shadow overflow-hidden sm:rounded-md">
           <div className="px-4 py-5 bg-white sm:p-6">
             <div className="grid grid-cols-6 gap-6">
@@ -299,14 +299,20 @@ const Register = () => (
             <button
               type="submit"
               disabled={onSubmit || !(dirty && isValid)}
-              className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className={cn(
+                'inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                {
+                  'bg-gray-300 hover:bg-gray-600 focus:ring-gray-500':
+                   onSubmit || !(dirty && isValid),
+                },
+              )}
             >
               Save
             </button>
             {onSubmit && <span>Successfully submitted</span>}
           </div>
         </div>
-      </Form>
+      </form>
     )}
   </Formik>
 );
