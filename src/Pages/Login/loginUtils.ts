@@ -4,11 +4,13 @@ import Select from '@components/Select';
 export type LoginInitValuesType = {
   email: string;
   password: string;
+  remember_me: boolean;
 };
 
 export const LoginInitValues: LoginInitValuesType = {
   email: '',
   password: '',
+  remember_me: false,
 };
 
 export const LoginFields = [
@@ -24,20 +26,6 @@ export const LoginFields = [
       }
     },
     isFirst: true,
-  },
-  {
-    name: 'name',
-    component: Select,
-    placeholder: 'Name',
-    validate: (value: string) => {
-      if (!value) {
-        return 'required...';
-      }
-    },
-    options: [
-      { value: 'male', text: 'Male' },
-      { value: 'female', text: 'Female' },
-    ],
   },
   {
     name: 'password',
