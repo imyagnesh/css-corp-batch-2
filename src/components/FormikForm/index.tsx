@@ -1,0 +1,38 @@
+import * as React from 'react';
+import Button from '@components/Button';
+import { Field, Form, Formik, FormikConfig } from 'formik';
+import { FieldsProps } from 'types/customTypes';
+
+type Props<T> = {
+  children?: React.ReactElement;
+  btnText: string;
+  fields: FieldsProps<T>[];
+} & FormikConfig<T>;
+
+// initialValues={LoginInitValues} onSubmit={onSubmit}
+const FormikForm = <T extends {}>({
+  fields,
+  children,
+  btnText,
+  ...props
+}: Props<T>) => {
+  return (
+    <Formik {...props}>
+      {({ isValid, dirty }) => (
+        <Form className="mt-8 space-y-6">
+          <div className="rounded-md shadow-sm -space-y-px">
+            {fields.map((x) => (
+              <Field key={x.name} {...x} />
+            ))}
+          </div>
+          {children}
+          <Button disabled={!(dirty && isValid)} type="submit">
+            {btnText}
+          </Button>
+        </Form>
+      )}
+    </Formik>
+  );
+};
+
+export default FormikForm;

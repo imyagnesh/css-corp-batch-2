@@ -1,20 +1,9 @@
 import React, { ComponentProps } from 'react';
 import cn from 'classnames';
 import { FieldProps } from 'formik';
+import { IsFirstOrLastProps } from '@types/customTypes';
 
-type IsFirstType = {
-  isFirst?: boolean;
-  isLast?: never;
-};
-
-type IsLastType = {
-  isFirst?: never;
-  isLast?: boolean;
-};
-
-type TestProps = IsFirstType | IsLastType;
-
-type Props = TestProps & FieldProps & ComponentProps<'input'>;
+type Props = IsFirstOrLastProps & FieldProps & ComponentProps<'input'>;
 
 const Input = ({
   field,
