@@ -10,7 +10,7 @@ type Props<T> = {
 } & FormikConfig<T>;
 
 // initialValues={LoginInitValues} onSubmit={onSubmit}
-const FormikForm = <T extends {}>({
+const FormikForm = <T extends { serverError?: '' }>({
   fields,
   children,
   btnText,
@@ -18,15 +18,20 @@ const FormikForm = <T extends {}>({
 }: Props<T>) => {
   return (
     <Formik {...props}>
-      {({ isValid, dirty }) => (
+      {({ isValid, dirty, errors, isSubmitting }) => (
         <Form className="mt-8 space-y-6">
+          {errors.serverError && (
+            <p className="text-center text-red-500 text-lg">
+              {errors.serverError}
+            </p>
+          )}
           <div className="rounded-md shadow-sm -space-y-px">
             {fields.map((x) => (
               <Field key={x.name} {...x} />
             ))}
           </div>
           {children}
-          <Button disabled={!(dirty && isValid)} type="submit">
+          <Button disabled={isSubmitting || !(dirty && isValid)} type="submit">
             {btnText}
           </Button>
         </Form>

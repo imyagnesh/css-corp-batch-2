@@ -1,4 +1,22 @@
 {
+  "users": [
+    {
+      "email": "yagnesh.modh@gmail.com",
+      "password": "$2a$10$Yn6dAVpdTK3VwKZ9Kr6Sx.Mzpy81Dbs42JKZ0NlbJzY.sJOAy3Nca",
+      "name": "Yagnesh Modh",
+      "gender": "male",
+      "confirmPassword": "abcd",
+      "id": 1
+    },
+    {
+      "email": "dsp.ce28@gmail.com",
+      "password": "$2a$10$n/WZrt0DQmToT1GEqRxPEOxTtGwoxV7OljxCDIXuuHXr5IGsxpPd2",
+      "name": "Shreya",
+      "gender": "female",
+      "confirmPassword": "abcd",
+      "id": 2
+    }
+  ],
   "todo-list": [
     {
       "text": "adfasdf",

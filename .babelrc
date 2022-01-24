@@ -15,6 +15,7 @@
           "@pages": "./src/Pages",
           "@layout": "./src/Layout",
           "@assets": "./src/assets",
+          "utils": "./src/utils",
           "types": "./src/types"
         }
       }

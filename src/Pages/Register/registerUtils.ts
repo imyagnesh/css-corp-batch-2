@@ -19,6 +19,7 @@ export type RegisterInitValuesType = {
   email: string;
   password: string;
   confirmPassword: string;
+  serverError?: '';
 };
 
 export const RegisterInitValues: RegisterInitValuesType = {

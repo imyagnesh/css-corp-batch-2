@@ -49,6 +49,8 @@
     "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
     "html-webpack-plugin": "^5.5.0",
+    "json-server": "^0.17.0",
+    "json-server-auth": "^2.1.0",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0",
@@ -66,6 +68,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
+    "axios": "^0.25.0",
     "classnames": "^2.3.1",
     "date-fns": "^2.27.0",
     "formik": "^2.2.9",
