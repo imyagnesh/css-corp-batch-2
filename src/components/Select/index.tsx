@@ -1,18 +1,7 @@
 import React, { ComponentProps } from 'react';
 import cn from 'classnames';
 import { FieldProps } from 'formik';
-
-type IsFirstType = {
-  isFirst?: boolean;
-  isLast?: never;
-};
-
-type IsLastType = {
-  isFirst?: never;
-  isLast?: boolean;
-};
-
-type TestProps = IsFirstType | IsLastType;
+import { IsFirstOrLastProps } from 'types/customTypes';
 
 type SelectOption = {
   value: string;
@@ -21,7 +10,7 @@ type SelectOption = {
 
 type Props = {
   options: SelectOption[];
-} & TestProps &
+} & IsFirstOrLastProps &
   FieldProps &
   ComponentProps<'select'>;
 
@@ -52,6 +41,7 @@ const Select = ({
         {...field}
         {...props}
       >
+        <option value="">{props.placeholder}</option>
         {options.map((x) => (
           <option key={x.value} value={x.value}>
             {x.text}
