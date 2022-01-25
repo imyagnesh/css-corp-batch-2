@@ -1,5 +1,6 @@
-import React, { lazy, Suspense } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { AuthContext } from 'context/authContext';
+import React, { lazy, Suspense, useContext, useEffect } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import AuthLayout from './Layout/AuthLayout';
 import MainLayout from './Layout/MainLayout';
 
