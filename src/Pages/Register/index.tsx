@@ -1,5 +1,5 @@
 import FormikForm from '@components/FormikForm';
-import { FormikHelpers } from 'formik';
+import { FormikErrors, FormikHelpers } from 'formik';
 import React from 'react';
 import axiosInstance from 'utils/axios';
 import {
@@ -28,8 +28,17 @@ const Register = (props: Props) => {
     }
   };
 
+  const validate = (values: RegisterInitValuesType) => {
+    const errors: FormikErrors<RegisterInitValuesType> = {};
+    if (values.password !== values.confirmPassword) {
+      errors.confirmPassword = 'password and confirm password should same.';
+    }
+    return errors;
+  };
+
   return (
     <FormikForm
+      validate={validate}
       fields={RegisterFields}
       initialValues={RegisterInitValues}
       onSubmit={onSubmit}
