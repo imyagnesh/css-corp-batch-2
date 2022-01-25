@@ -1,6 +1,9 @@
 import FormikForm from '@components/FormikForm';
+import { AuthContext } from 'context/authContext';
 import { FormikErrors, FormikHelpers } from 'formik';
-import React from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthType } from 'types/authTypes';
 import axiosInstance from 'utils/axios';
 import {
   RegisterFields,
@@ -11,37 +14,24 @@ import {
 interface Props {}
 
 const Register = (props: Props) => {
-  const onSubmit = async (
-    values: RegisterInitValuesType,
-    actions: FormikHelpers<RegisterInitValuesType>,
-  ) => {
-    try {
-      const res = await axiosInstance.post('register', values);
-      console.log(res);
-    } catch (error) {
-      console.log('error', error);
-      let message = 'Something went wrong. Please try after sometime.';
-      if (error instanceof Error) {
-        message = error.message;
-      }
-      actions.setErrors({ serverError: message });
-    }
-  };
+  const { onRegister } = useContext(AuthContext);
 
-  const validate = (values: RegisterInitValuesType) => {
+  const validate = useCallback((values: RegisterInitValuesType) => {
     const errors: FormikErrors<RegisterInitValuesType> = {};
     if (values.password !== values.confirmPassword) {
       errors.confirmPassword = 'password and confirm password should same.';
     }
     return errors;
-  };
+  }, []);
+
+  const test1 = { a: 1 };
 
   return (
     <FormikForm
       validate={validate}
       fields={RegisterFields}
       initialValues={RegisterInitValues}
-      onSubmit={onSubmit}
+      onSubmit={onRegister}
       btnText="Sign Up"
     />
   );

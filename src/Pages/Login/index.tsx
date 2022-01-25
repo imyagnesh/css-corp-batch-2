@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useContext } from 'react';
 import {
   LoginFields,
   LoginInitValues,
@@ -7,20 +7,22 @@ import {
 import Checkbox from '@components/Checkbox';
 import Link from '@components/Link';
 import FormikForm from '@components/FormikForm';
-import { Field } from 'formik';
+import { Field, FormikHelpers } from 'formik';
+import axiosInstance from 'utils/axios';
+import { useNavigate } from 'react-router-dom';
+import { AuthType } from 'types/authTypes';
+import { AuthContext } from 'context/authContext';
 
 interface Props {}
 
 const Login = (props: Props) => {
-  const onSubmit = (values: LoginInitValuesType) => {
-    console.log(values);
-  };
+  const { onLogin } = useContext(AuthContext);
 
   return (
     <FormikForm
       fields={LoginFields}
       initialValues={LoginInitValues}
-      onSubmit={onSubmit}
+      onSubmit={onLogin}
       btnText="Sign In"
     >
       <div className="flex items-center justify-between">

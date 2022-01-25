@@ -16,7 +16,8 @@
           "@layout": "./src/Layout",
           "@assets": "./src/assets",
           "utils": "./src/utils",
-          "types": "./src/types"
+          "types": "./src/types",
+          "context": "./src/context"
         }
       }
     ]

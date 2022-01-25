@@ -16,6 +16,8 @@ const FormikForm = <T extends { serverError?: '' }>({
   btnText,
   ...props
 }: Props<T>) => {
+  console.log('hello FormikForm');
+
   return (
     <Formik {...props}>
       {({ isValid, dirty, errors, isSubmitting }) => (
@@ -40,4 +42,4 @@ const FormikForm = <T extends { serverError?: '' }>({
   );
 };
 
-export default FormikForm;
+export default React.memo(FormikForm);

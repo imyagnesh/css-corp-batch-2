@@ -1,17 +1,12 @@
 import Input from '@components/Input';
 import Select from '@components/Select';
 import React from 'react';
+import { GenderEnum } from 'types/commonTypes';
 import {
   FieldsProps,
   IsFirstOrLastProps,
   SelectOptions,
 } from 'types/customTypes';
-
-enum GenderEnum {
-  male = 'male',
-  female = 'female',
-  other = 'other',
-}
 
 export type RegisterInitValuesType = {
   name: string;
