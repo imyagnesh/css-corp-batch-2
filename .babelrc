@@ -17,7 +17,8 @@
           "@assets": "./src/assets",
           "utils": "./src/utils",
           "types": "./src/types",
-          "context": "./src/context"
+          "context": "./src/context",
+          "hooks": "./src/hooks"
         }
       }
     ]
