@@ -5,9 +5,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthType } from 'types/authTypes';
 import axiosInstance from 'utils/axios';
+import useError from './useError';
 
 const useAuth = () => {
   const [token, setToken] = useState('');
+  const handleError = useError();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,11 +37,7 @@ const useAuth = () => {
         setToken(res.data.accessToken);
         navigate('/home', { replace: true });
       } catch (error) {
-        console.log('error', error);
-        let message = 'Something went wrong. Please try after sometime.';
-        if (error instanceof Error) {
-          message = error.message;
-        }
+        const message = handleError(error);
         actions.setErrors({ serverError: message });
       }
     },
@@ -59,11 +57,7 @@ const useAuth = () => {
         setToken(res.data.accessToken);
         navigate('/home', { replace: true });
       } catch (error) {
-        console.log('error', error);
-        let message = 'Something went wrong. Please try after sometime.';
-        if (error instanceof Error) {
-          message = error.message;
-        }
+        const message = handleError(error);
         actions.setErrors({ serverError: message });
       }
     },
