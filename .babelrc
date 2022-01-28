@@ -18,7 +18,8 @@
           "utils": "./src/utils",
           "types": "./src/types",
           "context": "./src/context",
-          "hooks": "./src/hooks"
+          "hooks": "./src/hooks",
+          "reducers": "./src/reducers"
         }
       }
     ]

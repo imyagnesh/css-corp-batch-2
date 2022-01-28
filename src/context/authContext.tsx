@@ -11,6 +11,7 @@ import React, {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthType } from 'types/authTypes';
+import { ProviderType } from 'types/customTypes';
 import { User } from 'types/UserType';
 import axiosInstance from 'utils/axios';
 
@@ -33,11 +34,7 @@ export const AuthContext = createContext<AuthContextType>({
   onLogout: () => {},
 });
 
-type Props = {
-  children: React.ReactElement;
-};
-
-export const AuthProvider = ({ children }: Props) => {
+export const AuthProvider = ({ children }: ProviderType) => {
   const { onLogin, onRegister, onLogout, token } = useAuth();
 
   const value = useMemo(

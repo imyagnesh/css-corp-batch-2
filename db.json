@@ -313,26 +313,6 @@
       "productId": 2,
       "quantity": 1,
       "id": 2
-    },
-    {
-      "productId": 3,
-      "quantity": 1,
-      "id": 3
-    },
-    {
-      "productId": 4,
-      "quantity": 1,
-      "id": 4
-    },
-    {
-      "productId": 5,
-      "quantity": 1,
-      "id": 5
-    },
-    {
-      "productId": 6,
-      "quantity": 1,
-      "id": 6
     }
   ]
 }
