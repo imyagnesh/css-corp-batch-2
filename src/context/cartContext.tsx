@@ -9,24 +9,33 @@ import axiosInstance from 'utils/axios';
 type CartProviderValue = {
   cart?: CartType[];
   products?: ProductType[];
+  loading: boolean;
   handleCart: (productId: number) => Promise<void>;
   loadData: () => Promise<void>;
+  updateCart: (cartItem: CartType) => void;
 };
 
 export const CartContext = createContext<CartProviderValue>({
   handleCart: async () => {},
   loadData: async () => {},
+  updateCart: () => {},
+  loading: false,
 });
 
 export const CartProvider = ({ children }: ProviderType) => {
-  const [{ cart, products }, dispatch] = useReducer(
+  const [{ cart, products, loading }, dispatch] = useReducer(
     productReducer,
     productInitialState,
   );
   const handleError = useError();
 
+  console.log('loading', loading);
+
   const loadData = useCallback(async () => {
     try {
+      dispatch({
+        type: 'LOAD_PRODUCTS_REQUEST',
+      });
       const res = await Promise.all([
         axiosInstance.get<ProductType[]>('660/products'),
         axiosInstance.get<CartType[]>('660/cart'),
@@ -47,6 +56,11 @@ export const CartProvider = ({ children }: ProviderType) => {
 
   const handleCart = useCallback(async (productId) => {
     try {
+      console.log(productId);
+
+      dispatch({
+        type: 'ADD_CART_ITEM_REQUEST',
+      });
       const res = await axiosInstance.post<CartType>('660/cart', {
         productId,
         quantity: 1,
@@ -57,11 +71,53 @@ export const CartProvider = ({ children }: ProviderType) => {
       });
       // setCart((val) => [...val, res.data]);
     } catch (error) {
-      console.log(error);
+      handleError(error);
     }
   }, []);
 
-  const updateCart = useCallback(() => {}, []);
+  const deleteCartItem = useCallback(async (cartItem) => {
+    try {
+      dispatch({
+        type: 'DELETE_CART_ITEM_REQUEST',
+      });
+      await axiosInstance.delete(`660/cart/${cartItem.id}`);
+      dispatch({
+        type: 'DELETE_CART_ITEM_SUCCESS',
+        cartItem,
+      });
+    } catch (error) {
+      handleError(error);
+    }
+  }, []);
+
+  const updateCartItem = useCallback(async (cartItem) => {
+    try {
+      dispatch({
+        type: 'UPDATE_CART_ITEM_REQUEST',
+      });
+      const res = await axiosInstance.put<CartType>(
+        `660/cart/${cartItem.id}`,
+        cartItem,
+      );
+      dispatch({
+        type: 'UPDATE_CART_ITEM_SUCCESS',
+        cartItem: res.data,
+      });
+    } catch (error) {
+      handleError(error);
+    }
+  }, []);
+
+  const updateCart = useCallback(
+    (cartItem: CartType) => {
+      if (cartItem.quantity > 0) {
+        updateCartItem(cartItem);
+      } else {
+        deleteCartItem(cartItem);
+      }
+    },
+    [updateCartItem, deleteCartItem],
+  );
 
   const value = useMemo(
     () => ({
@@ -69,8 +125,10 @@ export const CartProvider = ({ children }: ProviderType) => {
       products,
       handleCart,
       loadData,
+      updateCart,
+      loading,
     }),
-    [cart, products, handleCart, loadData],
+    [cart, products, handleCart, loadData, updateCart, loading],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -90,7 +90,7 @@ const MainLayout = (props: Props) => {
                           aria-hidden="true"
                         />
                         <span className="ml-2 text-sm font-medium">
-                          {cart?.length}
+                          {cart?.reduce((p, c) => p + c.quantity, 0)}
                         </span>
                       </button>
                     )}

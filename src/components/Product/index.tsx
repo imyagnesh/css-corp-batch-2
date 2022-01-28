@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { ChangeEvent, memo } from 'react';
 import { ProductType } from 'types/productsTypes';
 import cn from 'classnames';
 import Rating from '@components/Rating';
@@ -6,6 +6,7 @@ import { CartType } from 'types/cartTypes';
 
 type Props = {
   handleCart: (productId: number) => void;
+  updateCart: (cartItem: CartType) => void;
   cartItem: CartType | undefined;
 } & ProductType;
 
@@ -19,8 +20,15 @@ const Product = ({
   id,
   cartItem,
   handleCart,
+  updateCart,
 }: Props) => {
   console.log('Product Component');
+
+  const changeQuantity = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (cartItem) {
+      updateCart({ ...cartItem, quantity: Number(event.target.value) });
+    }
+  };
 
   return (
     <div className="w-full relative flex items-center bg-white px-4 pt-14 pb-8 overflow-hidden shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
@@ -70,7 +78,7 @@ const Product = ({
             ) : (
               <select
                 value={cartItem.quantity}
-                onChange={() => {}}
+                onChange={changeQuantity}
                 className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               >
                 {[...Array(10).keys()].map((x) => (
