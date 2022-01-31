@@ -353,6 +353,16 @@
       "productId": 14,
       "quantity": 1,
       "id": 18
+    },
+    {
+      "productId": 1,
+      "quantity": 1,
+      "id": 19
+    },
+    {
+      "productId": 2,
+      "quantity": 1,
+      "id": 20
     }
   ]
 }
