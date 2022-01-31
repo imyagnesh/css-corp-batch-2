@@ -6,8 +6,12 @@ import { CartType } from 'types/cartTypes';
 
 type Props = {
   handleCart: (productId: number) => void;
-  updateCart: (cartItem: CartType) => void;
+  updateCartItem: (cartItem: CartType) => void;
+  deleteCartItem: (cartItem: CartType) => void;
   cartItem: CartType | undefined;
+  addLoading: boolean;
+  deleteLoading: boolean;
+  updateLoading: boolean;
 } & ProductType;
 
 const Product = ({
@@ -20,13 +24,17 @@ const Product = ({
   id,
   cartItem,
   handleCart,
-  updateCart,
+  updateCartItem,
+  deleteCartItem,
+  addLoading,
+  updateLoading,
+  deleteLoading,
 }: Props) => {
   console.log('Product Component');
 
   const changeQuantity = (event: ChangeEvent<HTMLSelectElement>) => {
     if (cartItem) {
-      updateCart({ ...cartItem, quantity: Number(event.target.value) });
+      updateCartItem({ ...cartItem, quantity: Number(event.target.value) });
     }
   };
 
@@ -42,7 +50,9 @@ const Product = ({
           </h2>
 
           <section aria-labelledby="information-heading" className="mt-2">
-            <h3 id="information-heading">{description}</h3>
+            <h3 id="information-heading" className="truncate">
+              {description}
+            </h3>
 
             <p className="text-2xl text-gray-900">
               {new Intl.NumberFormat('en-US', {
@@ -64,9 +74,11 @@ const Product = ({
             {!cartItem ? (
               <button
                 type="button"
+                disabled={addLoading}
                 className={cn(
                   {
-                    'bg-gray-600 hover:bg-none focus:ring-0': !!cartItem,
+                    'bg-gray-600 hover:bg-none focus:ring-0':
+                      !!cartItem || addLoading,
                     'hover:bg-indigo-700 focus:ring-indigo-500': !cartItem,
                   },
                   'mt-6 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white  focus:outline-none focus:ring-2 focus:ring-offset-2 ',
@@ -76,17 +88,30 @@ const Product = ({
                 Add to bag
               </button>
             ) : (
-              <select
-                value={cartItem.quantity}
-                onChange={changeQuantity}
-                className="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              >
-                {[...Array(10).keys()].map((x) => (
-                  <option key={x} value={x}>
-                    {x}
-                  </option>
-                ))}
-              </select>
+              <div className="flex items-center justify-between">
+                <select
+                  disabled={updateLoading}
+                  value={cartItem.quantity}
+                  onChange={changeQuantity}
+                  className="mt-1 block w-1/2 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                >
+                  {[...Array(10).keys()].map((x) => (
+                    <option key={x} value={x + 1}>
+                      {x + 1}
+                    </option>
+                  ))}
+                </select>
+                <a
+                  role="button"
+                  onClick={() => deleteCartItem(cartItem)}
+                  className={cn('ml-3 text-sm font-medium', {
+                    'text-gray-600 hover:text-gray-500': deleteLoading,
+                    'text-indigo-600 hover:text-indigo-500': !deleteLoading,
+                  })}
+                >
+                  Delete
+                </a>
+              </div>
             )}
           </section>
         </div>

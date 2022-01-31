@@ -13,14 +13,13 @@ type CartProviderValue = {
   handleCart: (productId: number) => Promise<void>;
   loadData: () => Promise<void>;
   updateCart: (cartItem: CartType) => void;
+  deleteCartItem: (cartItem: CartType) => void;
+  updateCartItem: (cartItem: CartType) => void;
 };
 
-export const CartContext = createContext<CartProviderValue>({
-  handleCart: async () => {},
-  loadData: async () => {},
-  updateCart: () => {},
-  loading: false,
-});
+export const CartContext = createContext<CartProviderValue>(
+  {} as CartProviderValue,
+);
 
 export const CartProvider = ({ children }: ProviderType) => {
   const [{ cart, products, loading }, dispatch] = useReducer(
@@ -60,6 +59,7 @@ export const CartProvider = ({ children }: ProviderType) => {
 
       dispatch({
         type: 'ADD_CART_ITEM_REQUEST',
+        id: productId,
       });
       const res = await axiosInstance.post<CartType>('660/cart', {
         productId,
@@ -75,10 +75,11 @@ export const CartProvider = ({ children }: ProviderType) => {
     }
   }, []);
 
-  const deleteCartItem = useCallback(async (cartItem) => {
+  const deleteCartItem = useCallback(async (cartItem: CartType) => {
     try {
       dispatch({
         type: 'DELETE_CART_ITEM_REQUEST',
+        id: cartItem.productId,
       });
       await axiosInstance.delete(`660/cart/${cartItem.id}`);
       dispatch({
@@ -90,10 +91,11 @@ export const CartProvider = ({ children }: ProviderType) => {
     }
   }, []);
 
-  const updateCartItem = useCallback(async (cartItem) => {
+  const updateCartItem = useCallback(async (cartItem: CartType) => {
     try {
       dispatch({
         type: 'UPDATE_CART_ITEM_REQUEST',
+        id: cartItem.productId,
       });
       const res = await axiosInstance.put<CartType>(
         `660/cart/${cartItem.id}`,
@@ -126,9 +128,20 @@ export const CartProvider = ({ children }: ProviderType) => {
       handleCart,
       loadData,
       updateCart,
+      updateCartItem,
+      deleteCartItem,
       loading,
     }),
-    [cart, products, handleCart, loadData, updateCart, loading],
+    [
+      cart,
+      products,
+      handleCart,
+      loadData,
+      updateCart,
+      loading,
+      updateCartItem,
+      deleteCartItem,
+    ],
   );
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
