@@ -1,6 +1,6 @@
 import useError from 'hooks/useError';
 import React, { createContext, useCallback, useMemo, useReducer } from 'react';
-import productReducer, { productInitialState } from 'reducers/productReducer';
+import productReducer, { productInitialState } from 'reducers/productsReducer';
 import rootReducer, { rootInitialState } from 'reducers/rootReducer';
 import { CartType } from 'types/cartTypes';
 import { ProviderType } from 'types/customTypes';
@@ -25,32 +25,21 @@ export const CartContext = createContext<CartProviderValue>(
 );
 
 export const CartProvider = ({ children }: ProviderType) => {
-  const [
-    {
-      product: { cart, products },
-      loading,
-      error,
-    },
-    dispatch,
-  ] = useReducer(rootReducer, rootInitialState);
+  const [{ cart, products, loading, error }, dispatch] = useReducer(
+    rootReducer,
+    rootInitialState,
+  );
   const handleError = useError();
 
-  const loadData = useCallback(async () => {
+  const loadProducts = useCallback(async () => {
     try {
       dispatch({
         type: 'LOAD_PRODUCTS_REQUEST',
       });
-      const res = await Promise.all([
-        axiosInstance.get<ProductType[]>('660/products'),
-        axiosInstance.get<CartType[]>('660/cart'),
-      ]);
-
+      const res = await axiosInstance.get<ProductType[]>('660/products');
       dispatch({
         type: 'LOAD_PRODUCTS_SUCCESS',
-        data: {
-          products: res[0].data,
-          cart: res[1].data,
-        },
+        data: res.data,
       });
     } catch (error) {
       const message = handleError(error);
@@ -60,6 +49,30 @@ export const CartProvider = ({ children }: ProviderType) => {
       });
     }
   }, []);
+
+  const loadCart = useCallback(async () => {
+    try {
+      dispatch({
+        type: 'LOAD_CART_REQUEST',
+      });
+      const res = await axiosInstance.get<CartType[]>('660/cart');
+      dispatch({
+        type: 'LOAD_CART_SUCCESS',
+        data: res.data,
+      });
+    } catch (error) {
+      const message = handleError(error);
+      dispatch({
+        type: 'LOAD_CART_FAIL',
+        error: message,
+      });
+    }
+  }, []);
+
+  const loadData = useCallback(async () => {
+    loadProducts();
+    loadCart();
+  }, [loadProducts, loadCart]);
 
   const handleCart = useCallback(async (productId) => {
     try {

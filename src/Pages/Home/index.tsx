@@ -1,11 +1,14 @@
 import Product from '@components/Product';
+import { loadCart } from 'actions/cartActions';
+import { loadProducts } from 'actions/productActions';
 import { CartContext } from 'context/cartContext';
-import React, { useContext, useEffect } from 'react';
+import React, { memo, useContext, useEffect } from 'react';
+import { connect } from 'react-redux';
 
-const Home = () => {
+const Home = ({ products, cart, loadProducts, loadCart }) => {
   const {
-    products,
-    cart,
+    // products,
+    // cart,
     handleCart,
     loadData,
     updateCartItem,
@@ -13,9 +16,13 @@ const Home = () => {
     loading,
   } = useContext(CartContext);
 
+  console.log(products);
+  console.log(cart);
+
   useEffect(() => {
-    loadData();
-  }, [loadData]);
+    loadProducts();
+    loadCart();
+  }, [loadProducts, loadCart]);
 
   return (
     <div className="relative">
@@ -47,4 +54,18 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (store) => {
+  return {
+    products: store.products,
+    cart: store.cart,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadProducts: () => loadCart()(dispatch),
+    loadCart: () => loadProducts()(dispatch),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Home));

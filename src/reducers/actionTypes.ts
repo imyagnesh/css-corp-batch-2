@@ -1,13 +1,19 @@
 import { CartType } from 'types/cartTypes';
-import { ProductInitialStateType } from './productReducer';
+import { ProductType } from 'types/productsTypes';
 
 export type LoadProductSuccessAction = {
   type: 'LOAD_PRODUCTS_SUCCESS';
-  data: ProductInitialStateType;
+  data: ProductType[];
   processId?: number;
 };
 
-export type AddCartItemSuccess = {
+export type LoadCartSuccessAction = {
+  type: 'LOAD_CART_SUCCESS';
+  data: CartType[];
+  processId?: number;
+};
+
+export type CartItemSuccess = {
   type:
     | 'ADD_CART_ITEM_SUCCESS'
     | 'UPDATE_CART_ITEM_SUCCESS'
@@ -19,6 +25,7 @@ export type AddCartItemSuccess = {
 export type RequestActionType = {
   type:
     | 'LOAD_PRODUCTS_REQUEST'
+    | 'LOAD_CART_REQUEST'
     | 'ADD_CART_ITEM_REQUEST'
     | 'UPDATE_CART_ITEM_REQUEST'
     | 'DELETE_CART_ITEM_REQUEST';
@@ -28,6 +35,7 @@ export type RequestActionType = {
 export type BaseErrorActionType = {
   type:
     | 'LOAD_PRODUCTS_FAIL'
+    | 'LOAD_CART_FAIL'
     | 'ADD_CART_ITEM_FAIL'
     | 'UPDATE_CART_ITEM_FAIL'
     | 'DELETE_CART_ITEM_FAIL';

@@ -1,6 +1,9 @@
 import { ErrorType } from 'types/customTypes';
 
-export default (state: any, { type, error, processId, key }: ErrorType) => {
+export default (
+  state: any = {},
+  { type, error, processId, key }: ErrorType,
+) => {
   const matches = /(.*)_(REQUEST|FAIL)/.exec(type);
   if (matches) {
     const id = processId ? `_${processId}` : '';

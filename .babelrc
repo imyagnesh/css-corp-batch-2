@@ -19,7 +19,8 @@
           "types": "./src/types",
           "context": "./src/context",
           "hooks": "./src/hooks",
-          "reducers": "./src/reducers"
+          "reducers": "./src/reducers",
+          "actions": "./src/actions"
         }
       }
     ]

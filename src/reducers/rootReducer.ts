@@ -1,32 +1,51 @@
-import { ErrorActionType, RequestActionType } from './actionTypes';
+import { CartType } from 'types/cartTypes';
+import { ProductType } from 'types/productsTypes';
+import {
+  CartItemSuccess,
+  ErrorActionType,
+  LoadCartSuccessAction,
+  LoadProductSuccessAction,
+  RequestActionType,
+} from './actionTypes';
+import cartReducer from './cartReducer';
 import errorReducer from './errorReducer';
 import loadingReducer from './loadingReducer';
-import productReducer, {
-  ProductActions,
-  productInitialState,
-  ProductInitialStateType,
-} from './productReducer';
+import productsReducer from './productsReducer';
 
 export type RootReducerType = {
-  product: ProductInitialStateType;
+  products: ProductType[];
+  cart: CartType[];
   error: any;
   loading: any;
 };
 
 export const rootInitialState = {
-  product: productInitialState,
+  products: [],
+  cart: [],
   error: {},
   loading: {},
 };
 
-export type RootAction = ProductActions | RequestActionType | ErrorActionType;
+export type RootAction =
+  | LoadProductSuccessAction
+  | LoadCartSuccessAction
+  | CartItemSuccess
+  | RequestActionType
+  | ErrorActionType;
 
 export default (
   state: RootReducerType,
   action: RootAction,
 ): RootReducerType => {
   return {
-    product: productReducer(state.product, action as ProductActions),
+    cart: cartReducer(
+      state.cart,
+      action as LoadCartSuccessAction | CartItemSuccess,
+    ),
+    products: productsReducer(
+      state.products,
+      action as LoadProductSuccessAction,
+    ),
     loading: loadingReducer(state.loading, action as RequestActionType),
     error: errorReducer(state.error, action as ErrorActionType),
   };

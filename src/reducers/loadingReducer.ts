@@ -1,6 +1,6 @@
 import { LoadingType } from 'types/customTypes';
 
-export default (state: any, { type, processId }: LoadingType) => {
+export default (state: any = {}, { type, processId }: LoadingType) => {
   const matches = /(.*)_(REQUEST|SUCCESS|FAIL)/.exec(type);
   if (!matches) return state;
 
