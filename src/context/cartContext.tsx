@@ -10,12 +10,14 @@ import axiosInstance from 'utils/axios';
 type CartProviderValue = {
   cart?: CartType[];
   products?: ProductType[];
-  loading: boolean;
+  loading: any;
+  error: any;
   handleCart: (productId: number) => Promise<void>;
   loadData: () => Promise<void>;
   updateCart: (cartItem: CartType) => void;
   deleteCartItem: (cartItem: CartType) => void;
   updateCartItem: (cartItem: CartType) => void;
+  clearError: (key: string) => void;
 };
 
 export const CartContext = createContext<CartProviderValue>(
@@ -33,13 +35,10 @@ export const CartProvider = ({ children }: ProviderType) => {
   ] = useReducer(rootReducer, rootInitialState);
   const handleError = useError();
 
-  console.log(loading);
-
   const loadData = useCallback(async () => {
     try {
       dispatch({
         type: 'LOAD_PRODUCTS_REQUEST',
-        processId: -1,
       });
       const res = await Promise.all([
         axiosInstance.get<ProductType[]>('660/products'),
@@ -52,18 +51,18 @@ export const CartProvider = ({ children }: ProviderType) => {
           products: res[0].data,
           cart: res[1].data,
         },
-        processId: -1,
       });
     } catch (error) {
       const message = handleError(error);
-      console.log(message);
+      dispatch({
+        type: 'LOAD_PRODUCTS_FAIL',
+        error: message,
+      });
     }
   }, []);
 
   const handleCart = useCallback(async (productId) => {
     try {
-      console.log(productId);
-
       dispatch({
         type: 'ADD_CART_ITEM_REQUEST',
         processId: productId,
@@ -79,7 +78,14 @@ export const CartProvider = ({ children }: ProviderType) => {
       });
       // setCart((val) => [...val, res.data]);
     } catch (error) {
-      handleError(error);
+      const message = handleError(error);
+      console.log(message);
+
+      dispatch({
+        type: 'ADD_CART_ITEM_FAIL',
+        processId: productId,
+        error: message,
+      });
     }
   }, []);
 
@@ -96,7 +102,12 @@ export const CartProvider = ({ children }: ProviderType) => {
         processId: cartItem.productId,
       });
     } catch (error) {
-      handleError(error);
+      const message = handleError(error);
+      dispatch({
+        type: 'DELETE_CART_ITEM_FAIL',
+        processId: cartItem.productId,
+        error: message,
+      });
     }
   }, []);
 
@@ -116,8 +127,21 @@ export const CartProvider = ({ children }: ProviderType) => {
         processId: cartItem.productId,
       });
     } catch (error) {
-      handleError(error);
+      const message = handleError(error);
+      dispatch({
+        type: 'UPDATE_CART_ITEM_FAIL',
+        processId: cartItem.productId,
+        error: message,
+      });
     }
+  }, []);
+
+  const clearError = useCallback((key: string) => {
+    dispatch({
+      type: 'CLEAR_ERROR',
+      key: key,
+      error: '',
+    });
   }, []);
 
   const updateCart = useCallback(
@@ -141,6 +165,8 @@ export const CartProvider = ({ children }: ProviderType) => {
       updateCartItem,
       deleteCartItem,
       loading,
+      error,
+      clearError,
     }),
     [
       cart,
@@ -151,6 +177,8 @@ export const CartProvider = ({ children }: ProviderType) => {
       loading,
       updateCartItem,
       deleteCartItem,
+      error,
+      clearError,
     ],
   );
 

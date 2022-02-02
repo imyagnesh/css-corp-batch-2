@@ -17,8 +17,6 @@ const Home = () => {
     loadData();
   }, [loadData]);
 
-  console.log(loading);
-
   return (
     <div className="relative">
       {loading['LOAD_PRODUCTS'] && (

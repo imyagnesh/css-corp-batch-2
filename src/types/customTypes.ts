@@ -34,5 +34,6 @@ export type LoadingType = {
 };
 
 export type ErrorType = {
-  error?: Error;
+  error: string;
+  key?: string;
 } & LoadingType;

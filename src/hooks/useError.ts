@@ -7,6 +7,8 @@ const useError = () => {
   const handleError = useCallback(
     (error: any) => {
       let message = 'Something went wrong. Please try after sometime.';
+      console.log(error);
+
       if (error instanceof Error) {
         message = error.message;
       }

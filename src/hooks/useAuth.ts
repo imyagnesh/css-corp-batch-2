@@ -17,7 +17,6 @@ const useAuth = () => {
     const user = sessionStorage.getItem('@app/user');
     if (user) {
       const objUser = JSON.parse(user);
-      console.log(objUser);
     }
     // write validate token mechanism here
     if (token) setToken(token);

@@ -16,8 +16,6 @@ const FormikForm = <T extends { serverError?: '' }>({
   btnText,
   ...props
 }: Props<T>) => {
-  console.log('hello FormikForm');
-
   return (
     <Formik {...props}>
       {({ isValid, dirty, errors, isSubmitting }) => (

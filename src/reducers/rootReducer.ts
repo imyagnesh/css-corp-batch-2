@@ -27,14 +27,7 @@ export default (
 ): RootReducerType => {
   return {
     product: productReducer(state.product, action as ProductActions),
-    error: errorReducer(state, {
-      type: action.type,
-      processId: action.processId,
-      error: action.error,
-    } as ErrorActionType),
-    loading: loadingReducer(state, {
-      type: action.type,
-      processId: action.processId,
-    } as RequestActionType),
+    loading: loadingReducer(state.loading, action as RequestActionType),
+    error: errorReducer(state.error, action as ErrorActionType),
   };
 };

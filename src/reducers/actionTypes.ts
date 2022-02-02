@@ -3,9 +3,8 @@ import { ProductInitialStateType } from './productReducer';
 
 export type LoadProductSuccessAction = {
   type: 'LOAD_PRODUCTS_SUCCESS';
-  data: Omit<ProductInitialStateType, 'loading'>;
+  data: ProductInitialStateType;
   processId?: number;
-  error?: never;
 };
 
 export type AddCartItemSuccess = {
@@ -15,7 +14,6 @@ export type AddCartItemSuccess = {
     | 'DELETE_CART_ITEM_SUCCESS';
   cartItem: CartType;
   processId: number;
-  error?: never;
 };
 
 export type RequestActionType = {
@@ -24,16 +22,23 @@ export type RequestActionType = {
     | 'ADD_CART_ITEM_REQUEST'
     | 'UPDATE_CART_ITEM_REQUEST'
     | 'DELETE_CART_ITEM_REQUEST';
-  processId: number;
-  error?: never;
+  processId?: number;
 };
 
-export type ErrorActionType = {
+export type BaseErrorActionType = {
   type:
     | 'LOAD_PRODUCTS_FAIL'
     | 'ADD_CART_ITEM_FAIL'
     | 'UPDATE_CART_ITEM_FAIL'
     | 'DELETE_CART_ITEM_FAIL';
-  processId: number;
-  error: Error;
+  processId?: number;
+  error: string;
 };
+
+export type ClearErrorAction = {
+  type: 'CLEAR_ERROR';
+  key: string;
+  error: string;
+};
+
+export type ErrorActionType = BaseErrorActionType | ClearErrorAction;
