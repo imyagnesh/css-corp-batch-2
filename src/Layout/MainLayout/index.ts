@@ -1,6 +1,6 @@
 import MainLayout from './MainLayout';
 import { connect } from 'react-redux';
-import { RootState, AppDispatch } from 'configureStore';
+import { RootState, AppDispatch } from 'types/commonTypes';
 
 const mapStateToProps = (store: RootState) => ({
   quantity: store.cart.reduce((p, c) => p + c.quantity, 0),

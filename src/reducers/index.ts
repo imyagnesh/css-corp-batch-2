@@ -4,4 +4,6 @@ import loading from './loadingReducer';
 import products from './productsReducer';
 import cart from './cartReducer';
 
-export default combineReducers({ error, loading, products, cart });
+const rootReducer = combineReducers({ error, loading, products, cart });
+
+export default rootReducer;

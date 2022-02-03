@@ -1,8 +1,9 @@
+import { AppDispatch } from 'types/commonTypes';
 import { ProductType } from 'types/productsTypes';
 import axiosInstance from 'utils/axios';
 
 export const loadProducts = () => {
-  return async (dispatch) => {
+  return async (dispatch: AppDispatch) => {
     try {
       dispatch({
         type: 'LOAD_PRODUCTS_REQUEST',
@@ -13,10 +14,13 @@ export const loadProducts = () => {
         data: res.data,
       });
     } catch (error) {
-      //   const message = handleError(error);
+      let message = 'Something went wrong. Please try after sometime.';
+      if (error instanceof Error) {
+        message = error.message;
+      }
       dispatch({
         type: 'LOAD_PRODUCTS_FAIL',
-        error: 'Error',
+        error: message,
       });
     }
   };
