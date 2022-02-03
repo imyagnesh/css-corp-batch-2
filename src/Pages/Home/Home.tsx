@@ -1,24 +1,29 @@
 import Product from '@components/Product';
-import { loadCart } from 'actions/cartActions';
-import { loadProducts } from 'actions/productActions';
-import { CartContext } from 'context/cartContext';
-import React, { memo, useContext, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { memo, useEffect } from 'react';
+import { CartType } from 'types/cartTypes';
+import { ProductType } from 'types/productsTypes';
 
-const Home = ({ products, cart, loadProducts, loadCart }) => {
-  const {
-    // products,
-    // cart,
-    handleCart,
-    loadData,
-    updateCartItem,
-    deleteCartItem,
-    loading,
-  } = useContext(CartContext);
+type Props = {
+  products: ProductType[];
+  cart: CartType[];
+  loadProducts: () => Promise<void>;
+  loadCart: () => Promise<void>;
+  addCartItem: (productId: number) => Promise<void>;
+  updateCartItem: (cartItem: CartType) => Promise<void>;
+  deleteCartItem: (cartItem: CartType) => Promise<void>;
+  loading: any;
+};
 
-  console.log(products);
-  console.log(cart);
-
+const Home = ({
+  products,
+  cart,
+  loadProducts,
+  loadCart,
+  loading,
+  addCartItem,
+  updateCartItem,
+  deleteCartItem,
+}: Props) => {
   useEffect(() => {
     loadProducts();
     loadCart();
@@ -39,7 +44,7 @@ const Home = ({ products, cart, loadProducts, loadCart }) => {
         return (
           <Product
             key={product.id}
-            handleCart={handleCart}
+            handleCart={addCartItem}
             cartItem={cartItem}
             updateCartItem={updateCartItem}
             deleteCartItem={deleteCartItem}
@@ -54,18 +59,4 @@ const Home = ({ products, cart, loadProducts, loadCart }) => {
   );
 };
 
-const mapStateToProps = (store) => {
-  return {
-    products: store.products,
-    cart: store.cart,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    loadProducts: () => loadCart()(dispatch),
-    loadCart: () => loadProducts()(dispatch),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Home));
+export default memo(Home);

@@ -1,4 +1,4 @@
-import React, { Fragment, useContext } from 'react';
+import React, { Fragment, memo, useContext } from 'react';
 import cn from 'classnames';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon, ShoppingBagIcon } from '@heroicons/react/outline';
@@ -14,16 +14,19 @@ const navigation = [
   { name: 'Calendar', href: '#', current: false },
 ];
 
-interface Props {}
+interface Props {
+  quantity: number;
+  error: any;
+  clearError: (key: string) => void;
+}
 
-const MainLayout = (props: Props) => {
+const MainLayout = ({ quantity, error, clearError }: Props) => {
   const { onLogout, token } = useContext(AuthContext);
-  // const { cart, error, clearError } = useContext(CartContext);
   let location = useLocation();
   if (!token) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
-  // console.log('Main layout render');
+  console.log('Main layout render');
 
   return (
     <>
@@ -77,26 +80,13 @@ const MainLayout = (props: Props) => {
                   </div>
                 </div>
                 <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <CartContext.Consumer>
-                    {({ cart }) => {
-                      console.log('Cart section');
-
-                      return (
-                        <button
-                          type="button"
-                          className="flex items-center bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-                        >
-                          <ShoppingBagIcon
-                            className="h-6 w-6"
-                            aria-hidden="true"
-                          />
-                          <span className="ml-2 text-sm font-medium">
-                            {cart?.reduce((p, c) => p + c.quantity, 0)}
-                          </span>
-                        </button>
-                      );
-                    }}
-                  </CartContext.Consumer>
+                  <button
+                    type="button"
+                    className="flex items-center bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                  >
+                    <ShoppingBagIcon className="h-6 w-6" aria-hidden="true" />
+                    <span className="ml-2 text-sm font-medium">{quantity}</span>
+                  </button>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
@@ -197,41 +187,33 @@ const MainLayout = (props: Props) => {
         )}
       </Disclosure>
       <Outlet />
-      <CartContext.Consumer>
-        {({ error, clearError }) => {
-          console.log('error section');
 
-          return (
-            <>
-              {Object.keys(error)
-                .slice(0, 3)
-                .map((x, index) => {
-                  console.log(x);
-                  const title = x
-                    .replace(/_\d+/g, '')
-                    .split('_')
-                    .map(
-                      (txt) =>
-                        `${txt[0].toUpperCase()}${txt.slice(1).toLowerCase()}`,
-                    )
-                    .join(' ');
-                  return (
-                    <Snackbar
-                      key={x}
-                      title={title}
-                      text={error[x]}
-                      btnText="Retry"
-                      onCancel={() => clearError(x)}
-                      index={index}
-                    />
-                  );
-                })}
-            </>
-          );
-        }}
-      </CartContext.Consumer>
+      <>
+        {Object.keys(error)
+          .slice(0, 3)
+          .map((x, index) => {
+            console.log(x);
+            const title = x
+              .replace(/_\d+/g, '')
+              .split('_')
+              .map(
+                (txt) => `${txt[0].toUpperCase()}${txt.slice(1).toLowerCase()}`,
+              )
+              .join(' ');
+            return (
+              <Snackbar
+                key={x}
+                title={title}
+                text={error[x]}
+                btnText="Retry"
+                onCancel={() => clearError(x)}
+                index={index}
+              />
+            );
+          })}
+      </>
     </>
   );
 };
 
-export default MainLayout;
+export default memo(MainLayout);

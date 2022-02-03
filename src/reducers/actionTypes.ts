@@ -30,6 +30,8 @@ export type RequestActionType = {
     | 'UPDATE_CART_ITEM_REQUEST'
     | 'DELETE_CART_ITEM_REQUEST';
   processId?: number;
+  error?: never;
+  key?: never;
 };
 
 export type BaseErrorActionType = {
@@ -41,12 +43,26 @@ export type BaseErrorActionType = {
     | 'DELETE_CART_ITEM_FAIL';
   processId?: number;
   error: string;
+  key?: never;
 };
 
 export type ClearErrorAction = {
   type: 'CLEAR_ERROR';
+  processId?: never;
   key: string;
   error: string;
 };
 
 export type ErrorActionType = BaseErrorActionType | ClearErrorAction;
+
+export type LoadingActions =
+  | RequestActionType
+  | LoadProductSuccessAction
+  | LoadCartSuccessAction
+  | CartItemSuccess
+  | BaseErrorActionType;
+
+export type ErrorActions =
+  | RequestActionType
+  | BaseErrorActionType
+  | ClearErrorAction;

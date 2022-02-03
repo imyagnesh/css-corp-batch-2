@@ -1,8 +1,8 @@
-import { ErrorType } from 'types/customTypes';
+import { ErrorActions } from './actionTypes';
 
 export default (
   state: any = {},
-  { type, error, processId, key }: ErrorType,
+  { type, error, processId, key }: ErrorActions,
 ) => {
   const matches = /(.*)_(REQUEST|FAIL)/.exec(type);
   if (matches) {
