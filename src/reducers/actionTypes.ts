@@ -22,17 +22,28 @@ export type CartItemSuccess = {
   processId: number;
 };
 
-export type RequestActionType = {
-  type:
-    | 'LOAD_PRODUCTS_REQUEST'
-    | 'LOAD_CART_REQUEST'
-    | 'ADD_CART_ITEM_REQUEST'
-    | 'UPDATE_CART_ITEM_REQUEST'
-    | 'DELETE_CART_ITEM_REQUEST';
-  processId?: number;
-  error?: never;
-  key?: never;
+type LoadRequestActionType = {
+  type: 'LOAD_PRODUCTS_REQUEST' | 'LOAD_CART_REQUEST';
+  processId?: never;
+  cartItem?: never;
 };
+
+type AddCartItemRequestActionType = {
+  type: 'ADD_CART_ITEM_REQUEST';
+  processId: number;
+  cartItem?: never;
+};
+
+type ModifyCartItemRequestActionType = {
+  type: 'UPDATE_CART_ITEM_REQUEST' | 'DELETE_CART_ITEM_REQUEST';
+  cartItem: CartType;
+  processId: number;
+};
+
+export type RequestActionType =
+  | LoadRequestActionType
+  | AddCartItemRequestActionType
+  | ModifyCartItemRequestActionType;
 
 export type BaseErrorActionType = {
   type:

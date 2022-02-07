@@ -10,6 +10,33 @@ export const LoadCartErrorAction = (error: string): ErrorActions => ({
   error,
 });
 
+export const AddCartItemFailAction = (
+  error: string,
+  processId: number,
+): ErrorActions => ({
+  type: 'ADD_CART_ITEM_FAIL',
+  processId,
+  error,
+});
+
+export const UpdateCartItemFailAction = (
+  error: string,
+  processId: number,
+): ErrorActions => ({
+  type: 'UPDATE_CART_ITEM_FAIL',
+  processId,
+  error,
+});
+
+export const DeleteCartItemFailAction = (
+  error: string,
+  processId: number,
+): ErrorActions => ({
+  type: 'DELETE_CART_ITEM_FAIL',
+  processId,
+  error,
+});
+
 export default (
   state: any = {},
   { type, error, processId, key }: ErrorActions,

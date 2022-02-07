@@ -1,4 +1,5 @@
-import { LoadingActions } from './actionTypes';
+import { CartType } from 'types/cartTypes';
+import { LoadingActions, RequestActionType } from './actionTypes';
 
 export const LoadProductRequestAction = (): LoadingActions => ({
   type: 'LOAD_PRODUCTS_REQUEST',
@@ -8,7 +9,32 @@ export const LoadCartRequestAction = (): LoadingActions => ({
   type: 'LOAD_CART_REQUEST',
 });
 
-export default (state: any = {}, { type, processId }: LoadingActions) => {
+export const AddCartItemRequestAction = (
+  processId: number,
+): RequestActionType => ({
+  type: 'ADD_CART_ITEM_REQUEST',
+  processId,
+});
+
+export const UpdateCartItemRequestAction = (
+  cartItem: CartType,
+  processId: number,
+): RequestActionType => ({
+  type: 'UPDATE_CART_ITEM_REQUEST',
+  cartItem,
+  processId,
+});
+
+export const deleteCartItemRequestAction = (
+  cartItem: CartType,
+  processId: number,
+): RequestActionType => ({
+  type: 'DELETE_CART_ITEM_REQUEST',
+  cartItem,
+  processId,
+});
+
+export default (state: any = {}, { type, processId }: RequestActionType) => {
   const matches = /(.*)_(REQUEST|SUCCESS|FAIL)/.exec(type);
   if (!matches) return state;
 
