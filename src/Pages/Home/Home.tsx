@@ -1,6 +1,5 @@
 import Product from '@components/Product';
 import React, { memo, useEffect } from 'react';
-import { CartType } from 'types/cartTypes';
 import { ProductType } from 'types/productsTypes';
 
 type Props = {

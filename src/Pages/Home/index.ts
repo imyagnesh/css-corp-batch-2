@@ -7,7 +7,6 @@ import Home from './Home';
 const mapStateToProps = (store: RootState) => {
   return {
     products: store.products,
-    cart: store.cart,
     loading: store.loading,
   };
 };
