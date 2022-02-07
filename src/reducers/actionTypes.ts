@@ -1,13 +1,13 @@
 import { CartType } from 'types/cartTypes';
 import { ProductType } from 'types/productsTypes';
 
-export type LoadProductSuccessAction = {
+export type LoadProductSuccessActionType = {
   type: 'LOAD_PRODUCTS_SUCCESS';
   data: ProductType[];
   processId?: number;
 };
 
-export type LoadCartSuccessAction = {
+export type LoadCartSuccessActionType = {
   type: 'LOAD_CART_SUCCESS';
   data: CartType[];
   processId?: number;
@@ -57,8 +57,8 @@ export type ErrorActionType = BaseErrorActionType | ClearErrorAction;
 
 export type LoadingActions =
   | RequestActionType
-  | LoadProductSuccessAction
-  | LoadCartSuccessAction
+  | LoadProductSuccessActionType
+  | LoadCartSuccessActionType
   | CartItemSuccess
   | BaseErrorActionType;
 

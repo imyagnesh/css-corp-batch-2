@@ -1,5 +1,15 @@
 import { ErrorActions } from './actionTypes';
 
+export const LoadProductErrorAction = (error: string): ErrorActions => ({
+  type: 'LOAD_PRODUCTS_FAIL',
+  error,
+});
+
+export const LoadCartErrorAction = (error: string): ErrorActions => ({
+  type: 'LOAD_CART_FAIL',
+  error,
+});
+
 export default (
   state: any = {},
   { type, error, processId, key }: ErrorActions,

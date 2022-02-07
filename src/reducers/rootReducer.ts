@@ -3,8 +3,8 @@ import { ProductType } from 'types/productsTypes';
 import {
   CartItemSuccess,
   ErrorActionType,
-  LoadCartSuccessAction,
-  LoadProductSuccessAction,
+  LoadCartSuccessActionType,
+  LoadProductSuccessActionType,
   RequestActionType,
 } from './actionTypes';
 import cartReducer from './cartReducer';
@@ -27,8 +27,8 @@ export const rootInitialState = {
 };
 
 export type RootAction =
-  | LoadProductSuccessAction
-  | LoadCartSuccessAction
+  | LoadProductSuccessActionType
+  | LoadCartSuccessActionType
   | CartItemSuccess
   | RequestActionType
   | ErrorActionType;
@@ -40,11 +40,11 @@ export default (
   return {
     cart: cartReducer(
       state.cart,
-      action as LoadCartSuccessAction | CartItemSuccess,
+      action as LoadCartSuccessActionType | CartItemSuccess,
     ),
     products: productsReducer(
       state.products,
-      action as LoadProductSuccessAction,
+      action as LoadProductSuccessActionType,
     ),
     loading: loadingReducer(state.loading, action as RequestActionType),
     error: errorReducer(state.error, action as ErrorActionType),

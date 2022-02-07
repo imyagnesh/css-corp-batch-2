@@ -21,7 +21,8 @@
           "hooks": "./src/hooks",
           "reducers": "./src/reducers",
           "actions": "./src/actions",
-          "middleware": "./src/middleware"
+          "middleware": "./src/middleware",
+          "sagas": "./src/sagas"
         }
       }
     ]

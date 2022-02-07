@@ -4,8 +4,8 @@ import { ProductType } from 'types/productsTypes';
 
 type Props = {
   products: ProductType[];
-  loadProducts: () => Promise<void>;
-  loadCart: () => Promise<void>;
+  loadProducts: () => void;
+  loadCart: () => void;
   loading: any;
 };
 

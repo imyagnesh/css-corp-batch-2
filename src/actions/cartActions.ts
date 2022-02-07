@@ -1,4 +1,4 @@
-import { AppDispatch } from 'configureStore';
+import { AppDispatch } from 'types/commonTypes';
 import { CartType } from 'types/cartTypes';
 import axiosInstance from 'utils/axios';
 
