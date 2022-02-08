@@ -1,38 +1,17 @@
-import React, { useCallback, useContext } from 'react';
-import {
-  LoginFields,
-  LoginInitValues,
-  LoginInitValuesType,
-} from './loginUtils';
-import Checkbox from '@components/Checkbox';
-import Link from '@components/Link';
-import FormikForm from '@components/FormikForm';
-import { Field, FormikHelpers } from 'formik';
-import axiosInstance from 'utils/axios';
-import { useNavigate } from 'react-router-dom';
-import { AuthType } from 'types/authTypes';
-import { AuthContext } from 'context/authContext';
+import { FormikHelpers } from 'formik';
+import { connect } from 'react-redux';
+import { loginRequestAction } from 'reducers/loadingReducer';
+import { AppDispatch } from 'types/commonTypes';
+import Login from './Login';
+import { LoginInitValuesType } from './loginUtils';
 
-interface Props {}
+const mapStateToProps = (state) => ({});
 
-const Login = (props: Props) => {
-  const { onLogin } = useContext(AuthContext);
+const mapDispatchToProps = (dispatch: AppDispatch) => ({
+  onLogin: (
+    values: LoginInitValuesType,
+    actions: FormikHelpers<LoginInitValuesType>,
+  ) => dispatch(loginRequestAction(values, actions)),
+});
 
-  return (
-    <FormikForm
-      fields={LoginFields}
-      initialValues={LoginInitValues}
-      onSubmit={onLogin}
-      btnText="Sign In"
-    >
-      <div className="flex items-center justify-between">
-        <Field name="remember_me" component={Checkbox}>
-          Remember Me
-        </Field>
-        <Link href="#">Forgot your password?</Link>
-      </div>
-    </FormikForm>
-  );
-};
-
-export default Login;
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

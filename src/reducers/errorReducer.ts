@@ -3,6 +3,7 @@ import {
   DeleteCartItemActions,
   LoadCartActions,
   LoadProductsActions,
+  LoginActions,
   UpdateCartItemActions,
 } from 'types/commonTypes';
 import {
@@ -46,6 +47,11 @@ export const DeleteCartItemFailAction = (
 ): ModifyCartErrorActionType => ({
   type: DeleteCartItemActions.DELETE_CART_ITEM_FAIL,
   processId,
+  error,
+});
+
+export const LoginFailAction = (error: string): LoadErrorActionType => ({
+  type: LoginActions.LOGIN_FAIL,
   error,
 });
 
