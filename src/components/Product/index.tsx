@@ -20,9 +20,9 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
   addCartItem: (productId: number) =>
     dispatch(AddCartItemRequestAction(productId)),
   updateCartItem: (cartItem: CartType) =>
-    dispatch(UpdateCartItemRequestAction(cartItem, cartItem.productId)),
+    dispatch(UpdateCartItemRequestAction(cartItem)),
   deleteCartItem: (cartItem: CartType) =>
-    dispatch(deleteCartItemRequestAction(cartItem, cartItem.productId)),
+    dispatch(deleteCartItemRequestAction(cartItem)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Product);

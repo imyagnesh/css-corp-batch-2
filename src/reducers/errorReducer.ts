@@ -1,20 +1,32 @@
-import { ErrorActions } from './actionTypes';
+import {
+  AddCartItemActions,
+  DeleteCartItemActions,
+  LoadCartActions,
+  LoadProductsActions,
+  UpdateCartItemActions,
+} from 'types/commonTypes';
+import {
+  ClearErrorAction,
+  ErrorActions,
+  LoadErrorActionType,
+  ModifyCartErrorActionType,
+} from './actionTypes';
 
-export const LoadProductErrorAction = (error: string): ErrorActions => ({
-  type: 'LOAD_PRODUCTS_FAIL',
+export const LoadProductErrorAction = (error: string): LoadErrorActionType => ({
+  type: LoadProductsActions.LOAD_PRODUCTS_FAIL,
   error,
 });
 
-export const LoadCartErrorAction = (error: string): ErrorActions => ({
-  type: 'LOAD_CART_FAIL',
+export const LoadCartErrorAction = (error: string): LoadErrorActionType => ({
+  type: LoadCartActions.LOAD_CART_FAIL,
   error,
 });
 
 export const AddCartItemFailAction = (
   error: string,
   processId: number,
-): ErrorActions => ({
-  type: 'ADD_CART_ITEM_FAIL',
+): ModifyCartErrorActionType => ({
+  type: AddCartItemActions.ADD_CART_ITEM_FAIL,
   processId,
   error,
 });
@@ -22,8 +34,8 @@ export const AddCartItemFailAction = (
 export const UpdateCartItemFailAction = (
   error: string,
   processId: number,
-): ErrorActions => ({
-  type: 'UPDATE_CART_ITEM_FAIL',
+): ModifyCartErrorActionType => ({
+  type: UpdateCartItemActions.UPDATE_CART_ITEM_FAIL,
   processId,
   error,
 });
@@ -31,10 +43,15 @@ export const UpdateCartItemFailAction = (
 export const DeleteCartItemFailAction = (
   error: string,
   processId: number,
-): ErrorActions => ({
-  type: 'DELETE_CART_ITEM_FAIL',
+): ModifyCartErrorActionType => ({
+  type: DeleteCartItemActions.DELETE_CART_ITEM_FAIL,
   processId,
   error,
+});
+
+export const ClearError = (key: string): ClearErrorAction => ({
+  type: 'CLEAR_ERROR',
+  key,
 });
 
 export default (

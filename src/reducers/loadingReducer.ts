@@ -1,37 +1,47 @@
 import { CartType } from 'types/cartTypes';
-import { LoadingActions, RequestActionType } from './actionTypes';
+import {
+  AddCartItemActions,
+  DeleteCartItemActions,
+  LoadCartActions,
+  LoadProductsActions,
+  UpdateCartItemActions,
+} from 'types/commonTypes';
+import {
+  AddCartItemRequestActionType,
+  LoadRequestActionType,
+  ModifyCartItemRequestActionType,
+  RequestActionType,
+} from './actionTypes';
 
-export const LoadProductRequestAction = (): LoadingActions => ({
-  type: 'LOAD_PRODUCTS_REQUEST',
+export const LoadProductRequestAction = (): LoadRequestActionType => ({
+  type: LoadProductsActions.LOAD_PRODUCTS_REQUEST,
 });
 
-export const LoadCartRequestAction = (): LoadingActions => ({
-  type: 'LOAD_CART_REQUEST',
+export const LoadCartRequestAction = (): LoadRequestActionType => ({
+  type: LoadCartActions.LOAD_CART_REQUEST,
 });
 
 export const AddCartItemRequestAction = (
   processId: number,
-): RequestActionType => ({
-  type: 'ADD_CART_ITEM_REQUEST',
+): AddCartItemRequestActionType => ({
+  type: AddCartItemActions.ADD_CART_ITEM_REQUEST,
   processId,
 });
 
 export const UpdateCartItemRequestAction = (
   cartItem: CartType,
-  processId: number,
-): RequestActionType => ({
-  type: 'UPDATE_CART_ITEM_REQUEST',
+): ModifyCartItemRequestActionType => ({
+  type: UpdateCartItemActions.UPDATE_CART_ITEM_REQUEST,
   cartItem,
-  processId,
+  processId: cartItem.productId,
 });
 
 export const deleteCartItemRequestAction = (
   cartItem: CartType,
-  processId: number,
-): RequestActionType => ({
-  type: 'DELETE_CART_ITEM_REQUEST',
+): ModifyCartItemRequestActionType => ({
+  type: DeleteCartItemActions.DELETE_CART_ITEM_REQUEST,
   cartItem,
-  processId,
+  processId: cartItem.productId,
 });
 
 export default (state: any = {}, { type, processId }: RequestActionType) => {

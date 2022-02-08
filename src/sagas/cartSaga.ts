@@ -1,12 +1,19 @@
 import { AxiosResponse } from 'axios';
-import { LoadingActions, RequestActionType } from 'reducers/actionTypes';
+import {
+  AddCartItemRequestActionType,
+  LoadingActions,
+  ModifyCartItemRequestActionType,
+  RequestActionType,
+} from 'reducers/actionTypes';
 import {
   AddCartItemSuccessAction,
+  DeleteCartItemSuccessAction,
   LoadCartSuccessAction,
   UpdateCartItemSuccessAction,
 } from 'reducers/cartReducer';
 import {
   AddCartItemFailAction,
+  DeleteCartItemFailAction,
   LoadCartErrorAction,
   UpdateCartItemFailAction,
 } from 'reducers/errorReducer';
@@ -19,6 +26,12 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import { CartType } from 'types/cartTypes';
+import {
+  AddCartItemActions,
+  DeleteCartItemActions,
+  LoadCartActions,
+  UpdateCartItemActions,
+} from 'types/commonTypes';
 import axiosInstance from 'utils/axios';
 
 function* loadCart() {
@@ -37,7 +50,7 @@ function* loadCart() {
   }
 }
 
-function* addCartItem({ processId }: LoadingActions) {
+function* addCartItem({ processId }: AddCartItemRequestActionType) {
   try {
     const res: AxiosResponse<CartType> = yield call(
       axiosInstance.post,
@@ -57,41 +70,62 @@ function* addCartItem({ processId }: LoadingActions) {
   }
 }
 
-function* updateCartItem({ cartItem, processId }: RequestActionType) {
+function* updateCartItem({
+  cartItem,
+  processId,
+}: ModifyCartItemRequestActionType) {
   try {
-    if (cartItem) {
-      const res: AxiosResponse<CartType> = yield call(
-        axiosInstance.put,
-        `660/cart/${cartItem.id}`,
-        cartItem,
-      );
-      yield put(UpdateCartItemSuccessAction(res.data, processId || 0));
-    }
+    const res: AxiosResponse<CartType> = yield call(
+      axiosInstance.put,
+      `660/cart/${cartItem.id}`,
+      cartItem,
+    );
+    yield put(UpdateCartItemSuccessAction(res.data, processId));
   } catch (error) {
     let message = 'Something went wrong. Please try after sometime.';
     if (error instanceof Error) {
       message = error.message;
     }
-    yield put(UpdateCartItemFailAction(message, processId || 0));
+    yield put(UpdateCartItemFailAction(message, processId));
   }
 }
 
-function* deleteCartItem() {}
+function* deleteCartItem({
+  cartItem,
+  processId,
+}: ModifyCartItemRequestActionType) {
+  try {
+    yield call(axiosInstance.delete, `660/cart/${cartItem.id}`);
+    yield put(DeleteCartItemSuccessAction(cartItem, processId));
+  } catch (error) {
+    let message = 'Something went wrong. Please try after sometime.';
+    if (error instanceof Error) {
+      message = error.message;
+    }
+    yield put(DeleteCartItemFailAction(message, processId));
+  }
+}
 
 function* loadCartRequest() {
-  yield takeEvery('LOAD_CART_REQUEST', loadCart);
+  yield takeEvery(LoadCartActions.LOAD_CART_REQUEST, loadCart);
 }
 
 function* addCartItemRequest() {
-  yield takeLatest('ADD_CART_ITEM_REQUEST', addCartItem);
+  yield takeLatest(AddCartItemActions.ADD_CART_ITEM_REQUEST, addCartItem);
 }
 
 function* updateCartItemRequest() {
-  yield takeLatest('UPDATE_CART_ITEM_REQUEST', updateCartItem);
+  yield takeLatest(
+    UpdateCartItemActions.UPDATE_CART_ITEM_REQUEST,
+    updateCartItem,
+  );
 }
 
 function* deleteCartItemRequest() {
-  yield takeLatest('DELETE_CART_ITEM_REQUEST', deleteCartItem);
+  yield takeLatest(
+    DeleteCartItemActions.DELETE_CART_ITEM_REQUEST,
+    deleteCartItem,
+  );
 }
 
 export default function* rootCart() {

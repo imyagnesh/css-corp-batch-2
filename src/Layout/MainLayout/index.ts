@@ -12,7 +12,6 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
     dispatch({
       type: 'CLEAR_ERROR',
       key: key,
-      error: '',
     }),
 });
 

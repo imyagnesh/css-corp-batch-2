@@ -1,4 +1,10 @@
 import { CartType } from 'types/cartTypes';
+import {
+  AddCartItemActions,
+  DeleteCartItemActions,
+  LoadCartActions,
+  UpdateCartItemActions,
+} from 'types/commonTypes';
 import { CartItemSuccess, LoadCartSuccessActionType } from './actionTypes';
 
 const cartInitialState: CartType[] = [];
@@ -6,7 +12,7 @@ const cartInitialState: CartType[] = [];
 export const LoadCartSuccessAction = (
   data: CartType[],
 ): LoadCartSuccessActionType => ({
-  type: 'LOAD_CART_SUCCESS',
+  type: LoadCartActions.LOAD_CART_SUCCESS,
   data,
 });
 
@@ -14,7 +20,7 @@ export const AddCartItemSuccessAction = (
   cartItem: CartType,
   processId: number,
 ): CartItemSuccess => ({
-  type: 'ADD_CART_ITEM_SUCCESS',
+  type: AddCartItemActions.ADD_CART_ITEM_SUCCESS,
   cartItem,
   processId,
 });
@@ -23,7 +29,7 @@ export const UpdateCartItemSuccessAction = (
   cartItem: CartType,
   processId: number,
 ): CartItemSuccess => ({
-  type: 'UPDATE_CART_ITEM_SUCCESS',
+  type: UpdateCartItemActions.UPDATE_CART_ITEM_SUCCESS,
   cartItem,
   processId,
 });
@@ -32,7 +38,7 @@ export const DeleteCartItemSuccessAction = (
   cartItem: CartType,
   processId: number,
 ): CartItemSuccess => ({
-  type: 'DELETE_CART_ITEM_SUCCESS',
+  type: DeleteCartItemActions.DELETE_CART_ITEM_SUCCESS,
   cartItem,
   processId,
 });
@@ -42,13 +48,13 @@ export default (
   action: LoadCartSuccessActionType | CartItemSuccess,
 ) => {
   switch (action.type) {
-    case 'LOAD_CART_SUCCESS':
+    case LoadCartActions.LOAD_CART_SUCCESS:
       return action.data;
 
-    case 'ADD_CART_ITEM_SUCCESS':
+    case AddCartItemActions.ADD_CART_ITEM_SUCCESS:
       return [...state, action.cartItem];
 
-    case 'UPDATE_CART_ITEM_SUCCESS':
+    case UpdateCartItemActions.UPDATE_CART_ITEM_SUCCESS:
       return state.map((item) => {
         if (item.id === action.cartItem.id) {
           return action.cartItem;
@@ -56,7 +62,7 @@ export default (
         return item;
       });
 
-    case 'DELETE_CART_ITEM_SUCCESS':
+    case DeleteCartItemActions.DELETE_CART_ITEM_SUCCESS:
       return state.filter((item) => item.id !== action.cartItem.id);
 
     default:
