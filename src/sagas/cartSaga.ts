@@ -1,5 +1,11 @@
 import { AxiosResponse } from 'axios';
 import {
+  ADD_CART_ITEM_REQUEST,
+  DELETE_CART_ITEM_REQUEST,
+  LOAD_CART_REQUEST,
+  UPDATE_CART_ITEM_REQUEST,
+} from 'constants/actionTypes';
+import {
   AddCartItemRequestActionType,
   LoadingActions,
   ModifyCartItemRequestActionType,
@@ -26,12 +32,6 @@ import {
   takeLatest,
 } from 'redux-saga/effects';
 import { CartType } from 'types/cartTypes';
-import {
-  AddCartItemActions,
-  DeleteCartItemActions,
-  LoadCartActions,
-  UpdateCartItemActions,
-} from 'types/commonTypes';
 import axiosInstance from 'utils/axios';
 
 function* loadCart() {
@@ -107,25 +107,19 @@ function* deleteCartItem({
 }
 
 function* loadCartRequest() {
-  yield takeEvery(LoadCartActions.LOAD_CART_REQUEST, loadCart);
+  yield takeEvery(LOAD_CART_REQUEST, loadCart);
 }
 
 function* addCartItemRequest() {
-  yield takeLatest(AddCartItemActions.ADD_CART_ITEM_REQUEST, addCartItem);
+  yield takeLatest(ADD_CART_ITEM_REQUEST, addCartItem);
 }
 
 function* updateCartItemRequest() {
-  yield takeLatest(
-    UpdateCartItemActions.UPDATE_CART_ITEM_REQUEST,
-    updateCartItem,
-  );
+  yield takeLatest(UPDATE_CART_ITEM_REQUEST, updateCartItem);
 }
 
 function* deleteCartItemRequest() {
-  yield takeLatest(
-    DeleteCartItemActions.DELETE_CART_ITEM_REQUEST,
-    deleteCartItem,
-  );
+  yield takeLatest(DELETE_CART_ITEM_REQUEST, deleteCartItem);
 }
 
 export default function* rootCart() {

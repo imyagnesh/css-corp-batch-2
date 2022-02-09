@@ -3,8 +3,6 @@ import cn from 'classnames';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon, ShoppingBagIcon } from '@heroicons/react/outline';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { AuthContext } from 'context/authContext';
-import { CartContext } from 'context/cartContext';
 import Snackbar from '@components/Snackbar';
 
 const navigation = [
@@ -18,15 +16,22 @@ interface Props {
   quantity: number;
   error: any;
   clearError: (key: string) => void;
+  isUserExist: boolean;
+  onLogout: () => void;
 }
 
-const MainLayout = ({ quantity, error, clearError }: Props) => {
-  const { onLogout, token } = useContext(AuthContext);
+const MainLayout = ({
+  quantity,
+  error,
+  clearError,
+  isUserExist,
+  onLogout,
+}: Props) => {
   let location = useLocation();
-  if (!token) {
+  if (!isUserExist) {
     return <Navigate to="/" state={{ from: location }} replace />;
   }
-  console.log('Main layout render');
+  // console.log('Main layout render');
 
   return (
     <>

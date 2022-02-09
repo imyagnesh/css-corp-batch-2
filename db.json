@@ -15,6 +15,20 @@
       "gender": "female",
       "confirmPassword": "abcd",
       "id": 2
+    },
+    {
+      "email": "test@test.com",
+      "password": "$2a$10$KDHQCxgZ4T14vuUD.5IKr.UN2kH9OpHTTDC405E1iydOiApm9Ppf.",
+      "name": "Yagnesh Modh",
+      "gender": "male",
+      "id": 3
+    },
+    {
+      "email": "test@test1.com",
+      "password": "$2a$10$/zxDFnqFBaVvk1F1Zlscmuzn8OMqVjnKeh8ikVgfJqarbV1RYi4AK",
+      "name": "Yagnesh Modh",
+      "gender": "male",
+      "id": 4
     }
   ],
   "todo-list": [

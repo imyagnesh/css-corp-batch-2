@@ -10,7 +10,7 @@ type Props<T> = {
 } & FormikConfig<T>;
 
 // initialValues={LoginInitValues} onSubmit={onSubmit}
-const FormikForm = <T extends { serverError?: '' }>({
+const FormikForm = <T extends { serverError?: string }>({
   fields,
   children,
   btnText,

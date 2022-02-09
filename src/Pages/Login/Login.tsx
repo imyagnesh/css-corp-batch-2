@@ -1,16 +1,25 @@
-import React, { memo } from 'react';
-import { LoginFields, LoginInitValues } from './loginUtils';
+import React, { memo, useEffect, useMemo } from 'react';
+import {
+  LoginFields,
+  LoginInitValues,
+  LoginInitValuesType,
+} from './loginUtils';
 import Checkbox from '@components/Checkbox';
 import Link from '@components/Link';
 import FormikForm from '@components/FormikForm';
-import { Field } from 'formik';
-// import { AuthContext } from 'context/authContext';
+import { Field, FormikHelpers } from 'formik';
+import { User } from 'types/UserType';
+import { useNavigate } from 'react-router-dom';
 
-interface Props {}
+type Props = {
+  onLogin: (
+    values: LoginInitValuesType,
+    actions: FormikHelpers<LoginInitValuesType>,
+  ) => void;
+  user: User;
+};
 
-const Login = (props: Props) => {
-  //   const { onLogin } = useContext(AuthContext);
-
+const Login = ({ onLogin, user }: Props) => {
   return (
     <FormikForm
       fields={LoginFields}

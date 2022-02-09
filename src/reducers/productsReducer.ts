@@ -1,11 +1,11 @@
-import { LoadProductsActions } from 'types/commonTypes';
+import { LOAD_PRODUCTS_SUCCESS } from 'constants/actionTypes';
 import { ProductType } from 'types/productsTypes';
 import { LoadProductSuccessActionType } from './actionTypes';
 
 export const LoadProductsSuccess = (
   data: ProductType[],
 ): LoadProductSuccessActionType => ({
-  type: LoadProductsActions.LOAD_PRODUCTS_SUCCESS,
+  type: LOAD_PRODUCTS_SUCCESS,
   data,
 });
 
@@ -16,7 +16,7 @@ export default (
   action: LoadProductSuccessActionType,
 ) => {
   switch (action.type) {
-    case LoadProductsActions.LOAD_PRODUCTS_SUCCESS: {
+    case LOAD_PRODUCTS_SUCCESS: {
       return action.data;
     }
 

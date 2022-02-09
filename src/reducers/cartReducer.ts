@@ -1,10 +1,11 @@
-import { CartType } from 'types/cartTypes';
 import {
-  AddCartItemActions,
-  DeleteCartItemActions,
-  LoadCartActions,
-  UpdateCartItemActions,
-} from 'types/commonTypes';
+  ADD_CART_ITEM_SUCCESS,
+  DELETE_CART_ITEM_SUCCESS,
+  LOAD_CART_SUCCESS,
+  UPDATE_CART_ITEM_SUCCESS,
+} from 'constants/actionTypes';
+import { CartType } from 'types/cartTypes';
+
 import { CartItemSuccess, LoadCartSuccessActionType } from './actionTypes';
 
 const cartInitialState: CartType[] = [];
@@ -12,7 +13,7 @@ const cartInitialState: CartType[] = [];
 export const LoadCartSuccessAction = (
   data: CartType[],
 ): LoadCartSuccessActionType => ({
-  type: LoadCartActions.LOAD_CART_SUCCESS,
+  type: LOAD_CART_SUCCESS,
   data,
 });
 
@@ -20,7 +21,7 @@ export const AddCartItemSuccessAction = (
   cartItem: CartType,
   processId: number,
 ): CartItemSuccess => ({
-  type: AddCartItemActions.ADD_CART_ITEM_SUCCESS,
+  type: ADD_CART_ITEM_SUCCESS,
   cartItem,
   processId,
 });
@@ -29,7 +30,7 @@ export const UpdateCartItemSuccessAction = (
   cartItem: CartType,
   processId: number,
 ): CartItemSuccess => ({
-  type: UpdateCartItemActions.UPDATE_CART_ITEM_SUCCESS,
+  type: UPDATE_CART_ITEM_SUCCESS,
   cartItem,
   processId,
 });
@@ -38,7 +39,7 @@ export const DeleteCartItemSuccessAction = (
   cartItem: CartType,
   processId: number,
 ): CartItemSuccess => ({
-  type: DeleteCartItemActions.DELETE_CART_ITEM_SUCCESS,
+  type: DELETE_CART_ITEM_SUCCESS,
   cartItem,
   processId,
 });
@@ -48,13 +49,13 @@ export default (
   action: LoadCartSuccessActionType | CartItemSuccess,
 ) => {
   switch (action.type) {
-    case LoadCartActions.LOAD_CART_SUCCESS:
+    case LOAD_CART_SUCCESS:
       return action.data;
 
-    case AddCartItemActions.ADD_CART_ITEM_SUCCESS:
+    case ADD_CART_ITEM_SUCCESS:
       return [...state, action.cartItem];
 
-    case UpdateCartItemActions.UPDATE_CART_ITEM_SUCCESS:
+    case UPDATE_CART_ITEM_SUCCESS:
       return state.map((item) => {
         if (item.id === action.cartItem.id) {
           return action.cartItem;
@@ -62,7 +63,7 @@ export default (
         return item;
       });
 
-    case DeleteCartItemActions.DELETE_CART_ITEM_SUCCESS:
+    case DELETE_CART_ITEM_SUCCESS:
       return state.filter((item) => item.id !== action.cartItem.id);
 
     default:

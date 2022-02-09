@@ -22,7 +22,8 @@
           "reducers": "./src/reducers",
           "actions": "./src/actions",
           "middleware": "./src/middleware",
-          "sagas": "./src/sagas"
+          "sagas": "./src/sagas",
+          "constants": "./src/constants"
         }
       }
     ]

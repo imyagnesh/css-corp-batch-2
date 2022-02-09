@@ -1,3 +1,7 @@
+import {
+  LOAD_PRODUCTS_FAIL,
+  LOAD_PRODUCTS_REQUEST,
+} from 'constants/actionTypes';
 import { AppDispatch } from 'types/commonTypes';
 import { ProductType } from 'types/productsTypes';
 import axiosInstance from 'utils/axios';
@@ -6,7 +10,7 @@ export const loadProducts = () => {
   return async (dispatch: AppDispatch) => {
     try {
       dispatch({
-        type: 'LOAD_PRODUCTS_REQUEST',
+        type: LOAD_PRODUCTS_REQUEST,
       });
       const res = await axiosInstance.get<ProductType[]>('660/products');
       dispatch({
@@ -19,7 +23,7 @@ export const loadProducts = () => {
         message = error.message;
       }
       dispatch({
-        type: 'LOAD_PRODUCTS_FAIL',
+        type: LOAD_PRODUCTS_FAIL,
         error: message,
       });
     }

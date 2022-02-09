@@ -1,93 +1,126 @@
 import { FormikHelpers } from 'formik';
 import { LoginInitValuesType } from 'Pages/Login/loginUtils';
+import { RegisterInitValuesType } from 'Pages/Register/registerUtils';
 import { CartType } from 'types/cartTypes';
 import {
-  AddCartItemActions,
-  DeleteCartItemActions,
-  LoadCartActions,
-  LoadProductsActions,
-  LoginActions,
-  UpdateCartItemActions,
+  ADD_CART_ITEM_FAIL,
+  ADD_CART_ITEM_REQUEST,
+  ADD_CART_ITEM_SUCCESS,
+  CLEAR_ERROR,
+  DELETE_CART_ITEM_FAIL,
+  DELETE_CART_ITEM_REQUEST,
+  DELETE_CART_ITEM_SUCCESS,
+  LOAD_CART_FAIL,
+  LOAD_CART_REQUEST,
+  LOAD_CART_SUCCESS,
+  LOAD_PRODUCTS_FAIL,
+  LOAD_PRODUCTS_REQUEST,
+  LOAD_PRODUCTS_SUCCESS,
+  LOGIN_FAIL,
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGOUT_FAIL,
+  LOGOUT_REQUEST,
+  LOGOUT_SUCCESS,
+  REGISTER_FAIL,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  UPDATE_CART_ITEM_FAIL,
+  UPDATE_CART_ITEM_REQUEST,
+  UPDATE_CART_ITEM_SUCCESS,
 } from 'types/commonTypes';
+
 import { ProductType } from 'types/productsTypes';
 import { User } from 'types/UserType';
 
+export type LogoutRequestActionType = {
+  type: LOGOUT_REQUEST;
+  processId?: never;
+};
+
 export type LoadProductSuccessActionType = {
-  type: LoadProductsActions.LOAD_PRODUCTS_SUCCESS;
+  type: LOAD_PRODUCTS_SUCCESS;
   data: ProductType[];
   processId?: never;
 };
 
 export type LoadCartSuccessActionType = {
-  type: LoadCartActions.LOAD_CART_SUCCESS;
+  type: LOAD_CART_SUCCESS;
   data: CartType[];
   processId?: never;
 };
 
 export type CartItemSuccess = {
   type:
-    | AddCartItemActions.ADD_CART_ITEM_SUCCESS
-    | UpdateCartItemActions.UPDATE_CART_ITEM_SUCCESS
-    | DeleteCartItemActions.DELETE_CART_ITEM_SUCCESS;
+    | ADD_CART_ITEM_SUCCESS
+    | UPDATE_CART_ITEM_SUCCESS
+    | DELETE_CART_ITEM_SUCCESS;
   cartItem: CartType;
   processId: number;
 };
 
 export type LoadRequestActionType = {
-  type:
-    | LoadProductsActions.LOAD_PRODUCTS_REQUEST
-    | LoadCartActions.LOAD_CART_REQUEST;
+  type: LOAD_PRODUCTS_REQUEST | LOAD_CART_REQUEST;
   processId?: never;
   cartItem?: never;
 };
 
 export type AddCartItemRequestActionType = {
-  type: AddCartItemActions.ADD_CART_ITEM_REQUEST;
+  type: ADD_CART_ITEM_REQUEST;
   processId: number;
   cartItem?: never;
 };
 
 export type ModifyCartItemRequestActionType = {
-  type:
-    | UpdateCartItemActions.UPDATE_CART_ITEM_REQUEST
-    | DeleteCartItemActions.DELETE_CART_ITEM_REQUEST;
+  type: UPDATE_CART_ITEM_REQUEST | DELETE_CART_ITEM_REQUEST;
   cartItem: CartType;
   processId: number;
 };
 
-export type loginRequestActionType = {
-  type: LoginActions.LOGIN_REQUEST;
+export type LoginRequestActionType = {
+  type: LOGIN_REQUEST;
   values: LoginInitValuesType;
   actions: FormikHelpers<LoginInitValuesType>;
   processId?: never;
 };
 
-export type loginSuccessActionType = {
-  type: LoginActions.LOGIN_SUCCESS;
+export type RegisterRequestActionType = {
+  type: REGISTER_REQUEST;
+  values: RegisterInitValuesType;
+  actions: FormikHelpers<RegisterInitValuesType>;
+  processId?: never;
+};
+
+export type AuthSuccessActionType = {
+  type: LOGIN_SUCCESS | REGISTER_SUCCESS;
   user: User;
+};
+
+export type LogoutSuccessActionType = {
+  type: LOGOUT_SUCCESS;
+  user?: never;
 };
 
 export type RequestActionType =
   | LoadRequestActionType
   | AddCartItemRequestActionType
   | ModifyCartItemRequestActionType
-  | loginRequestActionType;
+  | LoginRequestActionType;
 
 export type LoadErrorActionType = {
   type:
-    | LoadProductsActions.LOAD_PRODUCTS_FAIL
-    | LoadCartActions.LOAD_CART_FAIL
-    | LoginActions.LOGIN_FAIL;
+    | LOAD_PRODUCTS_FAIL
+    | LOAD_CART_FAIL
+    | LOGIN_FAIL
+    | REGISTER_FAIL
+    | LOGOUT_FAIL;
   error: string;
   processId?: never;
   key?: never;
 };
 
 export type ModifyCartErrorActionType = {
-  type:
-    | AddCartItemActions.ADD_CART_ITEM_FAIL
-    | UpdateCartItemActions.UPDATE_CART_ITEM_FAIL
-    | DeleteCartItemActions.DELETE_CART_ITEM_FAIL;
+  type: ADD_CART_ITEM_FAIL | UPDATE_CART_ITEM_FAIL | DELETE_CART_ITEM_FAIL;
   processId: number;
   error: string;
   key?: never;
@@ -95,18 +128,18 @@ export type ModifyCartErrorActionType = {
 
 export type BaseErrorActionType = {
   type:
-    | LoadProductsActions.LOAD_PRODUCTS_FAIL
-    | LoadCartActions.LOAD_CART_FAIL
-    | AddCartItemActions.ADD_CART_ITEM_FAIL
-    | UpdateCartItemActions.UPDATE_CART_ITEM_FAIL
-    | DeleteCartItemActions.DELETE_CART_ITEM_FAIL;
+    | LOAD_PRODUCTS_FAIL
+    | LOAD_CART_FAIL
+    | ADD_CART_ITEM_FAIL
+    | UPDATE_CART_ITEM_FAIL
+    | DELETE_CART_ITEM_FAIL;
   processId?: number;
   error: string;
   key?: never;
 };
 
 export type ClearErrorAction = {
-  type: 'CLEAR_ERROR';
+  type: CLEAR_ERROR;
   key: string;
   processId?: never;
   error?: never;
