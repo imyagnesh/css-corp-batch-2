@@ -11,7 +11,7 @@ import {
   makeObservable,
   observable,
 } from 'mobx';
-import { observer } from 'mobx-react-lite';
+import { observer, useLocalObservable } from 'mobx-react-lite';
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import CounterStore from 'store/counterStore';
@@ -27,7 +27,7 @@ import './root.css';
 // const counterStore2 = new CounterStore();
 
 const Child1 = observer(() => {
-  const counterStore = useCounterStore();
+  const counterStore = useLocalObservable(() => new CounterStore());
 
   const loadData = async () => {
     await counterStore.loadCounter();
@@ -51,7 +51,8 @@ const Child1 = observer(() => {
 });
 
 const Child2 = observer(() => {
-  const counterStore = useCounterStore();
+  const counterStore = useLocalObservable(() => new CounterStore());
+
   return (
     <div>
       <h1>Counter 2</h1>
