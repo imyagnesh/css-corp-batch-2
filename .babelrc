@@ -6,6 +6,7 @@
   ],
   "plugins": [
     "@babel/plugin-transform-runtime",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
     [
       "module-resolver",
       {
@@ -23,9 +24,13 @@
           "actions": "./src/actions",
           "middleware": "./src/middleware",
           "sagas": "./src/sagas",
-          "constants": "./src/constants"
+          "constants": "./src/constants",
+          "store": "./src/store"
         }
       }
     ]
-  ]
+  ],
+  "assumptions": {
+    "setPublicClassFields": false
+  }
 }
