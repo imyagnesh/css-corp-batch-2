@@ -1,17 +1,18 @@
-import { AuthContext } from 'context/authContext';
-import React, { useContext } from 'react';
+import { useAuthStore } from 'context/authMobxContext';
+import { observer } from 'mobx-react-lite';
+import React, { memo, useContext } from 'react';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { User } from 'types/UserType';
 
-type Props = {
-  user: User;
-};
-
-const AuthLayout = ({ user }: Props) => {
+const AuthLayout = () => {
   let location = useLocation();
-  if (Object.keys(user).length > 0) {
-    return <Navigate to="/home" state={{ from: location }} replace />;
-  }
+  const authStore = useAuthStore();
+
+  console.log(authStore.isAuthenticated());
+  console.log(authStore.getUser());
+
+  // if (authStore.isAuthenticated()) {
+  //   return <Navigate to="/home" state={{ from: location }} replace />;
+  // }
 
   return (
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">

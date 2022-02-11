@@ -25,7 +25,8 @@
           "middleware": "./src/middleware",
           "sagas": "./src/sagas",
           "constants": "./src/constants",
-          "store": "./src/store"
+          "store": "./src/store",
+          "services": "./src/services"
         }
       }
     ]

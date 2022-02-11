@@ -1,11 +1,14 @@
-import { connect } from 'react-redux';
-import { RootState } from 'types/commonTypes';
+import { observer } from 'mobx-react-lite';
 import AuthLayout from './AuthLayout';
 
-const mapStateToProps = (state: RootState) => ({
-  user: state.user,
-});
+export default observer(AuthLayout);
+// import { connect } from 'react-redux';
+// import { RootState } from 'types/commonTypes';
 
-const mapDispatchToProps = {};
+// const mapStateToProps = (state: RootState) => ({
+//   user: state.user,
+// });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthLayout);
+// const mapDispatchToProps = {};
+
+// export default connect(mapStateToProps, mapDispatchToProps)(AuthLayout);

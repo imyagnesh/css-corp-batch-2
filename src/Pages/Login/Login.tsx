@@ -10,21 +10,24 @@ import FormikForm from '@components/FormikForm';
 import { Field, FormikHelpers } from 'formik';
 import { User } from 'types/UserType';
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from 'context/authMobxContext';
 
-type Props = {
-  onLogin: (
-    values: LoginInitValuesType,
-    actions: FormikHelpers<LoginInitValuesType>,
-  ) => void;
-  user: User;
-};
+// type Props = {
+//   onLogin: (
+//     values: LoginInitValuesType,
+//     actions: FormikHelpers<LoginInitValuesType>,
+//   ) => void;
+//   user: User;
+// };
 
-const Login = ({ onLogin, user }: Props) => {
+const Login = () => {
+  const authStore = useAuthStore();
+
   return (
     <FormikForm
       fields={LoginFields}
       initialValues={LoginInitValues}
-      onSubmit={onLogin}
+      onSubmit={authStore.onLogin}
       btnText="Sign In"
     >
       <div className="flex items-center justify-between">
@@ -37,4 +40,4 @@ const Login = ({ onLogin, user }: Props) => {
   );
 };
 
-export default memo(Login);
+export default Login;
