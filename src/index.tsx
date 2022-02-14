@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import store from './configureStore';
 import App from './App';
 import './root.css';
-import { AuthStoreProvider } from 'context/authMobxContext';
+import { RootStoreProvider } from 'context/rootStoreContext';
 
 // const counterStore1 = new CounterStore();
 // const counterStore2 = new CounterStore();
@@ -16,9 +16,9 @@ const root = document.getElementById('root');
 ReactDOM.render(
   <BrowserRouter>
     <Provider store={store}>
-      <AuthStoreProvider>
+      <RootStoreProvider>
         <App />
-      </AuthStoreProvider>
+      </RootStoreProvider>
     </Provider>
   </BrowserRouter>,
   root,

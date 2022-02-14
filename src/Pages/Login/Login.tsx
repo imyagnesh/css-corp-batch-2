@@ -10,7 +10,7 @@ import FormikForm from '@components/FormikForm';
 import { Field, FormikHelpers } from 'formik';
 import { User } from 'types/UserType';
 import { useNavigate } from 'react-router-dom';
-import { useAuthStore } from 'context/authMobxContext';
+import { useRootStore } from 'context/rootStoreContext';
 
 // type Props = {
 //   onLogin: (
@@ -21,7 +21,7 @@ import { useAuthStore } from 'context/authMobxContext';
 // };
 
 const Login = () => {
-  const authStore = useAuthStore();
+  const { authStore } = useRootStore();
 
   return (
     <FormikForm

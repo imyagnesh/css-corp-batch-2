@@ -4,14 +4,19 @@ import { LoginInitValuesType } from 'Pages/Login/loginUtils';
 import { RegisterInitValuesType } from 'Pages/Register/registerUtils';
 import AuthService from 'services/AuthService';
 import { User } from 'types/UserType';
+import RootStore from '.';
 
 export default class AuthStore {
   private authenticated = false;
 
   private user: User | undefined = undefined;
 
-  constructor(private readonly authService: AuthService) {
-    makeAutoObservable(this);
+  rootStore: RootStore;
+
+  constructor(rootStore: RootStore, private readonly authService: AuthService) {
+    makeAutoObservable(this, { rootStore: false });
+    this.rootStore = rootStore;
+    this.authenticated = !!this.hasToken();
   }
 
   private setAuthenticated = (authenticated: boolean) => {
@@ -22,11 +27,16 @@ export default class AuthStore {
     this.user = user;
   };
 
+  private hasToken = () => {
+    return sessionStorage.getItem('@app/token');
+  };
+
   onLogin = async (
     values: LoginInitValuesType,
     actions: FormikHelpers<LoginInitValuesType>,
   ) => {
     try {
+      // this.rootStore.loadingStore.setLoading()
       const res = await this.authService.login(values);
       sessionStorage.setItem('@app/token', res.accessToken);
       actions.resetForm();

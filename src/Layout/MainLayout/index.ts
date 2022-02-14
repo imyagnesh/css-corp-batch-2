@@ -14,7 +14,6 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
       type: 'CLEAR_ERROR',
       key: key,
     }),
-  onLogout: () => dispatch({ type: 'LOGOUT_REQUEST' }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainLayout);
