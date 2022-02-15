@@ -12,6 +12,7 @@ function* loadProducts() {
       axiosInstance.get,
       '660/products',
     );
+
     yield put(LoadProductsSuccess(res.data));
   } catch (error) {
     let message = 'Something went wrong. Please try after sometime.';

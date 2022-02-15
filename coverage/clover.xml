@@ -1,53 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1644909744254" clover="3.2.0">
-  <project timestamp="1644909744254" name="All files">
-    <metrics statements="69" coveredstatements="43" conditionals="15" coveredconditionals="1" methods="25" coveredmethods="3" elements="109" coveredelements="47" complexity="0" loc="69" ncloc="69" packages="5" files="6" classes="6"/>
-    <package name="Pages.Home">
-      <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
-      <file name="Home.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/Pages/Home/Home.tsx">
-        <metrics statements="6" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="3" coveredmethods="3"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="3" type="stmt"/>
-        <line num="14" count="2" type="stmt"/>
-        <line num="15" count="2" type="stmt"/>
-        <line num="18" count="3" type="stmt"/>
-        <line num="26" count="1" type="stmt"/>
+<coverage generated="1644912839702" clover="3.2.0">
+  <project timestamp="1644912839702" name="All files">
+    <metrics statements="234" coveredstatements="152" conditionals="73" coveredconditionals="40" methods="79" coveredmethods="45" elements="386" coveredelements="237" complexity="0" loc="234" ncloc="234" packages="10" files="20" classes="20"/>
+    <package name="src">
+      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
+      <file name="configureStore.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/configureStore.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="0" coveredmethods="0"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="2" falsecount="0"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="components.Product">
-      <metrics statements="15" coveredstatements="3" conditionals="6" coveredconditionals="0" methods="11" coveredmethods="0"/>
+    <package name="src.Pages.Home">
+      <metrics statements="12" coveredstatements="12" conditionals="3" coveredconditionals="3" methods="7" coveredmethods="7"/>
+      <file name="Home.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/Pages/Home/Home.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="12" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="stmt"/>
+        <line num="18" count="12" type="stmt"/>
+        <line num="26" count="2" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/Pages/Home/index.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="15" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="19" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Button">
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="index.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/components/Button/index.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="5" type="stmt"/>
+        <line num="8" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.components.Product">
+      <metrics statements="15" coveredstatements="8" conditionals="6" coveredconditionals="4" methods="11" coveredmethods="5"/>
       <file name="Product.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/components/Product/Product.tsx">
-        <metrics statements="9" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="5" coveredmethods="0"/>
+        <metrics statements="9" coveredstatements="5" conditionals="6" coveredconditionals="4" methods="5" coveredmethods="2"/>
         <line num="17" count="1" type="stmt"/>
-        <line num="33" count="0" type="stmt"/>
-        <line num="35" count="0" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
         <line num="36" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="37" count="0" type="stmt"/>
-        <line num="41" count="0" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
         <line num="86" count="0" type="stmt"/>
-        <line num="99" count="0" type="stmt"/>
+        <line num="99" count="10" type="stmt"/>
         <line num="106" count="0" type="stmt"/>
       </file>
       <file name="index.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/components/Product/index.tsx">
-        <metrics statements="6" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="12" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="3"/>
+        <line num="12" count="2" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
         <line num="19" count="1" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
         <line num="23" count="0" type="stmt"/>
         <line num="25" count="0" type="stmt"/>
       </file>
     </package>
-    <package name="components.Rating">
-      <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+    <package name="src.components.Rating">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
       <file name="index.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/components/Rating/index.tsx">
-        <metrics statements="3" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
         <line num="6" count="1" type="stmt"/>
-        <line num="7" count="0" type="stmt"/>
-        <line num="11" count="0" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
       </file>
     </package>
-    <package name="constants">
+    <package name="src.constants">
       <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="actionTypes.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/constants/actionTypes.ts">
         <metrics statements="25" coveredstatements="25" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -78,12 +107,76 @@
         <line num="33" count="1" type="stmt"/>
       </file>
     </package>
-    <package name="reducers">
-      <metrics statements="20" coveredstatements="8" conditionals="7" coveredconditionals="0" methods="9" coveredmethods="0"/>
-      <file name="loadingReducer.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/loadingReducer.ts">
-        <metrics statements="20" coveredstatements="8" conditionals="7" coveredconditionals="0" methods="9" coveredmethods="0"/>
-        <line num="25" count="1" type="stmt"/>
+    <package name="src.middleware">
+      <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <file name="logger.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/middleware/logger.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="12" type="stmt"/>
+        <line num="13" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="18" count="12" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.reducers">
+      <metrics statements="76" coveredstatements="55" conditionals="32" coveredconditionals="21" methods="32" coveredmethods="11"/>
+      <file name="cartReducer.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/cartReducer.ts">
+        <metrics statements="18" coveredstatements="9" conditionals="8" coveredconditionals="3" methods="7" coveredmethods="2"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
         <line num="29" count="1" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="51" count="15" type="cond" truecount="2" falsecount="3"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="59" count="0" type="stmt"/>
+        <line num="60" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="70" count="14" type="stmt"/>
+      </file>
+      <file name="errorReducer.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/errorReducer.ts">
+        <metrics statements="23" coveredstatements="18" conditionals="9" coveredconditionals="7" methods="10" coveredmethods="3"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="44" count="1" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="53" count="1" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="71" count="1" type="stmt"/>
+        <line num="85" count="15" type="stmt"/>
+        <line num="86" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="87" count="10" type="cond" truecount="1" falsecount="1"/>
+        <line num="89" count="10" type="cond" truecount="2" falsecount="0"/>
+        <line num="90" count="4" type="stmt"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="95" count="6" type="stmt"/>
+        <line num="96" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="97" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="100" count="5" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="8" count="1" type="stmt"/>
+      </file>
+      <file name="loadingReducer.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/loadingReducer.ts">
+        <metrics statements="20" coveredstatements="15" conditionals="7" coveredconditionals="6" methods="9" coveredmethods="3"/>
+        <line num="25" count="3" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
         <line num="33" count="1" type="stmt"/>
         <line num="35" count="0" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
@@ -95,13 +188,142 @@
         <line num="65" count="1" type="stmt"/>
         <line num="68" count="0" type="stmt"/>
         <line num="74" count="1" type="stmt"/>
+        <line num="87" count="15" type="stmt"/>
+        <line num="88" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="90" count="12" type="cond" truecount="1" falsecount="1"/>
+        <line num="92" count="12" type="cond" truecount="2" falsecount="0"/>
+        <line num="93" count="6" type="stmt"/>
+        <line num="96" count="6" type="stmt"/>
+        <line num="98" count="6" type="stmt"/>
+      </file>
+      <file name="productsReducer.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/productsReducer.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="18" count="15" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="24" count="14" type="stmt"/>
+      </file>
+      <file name="userReducer.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/reducers/userReducer.ts">
+        <metrics statements="8" coveredstatements="6" conditionals="5" coveredconditionals="2" methods="4" coveredmethods="1"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="29" count="15" type="cond" truecount="1" falsecount="3"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="38" count="15" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.sagas">
+      <metrics statements="76" coveredstatements="25" conditionals="20" coveredconditionals="2" methods="19" coveredmethods="13"/>
+      <file name="cartSaga.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/sagas/cartSaga.ts">
+        <metrics statements="33" coveredstatements="12" conditionals="12" coveredconditionals="1" methods="9" coveredmethods="6"/>
+        <line num="38" count="3" type="stmt"/>
+        <line num="39" count="3" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+        <line num="45" count="2" type="stmt"/>
+        <line num="46" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="47" count="2" type="stmt"/>
+        <line num="49" count="2" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="63" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="66" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="83" count="0" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="87" count="0" type="stmt"/>
-        <line num="88" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="90" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="92" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="93" count="0" type="stmt"/>
-        <line num="96" count="0" type="stmt"/>
+        <line num="89" count="0" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
         <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="101" count="0" type="stmt"/>
+        <line num="102" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="103" count="0" type="stmt"/>
+        <line num="105" count="0" type="stmt"/>
+        <line num="110" count="1" type="stmt"/>
+        <line num="114" count="1" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="122" count="1" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+      </file>
+      <file name="index.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/sagas/index.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="7" count="1" type="stmt"/>
+      </file>
+      <file name="productsSaga.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/sagas/productsSaga.ts">
+        <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="2" coveredmethods="2"/>
+        <line num="10" count="3" type="stmt"/>
+        <line num="11" count="3" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="19" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+      </file>
+      <file name="userSaga.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/sagas/userSaga.ts">
+        <metrics statements="34" coveredstatements="4" conditionals="6" coveredconditionals="0" methods="7" coveredmethods="4"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="38" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="39" count="0" type="stmt"/>
+        <line num="41" count="0" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="47" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="56" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="62" count="0" type="stmt"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="75" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="76" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="83" count="1" type="stmt"/>
+        <line num="87" count="1" type="stmt"/>
+        <line num="91" count="1" type="stmt"/>
+        <line num="95" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="src.utils">
+      <metrics statements="12" coveredstatements="9" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="3"/>
+      <file name="axios.ts" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/utils/axios.ts">
+        <metrics statements="12" coveredstatements="9" conditionals="6" coveredconditionals="4" methods="4" coveredmethods="3"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="12" count="6" type="stmt"/>
+        <line num="13" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="19" count="6" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="32" count="2" type="stmt"/>
+        <line num="38" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="41" count="0" type="stmt"/>
       </file>
     </package>
   </project>
