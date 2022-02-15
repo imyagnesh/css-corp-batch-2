@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1644827229556" clover="3.2.0">
-  <project timestamp="1644827229556" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1" elements="5" coveredelements="4" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
+<coverage generated="1644908050783" clover="3.2.0">
+  <project timestamp="1644908050783" name="All files">
+    <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1" elements="6" coveredelements="6" complexity="0" loc="3" ncloc="3" packages="1" files="1" classes="1"/>
     <file name="index.tsx" path="/Users/yagneshmodh/Documents/projects/css-corp-batch-2/src/components/Button/index.tsx">
-      <metrics statements="2" coveredstatements="2" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <metrics statements="3" coveredstatements="3" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
       <line num="6" count="1" type="stmt"/>
-      <line num="7" count="4" type="stmt"/>
+      <line num="7" count="5" type="stmt"/>
+      <line num="8" count="5" type="stmt"/>
     </file>
   </project>
 </coverage>
