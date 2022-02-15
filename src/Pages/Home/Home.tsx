@@ -16,7 +16,7 @@ const Home = ({ products, loadProducts, loadCart, loading }: Props) => {
   }, [loadProducts, loadCart]);
 
   return (
-    <div className="relative">
+    <div data-testid="homeContainer" className="relative">
       {loading['LOAD_PRODUCTS'] && (
         <div className="flex justify-center items-center text-white text-4xl w-screen h-screen bg-gray-400 absolute z-10 opacity-30">
           Loading...
