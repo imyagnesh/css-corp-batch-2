@@ -96,8 +96,11 @@ function* deleteCartItem({
 }: ModifyCartItemRequestActionType) {
   try {
     yield call(axiosInstance.delete, `660/cart/${cartItem.id}`);
+    console.log('data');
     yield put(DeleteCartItemSuccessAction(cartItem, processId));
   } catch (error) {
+    console.log(error);
+
     let message = 'Something went wrong. Please try after sometime.';
     if (error instanceof Error) {
       message = error.message;

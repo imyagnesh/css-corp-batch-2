@@ -4,7 +4,6 @@ import cn from 'classnames';
 type Props = {} & ComponentProps<'button'>;
 
 const Button = ({ children, icon: Icon, ...props }: Props) => {
-  console.log(Icon);
   return (
     <button
       data-testid="btn-component"

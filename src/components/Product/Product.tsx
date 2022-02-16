@@ -30,8 +30,6 @@ const Product = ({
   updateLoading,
   deleteLoading,
 }: ProductProps) => {
-  console.log(id);
-
   const changeQuantity = (event: ChangeEvent<HTMLSelectElement>) => {
     if (cartItem) {
       updateCartItem({ ...cartItem, quantity: Number(event.target.value) });

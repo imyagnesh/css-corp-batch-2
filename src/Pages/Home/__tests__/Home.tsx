@@ -3,6 +3,7 @@ import {
   fireEvent,
   render,
   screen,
+  waitFor,
   waitForElementToBeRemoved,
 } from '@testing-library/react';
 import Home from '../index';
@@ -118,7 +119,7 @@ describe('Test Home page cases', () => {
       id: 2,
     });
     setup({});
-    const products = await screen.findAllByTestId('productContainer');
+    await screen.findAllByTestId('productContainer');
     const addToCartBtn = screen.queryByRole('button', {
       name: 'Add to bag',
     });
@@ -127,5 +128,44 @@ describe('Test Home page cases', () => {
     }
     await waitForElementToBeRemoved(addToCartBtn);
     expect(addToCartBtn).not.toBeInTheDocument();
+  });
+
+  test('should click delete button to remove item from cart', async () => {
+    mock.onDelete('660/cart/1').reply(200, {});
+    setup({});
+    const products = await screen.findAllByTestId('productContainer');
+    const modifyCartItem = screen.queryByTestId('modifyProduct');
+    expect(products[1]).toContainElement(modifyCartItem);
+    const deleteBtn = screen.queryByRole('button', {
+      name: 'Delete',
+    });
+    if (deleteBtn) {
+      fireEvent.click(deleteBtn);
+      await waitForElementToBeRemoved(deleteBtn);
+      expect(deleteBtn).not.toBeInTheDocument();
+    }
+  });
+
+  test('should edit quantity', async () => {
+    mock.onPut('660/cart/1').reply(200, {
+      productId: 2,
+      quantity: 5,
+      id: 1,
+    });
+    setup({});
+    const products = await screen.findAllByTestId('productContainer');
+    const modifyCartItem = screen.queryByTestId('modifyProduct');
+    expect(products[1]).toContainElement(modifyCartItem);
+    const quantitySelect = screen.queryByRole('combobox');
+    expect(quantitySelect).toHaveValue('1');
+
+    if (quantitySelect) {
+      fireEvent.change(quantitySelect, {
+        target: {
+          value: '5',
+        },
+      });
+      await waitFor(() => expect(quantitySelect).toHaveValue('5'));
+    }
   });
 });
