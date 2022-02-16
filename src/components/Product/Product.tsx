@@ -91,7 +91,10 @@ const Product = ({
                 Add to bag
               </button>
             ) : (
-              <div className="flex items-center justify-between">
+              <div
+                data-testid="modifyProduct"
+                className="flex items-center justify-between"
+              >
                 <select
                   disabled={updateLoading}
                   value={cartItem.quantity}
