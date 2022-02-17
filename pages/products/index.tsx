@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { GetStaticProps, GetServerSideProps } from "next";
+import Link from "next/link";
+import styles from "../../styles/Products.module.css";
 
 type TodoListType = {
   userId: number;
@@ -31,10 +33,13 @@ const Products = ({ todoList }: Props) => {
   // }, [loadData]);
 
   return (
-    <div>
+    <div className="bg-slate-200 m-1">
       <h1>Todo List</h1>
       {todoList.map((x) => (
-        <p key={x.id}>{x.title}</p>
+        <Link key={x.id} href={`products/${x.id}`}>
+          {x.title}
+        </Link>
+        // <a hre key={x.id}></a>
       ))}
     </div>
   );

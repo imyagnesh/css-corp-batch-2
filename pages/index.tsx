@@ -1,9 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import styles from "../styles/Home.module.css";
+import styles from "@styles/Home.module.css";
+import { ReactElement } from "react";
+import MainLayout from "@layout/MainLayout";
 
-const Home: NextPage = () => {
+const Home = () => {
   return (
     <div className={styles.container}>
       {/* <Head>
@@ -67,6 +69,10 @@ const Home: NextPage = () => {
       </footer>
     </div>
   );
+};
+
+Home.getLayout = function getLayout(page: ReactElement) {
+  return <MainLayout>{page}</MainLayout>;
 };
 
 export default Home;
