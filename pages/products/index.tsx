@@ -16,6 +16,7 @@ type Props = {
 
 // Current approach is client side rendering
 const Products = ({ todoList }: Props) => {
+  console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
   // const [todoList, setTodoList] = useState([]);
 
   // const loadData = useCallback(async () => {
@@ -47,6 +48,8 @@ const Products = ({ todoList }: Props) => {
 
 // Pre-render my page at build time
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
+
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
   const json = await res.json();
   return {
