@@ -62,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       redirect: {
         destination: "/login",
         permanent: false,
+        basePath: "/products",
       },
     };
   }

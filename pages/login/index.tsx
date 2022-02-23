@@ -17,45 +17,45 @@ import {
 type Props = {};
 
 const Login = (props: Props) => {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
-  return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
-  );
-  // const { login } = useAuth();
+  // if (session) {
+  //   return (
+  //     <>
+  //       Signed in as {session.user.email} <br />
+  //       <button onClick={() => signOut()}>Sign out</button>
+  //     </>
+  //   );
+  // }
   // return (
   //   <>
-  //     <Head>
-  //       <title>Login</title>
-  //     </Head>
-  //     <FormikForm
-  //       initialValues={loginInitValues}
-  //       fields={LoginFields}
-  //       onSubmit={(values: LoginInitValueType) => login(values)}
-  //       btnText="Login"
-  //     >
-  //       <div className="flex items-center justify-between">
-  //         <Field name="remember_me" component={Checkbox}>
-  //           Remember Me
-  //         </Field>
-  //         <Link href="/forgotPassword">
-  //           <a>Forgot your password?</a>
-  //         </Link>
-  //       </div>
-  //     </FormikForm>
+  //     Not signed in <br />
+  //     <button onClick={() => signIn()}>Sign in</button>
   //   </>
   // );
+  const { login } = useAuth();
+  return (
+    <>
+      <Head>
+        <title>Login</title>
+      </Head>
+      <FormikForm
+        initialValues={loginInitValues}
+        fields={LoginFields}
+        onSubmit={(values: LoginInitValueType) => signIn()}
+        btnText="Login"
+      >
+        <div className="flex items-center justify-between">
+          <Field name="remember_me" component={Checkbox}>
+            Remember Me
+          </Field>
+          <Link href="/forgotPassword">
+            <a>Forgot your password?</a>
+          </Link>
+        </div>
+      </FormikForm>
+    </>
+  );
 };
 
 Login.getLayout = function getLayout(page: ReactElement) {
