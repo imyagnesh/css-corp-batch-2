@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { GetStaticProps, GetServerSideProps } from "next";
 import Link from "next/link";
 import styles from "../../styles/Products.module.css";
+import { getSession, useSession } from "next-auth/react";
+import { log } from "console";
 
 type TodoListType = {
   userId: number;
@@ -16,6 +18,10 @@ type Props = {
 
 // Current approach is client side rendering
 const Products = ({ todoList }: Props) => {
+  const { data: session } = useSession();
+
+  console.log(session);
+
   console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
   // const [todoList, setTodoList] = useState([]);
 
@@ -49,6 +55,16 @@ const Products = ({ todoList }: Props) => {
 // Pre-render my page at build time
 export const getServerSideProps: GetServerSideProps = async (context) => {
   console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
+
+  const session = await getSession(context);
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
 
   const res = await fetch("https://jsonplaceholder.typicode.com/todos");
   const json = await res.json();
