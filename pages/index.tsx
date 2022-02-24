@@ -1,15 +1,20 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import styles from "@styles/Home.module.css";
 import { ReactElement, useEffect } from "react";
 import MainLayout from "@layout/MainLayout";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut, getSession } from "next-auth/react";
+
+import { getToken } from "next-auth/jwt";
 import { useAuth } from "@context/authContext";
 import { useRouter } from "next/router";
 
 const Home = () => {
   const { data: session } = useSession();
+
+  console.log(session);
+
   if (session) {
     return (
       <>
@@ -102,5 +107,15 @@ const Home = () => {
 Home.getLayout = function getLayout(page: ReactElement) {
   return <MainLayout>{page}</MainLayout>;
 };
+
+// export const getServerSideProps: GetServerSideProps = async (context) => {
+//   const session = await getSession(context);
+//   return {
+//     props: {
+//       session,
+//       jwt,
+//     }, // will be passed to the page component as props
+//   };
+// };
 
 export default Home;

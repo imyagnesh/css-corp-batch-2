@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from "next";
+import { useSession } from "next-auth/react";
 import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
 
@@ -14,6 +15,9 @@ type Props = {
 };
 
 const Product = ({ todoItem }: Props) => {
+  const { data } = useSession();
+  console.log(data);
+
   return (
     <div>
       <Head>

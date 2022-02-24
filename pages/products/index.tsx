@@ -54,15 +54,15 @@ const Products = ({ todoList }: Props) => {
 
 // Pre-render my page at build time
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log("NEXT_PUBLIC_API_URL", process.env.NEXT_PUBLIC_API_URL);
-
   const session = await getSession(context);
+
+  console.log(session);
+
   if (!session) {
     return {
       redirect: {
         destination: "/login",
         permanent: false,
-        basePath: "/products",
       },
     };
   }
@@ -71,6 +71,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const json = await res.json();
   return {
     props: {
+      session,
       todoList: json,
     }, // will be passed to the page component as props
   };

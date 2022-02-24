@@ -42,7 +42,14 @@ const Login = (props: Props) => {
       <FormikForm
         initialValues={loginInitValues}
         fields={LoginFields}
-        onSubmit={(values: LoginInitValueType) => signIn()}
+        onSubmit={(values: LoginInitValueType) =>
+          signIn("credentials", {
+            email: values.email,
+            password: values.password,
+            redirect: true,
+            callbackUrl: "/",
+          })
+        }
         btnText="Login"
       >
         <div className="flex items-center justify-between">
