@@ -7,7 +7,7 @@ import {
   RegisterFields,
   RegisterInitValues,
   RegisterInitValueType,
-} from "./registerFields";
+} from "../../formikFields/registerFields";
 
 type Props = {};
 

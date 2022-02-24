@@ -40,33 +40,34 @@ export default NextAuth({
       },
     }),
   ],
-  callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   return true;
-    // },
-    // async redirect({ url, baseUrl }) {
-    //   return baseUrl;
-    // },
-    // async session({ session, user, token }) {
-    //   return session;
-    // },
-    async jwt({ token, account }) {
-      // Persist the OAuth access_token to the token right after signin
+  session: { strategy: "jwt" },
+  // callbacks: {
+  //   // async signIn({ user, account, profile, email, credentials }) {
+  //   //   return true;
+  //   // },
+  //   // async redirect({ url, baseUrl }) {
+  //   //   return baseUrl;
+  //   // },
+  //   // async session({ session, user, token }) {
+  //   //   return session;
+  //   // },
+  //   async jwt({ token, account }) {
+  //     // Persist the OAuth access_token to the token right after signin
 
-      console.log("token", token);
-      console.log("account", account);
-      if (account) {
-        token.accessToken = account.access_token;
-      }
-      return token;
-    },
-    async session({ session, token, user }) {
-      console.log("session", session);
-      console.log("token", token);
-      console.log("user", user);
-      // Send properties to the client, like an access_token from a provider.
-      session.accessToken = token.accessToken;
-      return session;
-    },
-  },
+  //     console.log("token", token);
+  //     console.log("account", account);
+  //     if (account) {
+  //       token.accessToken = account.access_token;
+  //     }
+  //     return token;
+  //   },
+  //   async session({ session, token, user }) {
+  //     console.log("session", session);
+  //     console.log("token", token);
+  //     console.log("user", user);
+  //     // Send properties to the client, like an access_token from a provider.
+  //     session.accessToken = token.accessToken;
+  //     return session;
+  //   },
+  // },
 });

@@ -1,7 +1,7 @@
 import { AuthType } from "@types/auth";
 import { User } from "@types/user";
-import { LoginInitValueType } from "pages/login/loginFields";
-import { RegisterInitValueType } from "pages/register/registerFields";
+import { LoginInitValueType } from "formikFields/loginFields";
+import { RegisterInitValueType } from "formikFields/registerFields";
 import React, {
   createContext,
   FC,

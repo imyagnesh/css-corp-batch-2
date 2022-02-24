@@ -108,14 +108,15 @@ Home.getLayout = function getLayout(page: ReactElement) {
   return <MainLayout>{page}</MainLayout>;
 };
 
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   const session = await getSession(context);
-//   return {
-//     props: {
-//       session,
-//       jwt,
-//     }, // will be passed to the page component as props
-//   };
-// };
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getSession(context);
+  const jwt = await getToken(context);
+  return {
+    props: {
+      session,
+      jwt,
+    }, // will be passed to the page component as props
+  };
+};
 
 export default Home;

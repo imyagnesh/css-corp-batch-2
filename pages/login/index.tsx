@@ -12,7 +12,7 @@ import {
   LoginFields,
   loginInitValues,
   LoginInitValueType,
-} from "./loginFields";
+} from "../../formikFields/loginFields";
 
 type Props = {};
 
